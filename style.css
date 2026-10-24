@@ -84,3 +84,18 @@ footer { border-top: 1px solid var(--line); text-align: center; color: var(--mut
   .card { transition: none; }
 }
 @media (max-width: 520px) { nav .wrap { gap: 14px; } }
+
+/* главный проект */
+.feature {
+  position: relative; background: linear-gradient(160deg, #1d1112 0%, var(--panel) 60%);
+  border: 1px solid var(--accent); border-radius: 8px; padding: 32px 24px 24px;
+  box-shadow: 0 0 40px rgba(153, 45, 34, .3), inset 0 0 0 1px rgba(153, 45, 34, .25);
+}
+.feature .flag {
+  position: absolute; top: -13px; left: 24px; background: var(--accent); color: var(--fg);
+  font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; padding: 2px 14px; border-radius: 999px;
+}
+.feature h3 { font-size: clamp(2rem, 6vw, 2.8rem); }
+.feature .role { color: var(--accent-hi); letter-spacing: .12em; text-transform: uppercase; font-size: .9rem; margin: 4px 0 16px; }
+.feature .links { margin: 20px 0 0; }
+.feature .cover { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 4px 0 20px; }
