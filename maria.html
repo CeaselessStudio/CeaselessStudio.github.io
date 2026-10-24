@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maria - Ceaseless Studio</title>
+<meta name="description" content="Maria: Cease's personal assistant on the Driven By Desire Discord server.">
+<link rel="icon" href="assets/avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">Ceaseless Studio</a>
+    <a class="link" href="index.html">Home</a>
+    <a class="link" href="ceaseless-bot.html">Ceaseless Bot</a>
+    <a class="link on" href="maria.html">Maria</a>
+  </div>
+</nav>
+
+  <header class="hero">
+    <h1>Maria</h1>
+    <p class="lead">Cease's personal assistant on the Driven By Desire server.<br>
+      Личный помощник Cease на сервере Driven By Desire.</p>
+  </header>
+
+  <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
+
+  <section class="reveal">
+    <h2>For everyone / Для всех</h2>
+    <div class="cmd">
+      <code>/proof</code>
+      <p>Send a screenshot of your 5-star itch.io rating. A moderator checks it, and you get the <b>Maria's Favorite</b> role.</p>
+      <p class="ru">Пришли скриншот оценки в 5 звёзд на itch.io. Модератор проверит, и ты получишь роль <b>Maria's Favorite</b>.</p>
+    </div>
+    <div class="cmd">
+      <code>!maria</code>
+      <p>A "Maria says..." card with a random line from her.</p>
+      <p class="ru">Карточка «Maria says...» со случайной фразой от неё.</p>
+    </div>
+    <div class="cmd">
+      <code>!casting</code>
+      <p>A "Casting results" card with a random verdict.</p>
+      <p class="ru">Карточка «Casting results» со случайным результатом.</p>
+    </div>
+    <div class="cmd">
+      <code>!zoe</code> <code>!carla</code> <code>!elsa</code> <code>!lucy</code> <code>!delphine</code>
+      <p>Each girl has her own card, color and lines, in character.</p>
+      <p class="ru">У каждой героини своя карточка, цвет и фразы в характере.</p>
+    </div>
+    <div class="cmd">
+      <code>!gm</code> <code>!gn</code>
+      <p>Good morning and good night wishes.</p>
+      <p class="ru">Пожелания доброго утра и доброй ночи.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Automatic / Автоматически</h2>
+    <div class="cmd">
+      <p style="margin:0">Welcomes every new member with a card when they join the server.</p>
+      <p class="ru">Встречает каждого нового участника карточкой, когда он заходит на сервер.</p>
+    </div>
+  </section>
+</main>
+
+<footer>&#9670; the grin stays on, the work never stops &#9670; &middot; <a href="index.html">back to the stage</a></footer>
+
+<script>
+  // плавное появление блоков при прокрутке
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
