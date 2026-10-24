@@ -1,0 +1,86 @@
+:root {
+  --bg: #0d0b0c;
+  --panel: #151213;
+  --fg: #ede8e0;
+  --muted: #8e8a8f;
+  --line: #3a3436;
+  --accent: #992d22;
+  --accent-hi: #c0402f;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 50% -10%, #2a1a1a 0%, transparent 55%),
+    var(--bg);
+  color: var(--fg);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+h1, h2, h3 { font-family: 'Pirata One', 'UnifrakturCook', serif; font-weight: 400; margin: 0; }
+a { color: var(--fg); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+a:hover { color: var(--accent-hi); }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+/* меню */
+nav { border-bottom: 1px solid var(--line); background: rgba(13, 11, 12, .85); position: sticky; top: 0; backdrop-filter: blur(6px); z-index: 5; }
+nav .wrap { display: flex; gap: 24px; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+nav .brand { font-family: 'Pirata One', serif; font-size: 1.4rem; text-decoration: none; margin-right: auto; }
+nav a.link { text-decoration: none; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; font-size: .85rem; }
+nav a.link:hover, nav a.link.on { color: var(--fg); }
+
+/* шапка */
+.hero { text-align: center; padding: 56px 0 40px; }
+.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 0 60px rgba(153, 45, 34, .25); }
+.hero h1 { font-size: clamp(2.4rem, 9vw, 4.2rem); margin-top: 32px; letter-spacing: .02em; }
+.hero p.lead { color: var(--muted); font-style: italic; max-width: 560px; margin: 12px auto 0; }
+.divider { text-align: center; color: var(--accent); letter-spacing: .5em; margin: 32px 0; user-select: none; }
+
+/* секции */
+section { padding: 32px 0; }
+h2 { color: var(--accent-hi); font-size: 1.9rem; margin-bottom: 16px; }
+h2::before { content: '\25C6\00a0'; color: var(--accent); font-size: .7em; vertical-align: middle; }
+p { margin: 0 0 12px; }
+
+/* карточки */
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 20px;
+  transition: border-color .2s, transform .2s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.card h3 { font-size: 1.5rem; margin-bottom: 4px; }
+.card .role { color: var(--accent-hi); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: 1rem; margin: 0; }
+.card a.more { display: inline-block; margin-top: 12px; font-size: .95rem; }
+
+.tiers { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); margin-top: 16px; }
+.tier { text-align: center; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 8px; font-size: .95rem; }
+.tier img { width: 100%; height: auto; border-radius: 4px; display: block; margin-bottom: 8px; }
+
+/* список команд */
+.cmd { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 14px 18px; margin-bottom: 12px; }
+.cmd code { color: var(--accent-hi); font-size: 1.05rem; }
+.cmd .opts { color: var(--muted); font-family: ui-monospace, Consolas, monospace; font-size: .85rem; margin-left: 6px; }
+.cmd p { margin: 6px 0 0; font-size: 1rem; }
+.cmd p.ru { color: var(--muted); }
+.perm { color: var(--muted); font-size: .9rem; margin: 24px 0 8px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* значки */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { border: 1px solid var(--line); border-radius: 999px; padding: 2px 14px; font-size: .95rem; color: var(--muted); }
+.badge.hot { border-color: var(--accent); color: var(--fg); }
+
+footer { border-top: 1px solid var(--line); text-align: center; color: var(--muted); padding: 32px 0 56px; margin-top: 32px; font-size: .95rem; }
+
+/* появление при прокрутке */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  .card { transition: none; }
+}
+@media (max-width: 520px) { nav .wrap { gap: 14px; } }

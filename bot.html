@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Bot - Ceaseless Studio</title>
+<meta name="description" content="Ceaseless Bot: the backstage of a modeling agency. Contracts, roles, reports and publishing for Discord servers.">
+<link rel="icon" href="assets/avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">Ceaseless Studio</a>
+    <a class="link" href="index.html">Home</a>
+    <a class="link on" href="bot.html">The Bot</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <h1>Ceaseless Bot</h1>
+    <p class="lead">The backstage of a modeling agency. Contracts, roles and reports, so the runway show never stops.<br>
+      Закулисье агентства: контракты, роли и отчёты.</p>
+  </header>
+
+  <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
+
+  <section class="reveal">
+    <h2>For everyone / Для всех</h2>
+    <div class="cmd">
+      <code>/contract</code><span class="opts">[member] [public]</span>
+      <p>Show a member's talent contract: tier, signing date (server join), roles. Defaults to yours.</p>
+      <p class="ru">Контракт участника: уровень подписки, дата подписания (вход на сервер), роли. По умолчанию - ваш.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Publishing / Публикации</h2>
+    <div class="perm">Manage Server / Управление сервером</div>
+    <div class="cmd">
+      <code>/say</code><span class="opts">[channel] [image]</span>
+      <p>Send a message as the bot. A form opens for the text.</p>
+      <p class="ru">Отправить сообщение от имени бота. Текст вводится в открывшейся форме.</p>
+    </div>
+    <div class="cmd">
+      <code>/embed</code><span class="opts">[channel] [image]</span>
+      <p>Send a styled embed card (title, text, image) as the bot.</p>
+      <p class="ru">Отправить оформленную карточку (заголовок, текст, картинка) от имени бота.</p>
+    </div>
+    <div class="cmd">
+      <code>/edit</code><span class="opts">message_link [image]</span>
+      <p>Edit a message the bot already sent. Right-click the message, then Copy Message Link.</p>
+      <p class="ru">Изменить уже отправленное ботом сообщение. ПКМ по сообщению, затем Копировать ссылку на сообщение.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Supporters / Поддержка</h2>
+    <div class="perm">View Audit Log / Просмотр журнала аудита</div>
+    <div class="cmd">
+      <code>/supporters</code><span class="opts">[public]</span>
+      <p>Current Boosty / Patreon supporters, grouped by tier, with a CSV export.</p>
+      <p class="ru">Текущие подписчики Boosty / Patreon по уровням, с выгрузкой в CSV.</p>
+    </div>
+    <div class="cmd">
+      <code>/roles-stats</code><span class="opts">[days] [public]</span>
+      <p>Boosty / Patreon role changes from the audit log (1-45 days, default 45), plus conflict check and CSV.</p>
+      <p class="ru">Изменения ролей Boosty / Patreon из журнала аудита (1-45 дней, по умолчанию 45), проверка конфликтов и CSV.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Reports &amp; Service / Отчёты и служебные</h2>
+    <div class="perm">Manage Server / Управление сервером</div>
+    <div class="cmd">
+      <code>/weekly-report</code>
+      <p>Preview this week's report: supporter changes, new members, activity. The full report posts itself every Monday.</p>
+      <p class="ru">Предпросмотр отчёта за текущую неделю: изменения подписчиков, новые участники, активность. Полный отчёт выходит сам каждый понедельник.</p>
+    </div>
+    <div class="cmd">
+      <code>/status</code>
+      <p>Is the bot online: ping, uptime, host, list of commands.</p>
+      <p class="ru">Проверить, что бот онлайн: пинг, аптайм, хост, список команд.</p>
+    </div>
+    <p class="perm" style="text-transform:none;letter-spacing:0">[ ] - optional. <code>channel</code> defaults to the current one. <code>public: True</code> shows the result to everyone, otherwise only to you.<br>
+      [ ] - необязательный параметр. <code>channel</code> по умолчанию - текущий канал. <code>public: True</code> - результат увидят все, иначе только вы.</p>
+  </section>
+</main>
+
+<footer>&#9670; the grin stays on, the work never stops &#9670; &middot; <a href="index.html">back to the stage</a></footer>
+
+<script>
+  // плавное появление блоков при прокрутке
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

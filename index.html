@@ -1,46 +1,124 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ceaseless Studio</title>
-<style>
-  :root { --bg:#0b0b0b; --fg:#f2f2f2; --muted:#8a8a8a; --accent:#992D22; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg); font-family:Georgia,'Times New Roman',serif; line-height:1.6; }
-  main { max-width:720px; margin:0 auto; padding:0 16px; }
-  header { padding:96px 0 48px; border-bottom:1px solid #222; }
-  h1 { font-size:clamp(2.2rem,8vw,4rem); margin:0; letter-spacing:.04em; }
-  h1 span { color:var(--accent); }
-  .tag { color:var(--muted); margin-top:12px; }
-  section { padding:40px 0; border-bottom:1px solid #222; }
-  h2 { color:var(--accent); font-size:1.1rem; text-transform:uppercase; letter-spacing:.15em; margin:0 0 16px; }
-  ul { padding-left:20px; margin:0; }
-  li { margin-bottom:8px; }
-  a { color:var(--fg); text-decoration-color:var(--accent); text-underline-offset:4px; }
-  a:hover { color:var(--accent); }
-  footer { padding:32px 0 64px; color:var(--muted); font-size:.9rem; }
-</style>
+<meta name="description" content="Behind the painted grin: Discord bots, automation and visual novel localization.">
+<meta property="og:title" content="Ceaseless Studio">
+<meta property="og:description" content="Behind the painted grin: Discord bots, automation and visual novel localization.">
+<meta property="og:image" content="assets/banner.png">
+<link rel="icon" href="assets/avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <header>
-    <h1>Ceaseless <span>Studio</span></h1>
-    <p class="tag">Discord-боты, автоматизация и русская локализация визуальных новелл.</p>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">Ceaseless Studio</a>
+    <a class="link on" href="index.html">Home</a>
+    <a class="link" href="bot.html">The Bot</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <img class="banner" src="assets/banner.png" alt="Ceaseless Studio - the show never stops">
+    <h1>Behind the painted grin</h1>
+    <p class="lead">Discord bots, automation and visual novel localization. The show never stops.</p>
   </header>
-  <section>
-    <h2>Что делаем</h2>
-    <ul>
-      <li>Discord-боты для сообществ</li>
-      <li>Автоматизация рутины</li>
-      <li>Русская локализация визуальных новелл</li>
-    </ul>
+
+  <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
+
+  <section class="reveal">
+    <h2>Who's behind the mask</h2>
+    <p>I build <b>Discord bots</b> and the little tools that keep a server running while nobody's watching.</p>
+    <p>I translate and proofread <b>visual novels into Russian</b>, and help run <b>Discord communities</b>: roles, permissions, supporter tiers, the whole circus.</p>
+    <p>Everything lives under one name: <b>Ceaseless Studio</b>.</p>
   </section>
-  <section>
-    <h2>Связь</h2>
+
+  <section class="reveal">
+    <h2>The act</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>The Last Embrace</h3>
+        <div class="role">Proofreader (RU)</div>
+        <p>Russian proofreading for the visual novel by NoX Productions.</p>
+        <a class="more" href="https://store.steampowered.com/app/4437270/The_Last_Embrace_Book_One/">Steam page</a>
+      </article>
+      <article class="card">
+        <h3>Driven By Desire</h3>
+        <div class="role">Discord moderator</div>
+        <p>Keeping order on the visual novel's Discord server.</p>
+        <a class="more" href="https://kloppstyle.itch.io/driven-by-desire">itch.io page</a>
+      </article>
+      <article class="card">
+        <h3>Ceaseless Studio</h3>
+        <div class="role">Bot &middot; Creator &amp; owner</div>
+        <p>The backstage of a modeling agency: contracts, roles and reports, so the runway show never stops.</p>
+        <a class="more" href="bot.html">See the commands</a>
+      </article>
+      <article class="card">
+        <h3>Maria</h3>
+        <div class="role">Bot &middot; Developer</div>
+        <p>Cease's personal assistant on the Driven By Desire Discord server.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>The inner circle</h2>
+    <p>On the Driven By Desire server, supporters rise through five tiers. The bot signs the contract, opens the doors and keeps the paperwork under control.</p>
+    <div class="tiers">
+      <div class="tier"><img src="assets/tiers/newcomer.webp" alt="Newcomer" loading="lazy">Newcomer</div>
+      <div class="tier"><img src="assets/tiers/wanderer.webp" alt="Wanderer" loading="lazy">Wanderer</div>
+      <div class="tier"><img src="assets/tiers/rising_star.webp" alt="Rising Star" loading="lazy">Rising Star</div>
+      <div class="tier"><img src="assets/tiers/seducer.webp" alt="Seducer" loading="lazy">Seducer</div>
+      <div class="tier"><img src="assets/tiers/master_of_desire.webp" alt="Master of Desire" loading="lazy">Master of Desire</div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Tools of the trade</h2>
+    <div class="badges">
+      <span class="badge hot">Python</span>
+      <span class="badge hot">discord.py</span>
+      <span class="badge">JavaScript</span>
+      <span class="badge">discord.js</span>
+      <span class="badge">Git</span>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Tongues I speak</h2>
+    <div class="badges">
+      <span class="badge hot">Russian - native</span>
+      <span class="badge">English - fluent</span>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Find me after the show</h2>
     <p><a href="https://github.com/CeaselessStudio">GitHub: CeaselessStudio</a></p>
+    <p>Discord: <b>ceaselessstudio</b></p>
   </section>
-  <footer>Тестовая страница. Скоро здесь будет больше.</footer>
 </main>
+
+<footer>&#9670; the grin stays on, the work never stops &#9670;</footer>
+
+<script>
+  // плавное появление блоков при прокрутке
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
 </body>
 </html>
