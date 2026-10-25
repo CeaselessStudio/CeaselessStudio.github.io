@@ -99,3 +99,12 @@ footer { border-top: 1px solid var(--line); text-align: center; color: var(--mut
 .feature .role { color: var(--accent-hi); letter-spacing: .12em; text-transform: uppercase; font-size: .9rem; margin: 4px 0 16px; }
 .feature .links { margin: 20px 0 0; }
 .feature .cover { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 4px 0 20px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
+.btn {
+  display: inline-block; padding: 8px 18px; border: 1px solid var(--line); border-radius: 999px;
+  text-decoration: none; color: var(--fg); font-size: 1rem; transition: border-color .2s, background .2s;
+}
+.btn:hover { border-color: var(--accent); color: var(--fg); background: rgba(153, 45, 34, .2); }
+.btn.primary { background: var(--accent); border-color: var(--accent); }
+.btn.primary:hover { background: var(--accent-hi); }
+.feature .links { color: var(--muted); font-size: 1rem; }
