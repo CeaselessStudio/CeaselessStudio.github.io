@@ -1,0 +1,46 @@
+[README.md](https://github.com/user-attachments/files/34128838/README.md)
+<p align="center">
+  <img src="assets/banner.png" alt="Ceaseless Studio - the show never stops">
+</p>
+
+# Ceaseless Studio
+
+**Behind the painted grin.** Discord bots, automation and visual novel localization. The show never stops.
+
+🌐 **Live site:** https://ceaselessstudio.github.io/
+
+## What's here
+
+The source of the Ceaseless Studio website: a static page set served by GitHub Pages, with no build step.
+
+| Page | What it is |
+|---|---|
+| `index.html` | Home: who's behind the mask, the main project, other acts, tools and languages |
+| `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, roles, reports and publishing |
+| `maria.html` | **Maria** - Cease's personal assistant on the Driven By Desire Discord server |
+| `style.css` | Shared styles |
+| `assets/` | Banner, key art, tier icons |
+
+## Main project: Driven By Desire
+
+<p align="center">
+  <img src="assets/driven-by-desire.webp" alt="Driven By Desire key art" width="600">
+</p>
+
+The heart of the studio. Ceaseless Studio keeps order on the visual novel's Discord server, where both bots work: Ceaseless Bot (contracts, supporter roles, reports) and Maria (Cease's personal assistant). Supporters rise through five tiers: Newcomer, Wanderer, Rising Star, Seducer, Master of Desire.
+
+## Other acts
+
+- **The Last Embrace** - Russian proofreading for the visual novel by NoX Productions.
+
+## Tools of the trade
+
+Python, discord.py, JavaScript, discord.js, Git.
+
+## Style
+
+Gothic clown: black and white with a crimson accent `#992D22`. Fonts: Pirata One and Cormorant Garamond.
+
+## Contact
+
+GitHub: [CeaselessStudio](https://github.com/CeaselessStudio) · Discord: `ceaselessstudio`
