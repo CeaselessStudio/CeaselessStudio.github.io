@@ -22,9 +22,11 @@
     reveals.forEach((el) => el.classList.add("in"));
   }
 
-  /* 2. полоса прочитанного под меню и параллакс баннера */
+  /* 2. полоса прочитанного под меню и медальон: параллакс по скроллу + наклон за курсором */
   const progress = document.querySelector(".progress");
-  const banner = document.querySelector(".hero .banner");
+  const medallion = document.querySelector(".medallion");
+  let lookX = 0;
+  let lookY = 0;
   let queued = false;
 
   function frame() {
@@ -33,9 +35,11 @@
     if (progress) {
       progress.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + "%";
     }
-    if (banner && !reduced) {
-      const shift = Math.min(window.scrollY * 0.12, 90);
-      banner.style.transform = "translate3d(0, " + shift.toFixed(1) + "px, 0) scale(1.015)";
+    if (medallion && !reduced) {
+      const shift = Math.min(window.scrollY * 0.08, 48);
+      medallion.style.transform =
+        "perspective(900px) translate3d(0, " + shift.toFixed(1) + "px, 0) " +
+        "rotateX(" + (lookY * -1).toFixed(2) + "deg) rotateY(" + lookX.toFixed(2) + "deg)";
     }
   }
 
@@ -47,6 +51,13 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
+  if (medallion && finePointer && !reduced) {
+    window.addEventListener("pointermove", (e) => {
+      lookX = (e.clientX / window.innerWidth - 0.5) * 6;
+      lookY = (e.clientY / window.innerHeight - 0.5) * 4;
+      onScroll();
+    }, { passive: true });
+  }
   frame();
 
   /* 3. свет за курсором */
@@ -88,11 +99,11 @@
     const spawn = (y) => ({
       x: Math.random() * width,
       y: typeof y === "number" ? y : Math.random() * height,
-      r: 0.6 + Math.random() * 1.6,
+      r: 0.7 + Math.random() * 1.8,
       vy: 5 + Math.random() * 13,
       sway: 4 + Math.random() * 14,
       phase: Math.random() * Math.PI * 2,
-      a: 0.06 + Math.random() * 0.22,
+      a: 0.1 + Math.random() * 0.26,
       warm: Math.random() > 0.78
     });
 

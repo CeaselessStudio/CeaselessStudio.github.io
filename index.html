@@ -16,7 +16,7 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
 <nav>
   <div class="wrap">
     <a class="brand" href="index.html">Ceaseless Studio</a>
@@ -29,9 +29,19 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 
 <main class="wrap">
   <header class="hero">
-    <img class="banner" src="assets/banner.png" alt="Ceaseless Studio - the show never stops">
-    <h1>Behind the painted grin</h1>
-    <p class="lead">Discord bots, automation and visual novel localization. The show never stops.</p>
+    <div class="stage-cone" aria-hidden="true"></div>
+    <div class="medallion">
+      <span class="bulbs" aria-hidden="true"></span>
+      <img class="portrait" src="assets/avatar.jpg" alt="Ceaseless Studio: a painted clown face">
+      <span class="gloss" aria-hidden="true"></span>
+    </div>
+    <p class="kicker">Behind the painted grin</p>
+    <h1>Ceaseless Studio</h1>
+    <p class="tagline">the show never stops</p>
+    <div class="diamonds" aria-hidden="true">
+      <i></i><i class="hollow"></i><i></i><i class="hollow"></i><i class="hot"></i><i class="hollow"></i><i></i><i class="hollow"></i><i></i>
+    </div>
+    <p class="lead">Discord bots, automation and visual novel localization.</p>
     <svg class="grin" viewBox="0 0 200 84" aria-hidden="true" focusable="false">
       <path class="line" pathLength="100" d="M22 20 C 46 74, 154 74, 178 20"></path>
       <path class="tick" d="M62 46 v16"></path>
@@ -132,6 +142,7 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
   <div class="glow"></div>
   <div class="beam beam-a"></div>
   <div class="beam beam-b"></div>
+  <div class="haze"></div>
   <canvas class="dust"></canvas>
 </div>
 <div class="grain" aria-hidden="true"></div>
