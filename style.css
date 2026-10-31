@@ -35,15 +35,74 @@ nav a.link:hover, nav a.link.on { color: var(--fg); }
 
 /* шапка */
 .hero { text-align: center; padding: 56px 0 40px; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 0 60px rgba(153, 45, 34, .25); }
-.hero h1 { font-size: clamp(2.4rem, 9vw, 4.2rem); margin-top: 32px; letter-spacing: .02em; }
+.hero h1 { font-size: clamp(2.4rem, 9vw, 4.2rem); margin: 0; letter-spacing: .02em; }
 .hero p.lead { color: var(--muted); font-style: italic; max-width: 560px; margin: 12px auto 0; }
+
+/* герой-сцена: медальон с портретом, имя, слоган, ромбы, пол сцены */
+.home .hero { position: relative; padding: 36px 0 28px; }
+
+.stage-cone {
+  position: absolute; left: 50%; top: -70px; width: min(520px, 92vw); height: 600px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(255, 219, 176, .15), rgba(255, 219, 176, .03) 58%, transparent);
+  clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%);
+  filter: blur(24px); pointer-events: none; z-index: -1;
+  animation: cone-sway 11s ease-in-out infinite alternate;
+}
+
+.medallion {
+  position: relative; width: clamp(176px, 30vw, 236px); aspect-ratio: 1;
+  margin: 4px auto 26px; z-index: 1; will-change: transform;
+}
+.medallion .portrait {
+  display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  filter: grayscale(1) contrast(1.08) brightness(.97);
+}
+.medallion::before {
+  content: ""; position: absolute; inset: -8px; border-radius: 50%; pointer-events: none;
+  border: 2px solid #7d231b;
+  box-shadow: 0 0 26px rgba(153, 45, 34, .55), 0 0 0 1px rgba(0, 0, 0, .85);
+}
+.medallion::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, .8);
+  background: radial-gradient(circle at 50% 38%, transparent 52%, rgba(0, 0, 0, .45));
+}
+.medallion .bulbs {
+  position: absolute; inset: -16px; border-radius: 50%; pointer-events: none;
+  background: repeating-conic-gradient(from 0deg, #ffeccd 0deg 1.5deg, rgba(255, 205, 150, .35) 1.5deg 3deg, transparent 3deg 24deg);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 96%, #000 97%, #000 99.4%, transparent 100%);
+  mask: radial-gradient(circle closest-side, transparent 96%, #000 97%, #000 99.4%, transparent 100%);
+  filter: drop-shadow(0 0 6px rgba(255, 190, 120, .8));
+  animation: bulbs-ring 9s steps(15, end) infinite;
+}
+.medallion .gloss {
+  position: absolute; inset: 0; border-radius: 50%; pointer-events: none; overflow: hidden;
+  background: linear-gradient(112deg, transparent 36%, rgba(255, 242, 226, .22) 47%, rgba(255, 242, 226, .04) 55%, transparent 64%);
+  background-size: 250% 100%; background-position: 140% 0;
+  mix-blend-mode: screen; animation: gloss 7s ease-in-out 2.2s infinite;
+}
+
+.kicker { margin: 0 0 8px; font-size: .82rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
+.home .hero h1 { font-size: clamp(2.8rem, 9vw, 4.6rem); line-height: .95; letter-spacing: .01em; }
+.tagline { margin: 12px 0 0; font-style: italic; color: var(--muted); letter-spacing: .05em; }
+
+.diamonds { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 20px 0 0; }
+.diamonds i { display: block; width: 9px; height: 9px; background: #9a9499; transform: rotate(45deg); }
+.diamonds i.hollow { background: transparent; border: 1px solid #9a9499; }
+.diamonds i.hot { background: var(--accent-hi); animation: hot-pulse 4.5s ease-in-out infinite alternate; }
+.diamonds::before, .diamonds::after { content: ""; width: 44px; height: 1px; }
+.diamonds::before { background: linear-gradient(90deg, transparent, var(--line)); }
+.diamonds::after { background: linear-gradient(90deg, var(--line), transparent); }
+
+.home .hero p.lead { margin-top: 20px; }
 .divider { text-align: center; color: var(--accent); letter-spacing: .5em; margin: 32px 0; user-select: none; }
 
 /* секции */
 section { padding: 32px 0; }
 h2 { color: var(--accent-hi); font-size: 1.9rem; margin-bottom: 16px; }
 h2::before { content: '\25C6\00a0'; color: var(--accent); font-size: .7em; vertical-align: middle; }
+.reveal.in h2 { animation: head-in .9s cubic-bezier(.2, .7, .2, 1) both; }
 p { margin: 0 0 12px; }
 
 /* карточки */
@@ -72,6 +131,14 @@ p { margin: 0 0 12px; }
 .cmd .opts { color: var(--muted); font-family: ui-monospace, Consolas, monospace; font-size: .85rem; margin-left: 6px; }
 .cmd p { margin: 6px 0 0; font-size: 1rem; }
 .cmd p.ru { color: var(--muted); }
+.cmd { position: relative; overflow: hidden; }
+.cmd::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(106deg, transparent 40%, rgba(255, 226, 196, .09) 50%, transparent 60%);
+  transform: translateX(-130%); transition: transform .9s ease;
+}
+.cmd:hover::after { transform: translateX(130%); }
+.cmd:hover { border-left-color: var(--accent-hi); }
 .perm { color: var(--muted); font-size: .9rem; margin: 24px 0 8px; letter-spacing: .08em; text-transform: uppercase; }
 
 /* значки */
@@ -142,11 +209,21 @@ footer { border-top: 1px solid var(--line); text-align: center; color: var(--mut
 /* два прожектора, медленно качаются над сценой */
 .beam {
   position: absolute; top: -45vh; left: 50%; width: 26vw; height: 150vh;
-  transform-origin: 50% 0; filter: blur(34px); mix-blend-mode: screen;
-  background: linear-gradient(180deg, rgba(255, 231, 205, .16), rgba(255, 231, 205, .03) 55%, transparent 80%);
+  transform-origin: 50% 0; filter: blur(30px); mix-blend-mode: screen;
+  background: linear-gradient(180deg, rgba(255, 231, 205, .26), rgba(255, 231, 205, .06) 55%, transparent 80%);
 }
 .beam-a { animation: sweep-a 22s ease-in-out infinite alternate; }
-.beam-b { opacity: .6; animation: sweep-b 27s ease-in-out infinite alternate; }
+.beam-b { opacity: .7; animation: sweep-b 27s ease-in-out infinite alternate; }
+
+/* дымка у сцены, медленно плывёт */
+.haze {
+  position: absolute; left: -20%; right: -20%; bottom: -12vh; height: 65vh;
+  background:
+    radial-gradient(ellipse 42% 60% at 30% 70%, rgba(205, 175, 165, .10), transparent 70%),
+    radial-gradient(ellipse 46% 55% at 68% 80%, rgba(153, 45, 34, .16), transparent 72%);
+  filter: blur(26px); mix-blend-mode: screen; opacity: .6;
+  animation: haze 36s ease-in-out infinite alternate;
+}
 
 .dust { position: absolute; inset: 0; width: 100%; height: 100%; }
 
@@ -171,12 +248,16 @@ footer { border-top: 1px solid var(--line); text-align: center; color: var(--mut
 nav::after,
 footer::before {
   content: ""; position: absolute; left: 0; right: 0; height: 9px; pointer-events: none;
-  background-image: radial-gradient(circle, #ffe6bd 0 1.7px, rgba(255, 205, 140, .55) 2.4px, transparent 3.4px);
-  background-size: 24px 9px; background-position: center;
-  animation: flicker 4.4s steps(1, end) infinite;
+  background-image:
+    radial-gradient(circle, #ffe6bd 0 1.7px, rgba(255, 205, 140, .55) 2.4px, transparent 3.4px),
+    linear-gradient(90deg, transparent, rgba(255, 228, 184, .85), transparent);
+  background-size: 24px 9px, 150px 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: 0 0, -170px 0;
+  animation: bulbs-chase 5.2s linear infinite;
 }
 nav::after { bottom: -9px; }
-footer::before { top: -9px; animation-delay: -2.1s; }
+footer::before { top: -9px; animation-delay: -2.6s; }
 footer { position: relative; }
 
 /* полоса прочитанного под меню */
@@ -186,12 +267,12 @@ footer { position: relative; }
   box-shadow: 0 0 12px rgba(192, 64, 47, .75);
 }
 
-/* глитч на заголовке, один раз при загрузке */
-.hero h1 { animation: glitch 1.2s steps(2, end) .6s 1; }
+/* глитч на заголовке, один раз при загрузке, только на главной */
+.home .hero h1 { animation: glitch 1.2s steps(2, end) .6s 1; }
 
 /* ухмылка, которая прорисовывается */
 .grin {
-  display: block; width: min(260px, 62vw); height: auto; margin: 18px auto 0; overflow: visible;
+  display: block; width: min(260px, 62vw); height: auto; margin: 14px auto 0; overflow: visible;
   filter: drop-shadow(0 0 16px rgba(192, 64, 47, .35));
   animation: grin-idle 7s ease-in-out 2.2s infinite alternate;
 }
@@ -237,14 +318,30 @@ html.curtain-seen .curtain { display: none; }
   80% { transform: translate3d(13px, 7px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
-@keyframes flicker {
-  0%, 100% { opacity: .85; }
-  6% { opacity: .35; }
-  8% { opacity: .9; }
-  47% { opacity: .5; }
-  49% { opacity: .88; }
-  73% { opacity: .4; }
-  75% { opacity: .9; }
+@keyframes bulbs-chase {
+  from { background-position: 0 0, -170px 0; }
+  to { background-position: 0 0, calc(100% + 170px) 0; }
+}
+@keyframes haze {
+  from { transform: translate3d(-2%, 0, 0) scale(1); }
+  to { transform: translate3d(3%, -2%, 0) scale(1.07); }
+}
+@keyframes cone-sway {
+  from { transform: translateX(-50%) rotate(-1.4deg); opacity: .72; }
+  to { transform: translateX(-50%) rotate(1.4deg); opacity: 1; }
+}
+@keyframes bulbs-ring { to { transform: rotate(360deg); } }
+@keyframes gloss {
+  0%, 55% { background-position: 140% 0; }
+  80%, 100% { background-position: -40% 0; }
+}
+@keyframes hot-pulse {
+  from { box-shadow: 0 0 5px rgba(192, 64, 47, .45); }
+  to { box-shadow: 0 0 16px rgba(192, 64, 47, .95); }
+}
+@keyframes head-in {
+  from { opacity: 0; letter-spacing: .16em; clip-path: inset(0 0 100% 0); }
+  to { opacity: 1; letter-spacing: normal; clip-path: inset(0 0 0 0); }
 }
 @keyframes glitch {
   0%, 100% { text-shadow: none; transform: none; }
@@ -260,13 +357,14 @@ html.curtain-seen .curtain { display: none; }
 @keyframes curtain-r { to { transform: translateX(102%); } }
 
 @media (max-width: 720px) {
-  .atmosphere::before, .atmosphere::after, .beam, .torch { display: none; }
+  .atmosphere::before, .atmosphere::after, .beam, .torch, .haze { display: none; }
   .grain { opacity: .035; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .glow, .beam, .grain, .atmosphere::before, .atmosphere::after,
-  nav::after, footer::before, .hero h1, .grin, .grin .line, .grin .tick, .curtain i { animation: none !important; }
+  .glow, .beam, .grain, .atmosphere::before, .atmosphere::after, .haze,
+  nav::after, footer::before, .home .hero h1, .grin, .grin .line, .grin .tick, .curtain i,
+  .medallion .bulbs, .medallion .gloss, .stage-cone, .reveal.in h2, .diamonds i.hot { animation: none !important; }
   .grin .line { stroke-dashoffset: 0; }
   .grin .tick { opacity: 1; }
   .curtain, .torch, .dust { display: none; }

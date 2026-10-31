@@ -14,11 +14,11 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 
 | Page | What it is |
 |---|---|
-| `index.html` | Home: who's behind the mask, the main project, other acts, tools and languages |
+| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, other acts, tools and languages |
 | `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
 | `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
 | `style.css` | Shared styles and the scene: grain, glow, spotlights, curtain folds, marquee bulbs |
-| `site.js` | Scene effects: reveal, read progress, banner parallax, cursor light, card tilt, dust, opening curtain |
+| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain |
 | `assets/` | Banner, key art, tier icons |
 
 ## Main project: Driven By Desire
@@ -43,9 +43,9 @@ Gothic clown: black and white with a crimson accent `#992D22`. Fonts: Pirata One
 
 ## Motion
 
-The page is a stage, not a screenshot: film grain, breathing crimson light, two spotlights sweeping the hero, velvet folds at the edges, marquee bulbs under the menu and above the footer, dust in the beam, cursor light, card tilt on hover, a read-progress line, a painted grin that draws itself on the home page, and a curtain that parts on the first visit per session.
+The page is a stage, not a screenshot. The home hero is built from live layers instead of one image: a portrait medallion with a ring of chasing bulbs, a spotlight cone from above, the studio name, the tagline and a diamond row, all sitting in the same light as the rest of the scene. Behind it: film grain, breathing crimson light, two sweeping spotlights, drifting haze, velvet folds at the edges, marquee bulbs running under the menu and above the footer, and dust in the beam. Section headings wipe in once as they appear, command rows catch a light sweep on hover, cards tilt, the read-progress line follows the scroll, the painted grin draws itself, and a curtain parts on the first visit per session. The headline glitch runs on the home page only.
 
-Everything moves on `transform`/`opacity` only, without libraries. All of it turns off under `prefers-reduced-motion: reduce`, and the heavy layers (folds, beams, cursor light, dust, curtain) are hidden on screens narrower than 720 px.
+Everything moves on `transform`/`opacity` only, without libraries. All of it turns off under `prefers-reduced-motion: reduce`, and the heavy layers (folds, beams, haze, cursor light, dust, curtain) are hidden on screens narrower than 720 px.
 
 ## Contact
 
