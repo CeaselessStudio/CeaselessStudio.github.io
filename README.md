@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/34128838/README.md)
 <p align="center">
   <img src="assets/banner.png" alt="Ceaseless Studio - the show never stops">
 </p>
@@ -16,8 +15,8 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | Page | What it is |
 |---|---|
 | `index.html` | Home: who's behind the mask, the main project, other acts, tools and languages |
-| `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, roles, reports and publishing |
-| `maria.html` | **Maria** - Cease's personal assistant on the Driven By Desire Discord server |
+| `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
+| `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
 | `style.css` | Shared styles |
 | `assets/` | Banner, key art, tier icons |
 
