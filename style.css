@@ -365,6 +365,7 @@ html.curtain-seen .curtain { display: none; }
   .glow, .beam, .grain, .atmosphere::before, .atmosphere::after, .haze,
   nav::after, footer::before, .home .hero h1, .grin, .grin .line, .grin .tick, .curtain i,
   .medallion .bulbs, .medallion .gloss, .stage-cone, .reveal.in h2, .diamonds i.hot { animation: none !important; }
+  .hero-clown { animation: none !important; }
   .grin .line { stroke-dashoffset: 0; }
   .grin .tick { opacity: 1; }
   .curtain, .torch, .dust { display: none; }
@@ -394,4 +395,46 @@ html.curtain-seen .curtain { display: none; }
 .social-v::after { content: " \2197"; color: var(--accent-hi); font-size: .9em; }
 button.social .social-v::after { content: " \29C9"; }
 .social-hint { color: var(--muted); font-size: .9rem; margin: 14px 0 0; }
+
+/* клоунская труппа: портреты в ч/б с багровым акцентом */
+.clown-card {
+  position: relative; margin: 0; border: 1px solid var(--line); border-radius: 6px;
+  overflow: hidden; background: #120c0e;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .55), 0 0 0 1px rgba(192, 64, 47, .22);
+  transition: box-shadow .3s ease;
+}
+.clown-card img { display: block; width: 100%; height: auto; }
+.clown-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 0 44px rgba(0, 0, 0, .6), inset 0 0 0 1px rgba(255, 255, 255, .05);
+}
+.clown-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(200deg, rgba(153, 45, 34, .2), transparent 46%);
+}
+.clown-card:hover { box-shadow: 0 24px 54px rgba(0, 0, 0, .6), 0 0 0 1px rgba(192, 64, 47, .5); }
+
+.hero-clown {
+  position: absolute; right: -6px; top: 26px; width: 136px; z-index: 2;
+  transform: rotate(7deg); animation: bob 9s ease-in-out infinite alternate;
+}
+
+.mask-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 36px; align-items: start; }
+.mask-art { position: relative; min-height: 420px; }
+.mask-art .tilt-a { position: absolute; right: 2%; top: 0; width: 64%; transform: rotate(4deg); }
+.mask-art .tilt-b { position: absolute; left: 0; top: 84px; width: 56%; transform: rotate(-6deg); }
+
+.contact-row { display: flex; gap: 32px; align-items: flex-start; justify-content: space-between; }
+.contact-copy { flex: 1 1 auto; }
+.contact-clown { flex: 0 0 128px; width: 128px; margin-top: 4px; transform: rotate(-5deg); }
+
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -10px; } }
+
+@media (max-width: 900px) {
+  .hero-clown, .contact-clown { display: none; }
+  .mask-grid { grid-template-columns: 1fr; gap: 24px; }
+  .mask-art { min-height: 340px; }
+  .mask-art .tilt-a { width: 52%; right: 6%; top: 0; }
+  .mask-art .tilt-b { width: 46%; left: 6%; top: 64px; }
+}
 .feature .links { color: var(--muted); font-size: 1rem; }
