@@ -33,9 +33,39 @@
   <section class="reveal">
     <h2>For everyone / Для всех</h2>
     <div class="cmd">
+      <code>/help</code>
+      <p>The commands any member can use, with no admin rights. Moderator commands stay hidden.</p>
+      <p class="ru">Команды, доступные любому участнику, без прав администратора. Команды модераторов в список не попадают.</p>
+    </div>
+    <div class="cmd">
       <code>/contract</code><span class="opts">[member] [public]</span>
       <p>Show a member's talent contract: tier, signing date (server join), roles. Defaults to yours.</p>
       <p class="ru">Контракт участника: уровень подписки, дата подписания (вход на сервер), роли. По умолчанию - ваш.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Admin help / Админская помощь</h2>
+    <div class="perm">Administrator / Администратор</div>
+    <div class="cmd">
+      <code>/help-adm</code>
+      <p>Admin version of <code>/help</code>: moderator commands grouped by the right each one needs. Only administrators see it.</p>
+      <p class="ru">Админская версия <code>/help</code>: команды модераторов, сгруппированные по праву, которое для них нужно. Видна только администраторам.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Reaction roles / Роли по реакциям</h2>
+    <div class="perm">Manage Roles / Управление ролями</div>
+    <div class="cmd">
+      <code>/roles-card</code><span class="opts">card</span>
+      <p>Post a reaction-role card in this channel: <b>Languages</b> (ten languages) or <b>Teams</b> (six teams). Members pick a role by reacting.</p>
+      <p class="ru">Поставить в канал карточку ролей по реакциям: <b>Languages</b> (десять языков) или <b>Teams</b> (шесть команд). Роль выбирается реакцией.</p>
+    </div>
+    <div class="cmd">
+      <code>/roles-sync</code><span class="opts">[apply]</span>
+      <p>Compare the cards with member roles: who reacted but has no role, who has a role without a reaction. <code>apply: True</code> fixes it.</p>
+      <p class="ru">Сверить карточки с ролями: у кого реакция без роли, у кого роль без реакции. С <code>apply: True</code> бот всё поправит.</p>
     </div>
   </section>
 
@@ -64,13 +94,33 @@
     <div class="perm">View Audit Log / Просмотр журнала аудита</div>
     <div class="cmd">
       <code>/supporters</code><span class="opts">[public]</span>
-      <p>Current Boosty / Patreon supporters, grouped by tier, with a CSV export.</p>
-      <p class="ru">Текущие подписчики Boosty / Patreon по уровням, с выгрузкой в CSV.</p>
+      <p>Current Boosty / Patreon supporters, grouped by tier, with the date they joined and a CSV export.</p>
+      <p class="ru">Текущие подписчики Boosty / Patreon по уровням, с датой подписки и выгрузкой в CSV.</p>
     </div>
     <div class="cmd">
       <code>/roles-stats</code><span class="opts">[days] [public]</span>
-      <p>Boosty / Patreon role changes from the audit log (1-45 days, default 45), plus conflict check and CSV.</p>
-      <p class="ru">Изменения ролей Boosty / Patreon из журнала аудита (1-45 дней, по умолчанию 45), проверка конфликтов и CSV.</p>
+      <p>Boosty / Patreon role changes from the stored history (<code>days</code>, 0 = all time, default 45), plus the conflict check and CSV.</p>
+      <p class="ru">Изменения ролей Boosty / Patreon из накопленной истории (<code>days</code>, 0 = всё время, по умолчанию 45), проверка конфликтов и CSV.</p>
+    </div>
+    <div class="cmd">
+      <code>/languages-teams</code><span class="opts">[public]</span>
+      <p>How many members hold each language and team role.</p>
+      <p class="ru">Сколько участников держат каждую языковую роль и роль команды.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Early access / Ранний доступ</h2>
+    <div class="perm">Manage Server / Управление сервером</div>
+    <div class="cmd">
+      <code>/release add</code><span class="opts">name link date</span>
+      <p>Schedule a build link. The bot posts it in #booster-builds 3 days and in #rater-builds 1 day before the public release <code>date</code> (<code>YYYY-MM-DD</code>), at 14:00 Moscow time. The public post is up to the author.</p>
+      <p class="ru">Запланировать ссылку на сборку. Бот сам напишет её в #booster-builds за 3 дня и в #rater-builds за 1 день до даты публичного релиза <code>date</code> (<code>ГГГГ-ММ-ДД</code>), в 14:00 по Москве. Публичный пост делает автор.</p>
+    </div>
+    <div class="cmd">
+      <code>/release list</code> <code>/release remove</code><span class="opts">name</span>
+      <p>Show what is scheduled and what has already gone out, or cancel a scheduled build. To change the date, remove it and add again.</p>
+      <p class="ru">Показать расписание и что уже отправлено, или отменить запланированную сборку. Чтобы поменять дату, удалите и добавьте заново.</p>
     </div>
   </section>
 
@@ -79,13 +129,13 @@
     <div class="perm">Manage Server / Управление сервером</div>
     <div class="cmd">
       <code>/weekly-report</code>
-      <p>Preview this week's report: supporter changes, new members, activity. The full report posts itself every Monday.</p>
-      <p class="ru">Предпросмотр отчёта за текущую неделю: изменения подписчиков, новые участники, активность. Полный отчёт выходит сам каждый понедельник.</p>
+      <p>Preview this week's report: supporter changes, new members, activity. The full report posts itself every Monday at 10:00 Moscow time.</p>
+      <p class="ru">Предпросмотр отчёта за текущую неделю: изменения подписчиков, новые участники, активность. Полный отчёт выходит сам каждый понедельник в 10:00 по Москве.</p>
     </div>
     <div class="cmd">
       <code>/status</code>
-      <p>Is the bot online: ping, uptime, host, list of commands.</p>
-      <p class="ru">Проверить, что бот онлайн: пинг, аптайм, хост, список команд.</p>
+      <p>Post a live status card in this channel: ping, uptime, host, version, module count, errors, last role-log catch-up. It refreshes itself every 5 minutes; a new card replaces the old one.</p>
+      <p class="ru">Поставить в канал живую карточку статуса: пинг, аптайм, хост, версия, число модулей, ошибки, последний догон лога ролей. Обновляется сама каждые 5 минут; новая заменяет старую.</p>
     </div>
     <p class="perm" style="text-transform:none;letter-spacing:0">[ ] - optional. <code>channel</code> defaults to the current one. <code>public: True</code> shows the result to everyone, otherwise only to you.<br>
       [ ] - необязательный параметр. <code>channel</code> по умолчанию - текущий канал. <code>public: True</code> - результат увидят все, иначе только вы.</p>

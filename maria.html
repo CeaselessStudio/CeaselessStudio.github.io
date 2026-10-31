@@ -34,9 +34,14 @@
   <section class="reveal">
     <h2>For everyone / Для всех</h2>
     <div class="cmd">
-      <code>/proof</code>
-      <p>Send a screenshot of your 5-star itch.io rating. The reply is visible only to you. An admin checks it with Approve / Reject, and Approve gives you the <b>Maria's Favorite</b> role.</p>
-      <p class="ru">Пришли скриншот оценки в 5 звёзд на itch.io. Ответ видишь только ты. Администратор проверяет заявку кнопками Approve / Reject, а Approve выдаёт роль <b>Maria's Favorite</b>.</p>
+      <code>/help</code>
+      <p>Maria's commands for everyone: <code>/proof</code> and the <code>!</code> cards. Admin commands stay hidden.</p>
+      <p class="ru">Команды Марии для всех: <code>/proof</code> и <code>!</code>-карточки. Админские команды в список не попадают.</p>
+    </div>
+    <div class="cmd">
+      <code>/proof</code><span class="opts">screenshot</span>
+      <p>Send a screenshot of your rating on itch.io. The reply is visible only to you; admins get the request with Approve / Reject buttons. Approve gives the <b>Game Rater</b> role.</p>
+      <p class="ru">Пришли скриншот своей оценки на itch.io. Ответ видишь только ты; администраторы получают заявку с кнопками Approve / Reject. Approve выдаёт роль <b>Game Rater</b>.</p>
     </div>
     <div class="cmd">
       <code>!maria</code>
@@ -66,9 +71,29 @@
     <h2>Admins / Администраторам</h2>
     <div class="perm">Administrator / Администратор</div>
     <div class="cmd">
+      <code>/help-adm</code>
+      <p>Maria's admin version of <code>/help</code>: her moderator commands grouped by the right each one needs. Only administrators see it.</p>
+      <p class="ru">Админская версия <code>/help</code> Марии: её команды модераторов, сгруппированные по праву, которое для них нужно. Видна только администраторам.</p>
+    </div>
+    <div class="cmd">
       <code>/allgm</code> <code>/allgn</code><span class="opts">[public]</span>
       <p>Show every <code>!gm</code> / <code>!gn</code> card with its render at once. Only you see it, or everyone with <code>public: True</code>. Handy for checking new renders.</p>
       <p class="ru">Показать сразу все карточки <code>!gm</code> / <code>!gn</code> с рендерами. Видите только вы, а с <code>public: True</code> все. Удобно проверять новые рендеры.</p>
+    </div>
+    <div class="cmd">
+      <code>/gmdelphine</code> <code>/gndelphine</code>
+      <p>Post Delphine's good morning / good night card with her render to the channel, visible to everyone.</p>
+      <p class="ru">Отправить в канал карточку Дельфины с пожеланием доброго утра / спокойной ночи и её рендером, видна всем.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Publishing as Maria / Публикации от Марии</h2>
+    <div class="perm">Manage Server / Управление сервером</div>
+    <div class="cmd">
+      <code>/say</code> <code>/embed</code> <code>/edit</code>
+      <p>Same as Ceaseless's publisher, but the message or card is posted as Maria and the card is purple by default.</p>
+      <p class="ru">То же, что публикация у Ceaseless, но сообщение или карточка уходят от имени Марии, а карточка по умолчанию пурпурная.</p>
     </div>
   </section>
 
