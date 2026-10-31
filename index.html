@@ -131,8 +131,17 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 
   <section class="reveal">
     <h2>Find me after the show</h2>
-    <p><a href="https://github.com/CeaselessStudio">GitHub: CeaselessStudio</a></p>
-    <p>Discord: <b>ceaselessstudio</b></p>
+    <div class="socials">
+      <a class="social" href="https://github.com/CeaselessStudio">
+        <span class="social-k">GitHub</span>
+        <span class="social-v">CeaselessStudio</span>
+      </a>
+      <button class="social" type="button" data-copy="ceaselessstudio" title="Copy the Discord handle">
+        <span class="social-k">Discord</span>
+        <span class="social-v">ceaselessstudio</span>
+      </button>
+    </div>
+    <p class="social-hint">Click Discord to copy the handle.</p>
   </section>
 </main>
 
