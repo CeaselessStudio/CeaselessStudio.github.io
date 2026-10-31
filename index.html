@@ -30,6 +30,9 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <main class="wrap">
   <header class="hero">
     <div class="stage-cone" aria-hidden="true"></div>
+    <figure class="clown-card hero-clown" aria-hidden="true">
+      <img src="assets/clown/starblue.webp" alt="" loading="lazy">
+    </figure>
     <div class="medallion">
       <span class="bulbs" aria-hidden="true"></span>
       <img class="portrait" src="assets/avatar.jpg" alt="Ceaseless Studio: a painted clown face">
@@ -54,9 +57,17 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 
   <section class="reveal">
     <h2>Who's behind the mask</h2>
-    <p>I build <b>Discord bots</b> and the little tools that keep a server running while nobody's watching.</p>
-    <p>I translate and proofread <b>visual novels into Russian</b>, and help run <b>Discord communities</b>: roles, permissions, supporter tiers, the whole circus.</p>
-    <p>Everything lives under one name: <b>Ceaseless Studio</b>.</p>
+    <div class="mask-grid">
+      <div class="mask-copy">
+        <p>I build <b>Discord bots</b> and the little tools that keep a server running while nobody's watching.</p>
+        <p>I translate and proofread <b>visual novels into Russian</b>, and help run <b>Discord communities</b>: roles, permissions, supporter tiers, the whole circus.</p>
+        <p>Everything lives under one name: <b>Ceaseless Studio</b>.</p>
+      </div>
+      <div class="mask-art" aria-hidden="true">
+        <figure class="clown-card tilt-a"><img src="assets/clown/ringmaster.webp" alt="" loading="lazy"></figure>
+        <figure class="clown-card tilt-b"><img src="assets/clown/stargirl.webp" alt="" loading="lazy"></figure>
+      </div>
+    </div>
   </section>
 
   <section class="reveal">
@@ -85,6 +96,16 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
       </div>
       <p class="links">On the server: <a href="ceaseless-bot.html">Ceaseless Bot</a> &middot; <a href="maria.html">Maria</a></p>
     </article>
+  </section>
+
+  <section class="reveal">
+    <h2>After dark</h2>
+    <div class="cast-strip">
+      <figure class="clown-card"><img src="assets/clown/redhair.webp" alt="" loading="lazy"></figure>
+      <figure class="clown-card"><img src="assets/clown/green.webp" alt="" loading="lazy"></figure>
+      <figure class="clown-card"><img src="assets/clown/raven.webp" alt="" loading="lazy"></figure>
+      <figure class="clown-card"><img src="assets/clown/cross.webp" alt="" loading="lazy"></figure>
+    </div>
   </section>
 
   <section class="reveal">
@@ -132,21 +153,28 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 
   <section class="reveal">
     <h2>Find me after the show</h2>
-    <div class="socials">
-      <a class="social" href="https://github.com/CeaselessStudio">
-        <span class="social-k">GitHub</span>
-        <span class="social-v">CeaselessStudio</span>
-      </a>
-      <a class="social" href="https://t.me/CeaseNeverly">
-        <span class="social-k">Telegram</span>
-        <span class="social-v">@CeaseNeverly</span>
-      </a>
-      <button class="social" type="button" data-copy="ceaselessstudio" title="Copy the Discord handle">
-        <span class="social-k">Discord</span>
-        <span class="social-v">ceaselessstudio</span>
-      </button>
+    <div class="contact-row">
+      <div class="contact-copy">
+        <div class="socials">
+          <a class="social" href="https://github.com/CeaselessStudio">
+            <span class="social-k">GitHub</span>
+            <span class="social-v">CeaselessStudio</span>
+          </a>
+          <a class="social" href="https://t.me/CeaseNeverly">
+            <span class="social-k">Telegram</span>
+            <span class="social-v">@CeaseNeverly</span>
+          </a>
+          <button class="social" type="button" data-copy="ceaselessstudio" title="Copy the Discord handle">
+            <span class="social-k">Discord</span>
+            <span class="social-v">ceaselessstudio</span>
+          </button>
+        </div>
+        <p class="social-hint">Click Discord to copy the handle.</p>
+      </div>
+      <figure class="clown-card contact-clown" aria-hidden="true">
+        <img src="assets/clown/scarlet.webp" alt="" loading="lazy">
+      </figure>
     </div>
-    <p class="social-hint">Click Discord to copy the handle.</p>
   </section>
 </main>
 
