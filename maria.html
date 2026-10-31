@@ -19,6 +19,7 @@
     <a class="link" href="ceaseless-bot.html">Ceaseless Bot</a>
     <a class="link on" href="maria.html">Maria</a>
   </div>
+  <div class="progress" aria-hidden="true"></div>
 </nav>
 
 <main class="wrap">
@@ -108,17 +109,15 @@
 
 <footer>&#9670; the grin stays on, the work never stops &#9670; &middot; <a href="index.html">back to the stage</a></footer>
 
-<script>
-  // плавное появление блоков при прокрутке
-  const els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    els.forEach((el) => io.observe(el));
-  } else {
-    els.forEach((el) => el.classList.add('in'));
-  }
-</script>
+<div class="atmosphere" aria-hidden="true">
+  <div class="glow"></div>
+  <div class="beam beam-a"></div>
+  <div class="beam beam-b"></div>
+  <canvas class="dust"></canvas>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<div class="torch" aria-hidden="true"></div>
+
+<script src="site.js" defer></script>
 </body>
 </html>
