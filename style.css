@@ -365,7 +365,7 @@ html.curtain-seen .curtain { display: none; }
   .glow, .beam, .grain, .atmosphere::before, .atmosphere::after, .haze,
   nav::after, footer::before, .home .hero h1, .grin, .grin .line, .grin .tick, .curtain i,
   .medallion .bulbs, .medallion .gloss, .stage-cone, .reveal.in h2, .diamonds i.hot { animation: none !important; }
-  .hero-clown { animation: none !important; }
+  .side-card { animation: none !important; }
   .grin .line { stroke-dashoffset: 0; }
   .grin .tick { opacity: 1; }
   .curtain, .torch, .dust { display: none; }
@@ -414,10 +414,12 @@ button.social .social-v::after { content: " \29C9"; }
 }
 .clown-card:hover { box-shadow: 0 24px 54px rgba(0, 0, 0, .6), 0 0 0 1px rgba(192, 64, 47, .5); }
 
-.hero-clown {
-  position: absolute; right: -6px; top: 26px; width: 136px; z-index: 2;
-  transform: rotate(7deg); animation: bob 9s ease-in-out infinite alternate;
-}
+.hero-sides { position: absolute; inset: 0; pointer-events: none; }
+.side-card { position: absolute; width: 148px; animation: bob 11s ease-in-out infinite alternate; }
+.side-1 { left: -36px; top: 8px; transform: rotate(-8deg); }
+.side-2 { right: -36px; top: 0; width: 140px; transform: rotate(7deg); animation-delay: -3s; }
+.side-3 { left: -18px; top: 392px; width: 118px; transform: rotate(6deg); animation-delay: -6s; }
+.side-4 { right: -22px; top: 408px; width: 124px; transform: rotate(-5deg); animation-delay: -8s; }
 
 .mask-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 36px; align-items: start; }
 .mask-art { position: relative; min-height: 420px; }
@@ -434,8 +436,12 @@ button.social .social-v::after { content: " \29C9"; }
 
 @keyframes bob { from { translate: 0 0; } to { translate: 0 -10px; } }
 
+@media (max-width: 920px) {
+  .hero-sides { display: none; }
+}
+
 @media (max-width: 900px) {
-  .hero-clown, .contact-clown { display: none; }
+  .contact-clown { display: none; }
   .mask-grid { grid-template-columns: 1fr; gap: 24px; }
   .mask-art { min-height: 340px; }
   .mask-art .tilt-a { width: 52%; right: 6%; top: 0; }

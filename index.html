@@ -30,9 +30,12 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <main class="wrap">
   <header class="hero">
     <div class="stage-cone" aria-hidden="true"></div>
-    <figure class="clown-card hero-clown" aria-hidden="true">
-      <img src="assets/clown/starblue.webp" alt="" loading="lazy">
-    </figure>
+    <div class="hero-sides" aria-hidden="true">
+      <figure class="clown-card side-card side-1"><img src="assets/clown/redhair.webp" alt="" loading="lazy"></figure>
+      <figure class="clown-card side-card side-2"><img src="assets/clown/starblue.webp" alt="" loading="lazy"></figure>
+      <figure class="clown-card side-card side-3"><img src="assets/clown/green.webp" alt="" loading="lazy"></figure>
+      <figure class="clown-card side-card side-4"><img src="assets/clown/raven.webp" alt="" loading="lazy"></figure>
+    </div>
     <div class="medallion">
       <span class="bulbs" aria-hidden="true"></span>
       <img class="portrait" src="assets/avatar.jpg" alt="Ceaseless Studio: a painted clown face">
