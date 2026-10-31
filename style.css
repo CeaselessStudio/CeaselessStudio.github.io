@@ -428,6 +428,10 @@ button.social .social-v::after { content: " \29C9"; }
 .contact-copy { flex: 1 1 auto; }
 .contact-clown { flex: 0 0 128px; width: 128px; margin-top: 4px; transform: rotate(-5deg); }
 
+.cast-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cast-strip .clown-card { transform: rotate(-2deg); }
+.cast-strip .clown-card:nth-child(even) { transform: rotate(2deg); margin-top: 16px; }
+
 @keyframes bob { from { translate: 0 0; } to { translate: 0 -10px; } }
 
 @media (max-width: 900px) {
@@ -436,5 +440,18 @@ button.social .social-v::after { content: " \29C9"; }
   .mask-art { min-height: 340px; }
   .mask-art .tilt-a { width: 52%; right: 6%; top: 0; }
   .mask-art .tilt-b { width: 46%; left: 6%; top: 64px; }
+  .cast-strip { gap: 10px; }
+}
+
+@media (max-width: 720px) {
+  .cast-strip {
+    display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 10px;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  }
+  .cast-strip::-webkit-scrollbar { height: 6px; }
+  .cast-strip::-webkit-scrollbar-track { background: transparent; }
+  .cast-strip::-webkit-scrollbar-thumb { background: #4a2a2c; border-radius: 3px; }
+  .cast-strip .clown-card { flex: 0 0 64%; scroll-snap-align: center; }
+  .cast-strip .clown-card:nth-child(even) { margin-top: 12px; }
 }
 .feature .links { color: var(--muted); font-size: 1rem; }
