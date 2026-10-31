@@ -185,4 +185,36 @@
       setTimeout(() => curtain.classList.add("done"), 2400);
     }
   }
+  /* 7. контакты: копировать ник по клику */
+  document.querySelectorAll("[data-copy]").forEach((el) => {
+    const value = el.getAttribute("data-copy");
+    const label = el.querySelector(".social-v");
+    const flash = () => {
+      if (!label) return;
+      const old = label.textContent;
+      label.textContent = "copied";
+      setTimeout(() => { label.textContent = old; }, 1500);
+    };
+    el.addEventListener("click", () => {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(value).then(flash).catch(() => fallbackCopy(value, flash));
+      } else {
+        fallbackCopy(value, flash);
+      }
+    });
+  });
+
+  function fallbackCopy(value, done) {
+    const field = document.createElement("textarea");
+    field.value = value;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.top = "-1000px";
+    document.body.appendChild(field);
+    field.select();
+    try {
+      if (document.execCommand("copy")) done();
+    } catch (e) { /* браузер не дал скопировать */ }
+    document.body.removeChild(field);
+  }
 })();

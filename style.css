@@ -378,4 +378,20 @@ html.curtain-seen .curtain { display: none; }
 .btn:hover { border-color: var(--accent); color: var(--fg); background: rgba(153, 45, 34, .2); }
 .btn.primary { background: var(--accent); border-color: var(--accent); }
 .btn.primary:hover { background: var(--accent-hi); }
+
+/* контакты: карточки-ссылки и копирование ника */
+.socials { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 0; }
+.social {
+  display: flex; flex-direction: column; gap: 2px; min-width: 200px;
+  padding: 12px 18px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); color: var(--fg); font: inherit; text-align: left;
+  text-decoration: none; cursor: pointer;
+  transition: border-color .2s, background .2s, transform .2s;
+}
+.social:hover { border-color: var(--accent); background: #1b1416; transform: translateY(-2px); }
+.social-k { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.social-v { font-size: 1.05rem; }
+.social-v::after { content: " \2197"; color: var(--accent-hi); font-size: .9em; }
+button.social .social-v::after { content: " \29C9"; }
+.social-hint { color: var(--muted); font-size: .9rem; margin: 14px 0 0; }
 .feature .links { color: var(--muted); font-size: 1rem; }
