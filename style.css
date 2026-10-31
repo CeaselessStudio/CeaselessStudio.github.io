@@ -6,6 +6,8 @@
   --line: #3a3436;
   --accent: #992d22;
   --accent-hi: #c0402f;
+  --mx: 50vw; /* курсор для прожектора (ставит site.js) */
+  --my: 30vh;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -48,9 +50,13 @@ p { margin: 0 0 12px; }
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .card {
   background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 20px;
-  transition: border-color .2s, transform .2s;
+  transition: border-color .2s, transform .18s ease, box-shadow .25s;
+  will-change: transform;
 }
-.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, .45), 0 0 24px rgba(153, 45, 34, .22);
+}
 .card h3 { font-size: 1.5rem; margin-bottom: 4px; }
 .card .role { color: var(--accent-hi); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
 .card p { color: var(--muted); font-size: 1rem; margin: 0; }
@@ -75,15 +81,23 @@ p { margin: 0 0 12px; }
 
 footer { border-top: 1px solid var(--line); text-align: center; color: var(--muted); padding: 32px 0 56px; margin-top: 32px; font-size: .95rem; }
 
-/* появление при прокрутке */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* появление при прокрутке + виньетка, которая гаснет при входе */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, .55);
+  transition: opacity .7s ease, transform .7s ease, box-shadow 1.1s ease;
+}
+.reveal.in { opacity: 1; transform: none; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0); }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; box-shadow: none; transition: none; }
   html { scroll-behavior: auto; }
   .card { transition: none; }
 }
-@media (max-width: 520px) { nav .wrap { gap: 14px; } }
+@media (max-width: 520px) {
+  nav .wrap { gap: 10px; padding-top: 8px; padding-bottom: 8px; }
+  nav .brand { font-size: 1.02rem; }
+  nav a.link { font-size: .66rem; letter-spacing: .05em; }
+}
 
 /* главный проект */
 .feature {
@@ -98,6 +112,165 @@ footer { border-top: 1px solid var(--line); text-align: center; color: var(--mut
 .feature h3 { font-size: clamp(2rem, 6vw, 2.8rem); }
 .feature .role { color: var(--accent-hi); letter-spacing: .12em; text-transform: uppercase; font-size: .9rem; margin: 4px 0 16px; }
 .feature .links { margin: 20px 0 0; }
+
+/* ==========================================================================
+   Сцена: фоновые слои, свет, лампочки, занавес
+   Всё на transform/opacity, отключается через prefers-reduced-motion
+   ========================================================================== */
+
+/* задник: держит свечение, прожекторы, пыль и бархат по краям */
+.atmosphere { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+
+/* бархатные складки по краям экрана */
+.atmosphere::before,
+.atmosphere::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: min(56px, 6vw);
+  background: repeating-linear-gradient(90deg, #170a0b 0 5px, #2c1114 5px 15px, #150809 15px 21px);
+  opacity: .6; animation: folds 90s linear infinite;
+}
+.atmosphere::before { left: 0; }
+.atmosphere::after { right: 0; animation-direction: reverse; }
+
+/* дыхание багрового света сверху */
+.glow {
+  position: absolute; left: -10%; right: -10%; top: -25vh; height: 90vh;
+  background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(153, 45, 34, .55), rgba(153, 45, 34, 0) 70%);
+  filter: blur(30px); mix-blend-mode: screen;
+  animation: breathe 18s ease-in-out infinite alternate;
+}
+
+/* два прожектора, медленно качаются над сценой */
+.beam {
+  position: absolute; top: -45vh; left: 50%; width: 26vw; height: 150vh;
+  transform-origin: 50% 0; filter: blur(34px); mix-blend-mode: screen;
+  background: linear-gradient(180deg, rgba(255, 231, 205, .16), rgba(255, 231, 205, .03) 55%, transparent 80%);
+}
+.beam-a { animation: sweep-a 22s ease-in-out infinite alternate; }
+.beam-b { opacity: .6; animation: sweep-b 27s ease-in-out infinite alternate; }
+
+.dust { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* плёночное зерно поверх страницы */
+.grain {
+  position: fixed; inset: -60px; z-index: 3; pointer-events: none; opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: grain 1.1s steps(5, end) infinite;
+}
+
+/* свет вокруг курсора */
+.torch {
+  position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: 0;
+  mix-blend-mode: screen; transition: opacity .5s ease;
+  background: radial-gradient(340px circle at var(--mx) var(--my), rgba(255, 214, 170, .11), rgba(255, 214, 170, 0) 65%);
+}
+.torch.on { opacity: 1; }
+
+/* лампочки шатра: низ меню и верх футера */
+nav::after,
+footer::before {
+  content: ""; position: absolute; left: 0; right: 0; height: 9px; pointer-events: none;
+  background-image: radial-gradient(circle, #ffe6bd 0 1.7px, rgba(255, 205, 140, .55) 2.4px, transparent 3.4px);
+  background-size: 24px 9px; background-position: center;
+  animation: flicker 4.4s steps(1, end) infinite;
+}
+nav::after { bottom: -9px; }
+footer::before { top: -9px; animation-delay: -2.1s; }
+footer { position: relative; }
+
+/* полоса прочитанного под меню */
+.progress {
+  position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--accent), #e0694f);
+  box-shadow: 0 0 12px rgba(192, 64, 47, .75);
+}
+
+/* глитч на заголовке, один раз при загрузке */
+.hero h1 { animation: glitch 1.2s steps(2, end) .6s 1; }
+
+/* ухмылка, которая прорисовывается */
+.grin {
+  display: block; width: min(260px, 62vw); height: auto; margin: 18px auto 0; overflow: visible;
+  filter: drop-shadow(0 0 16px rgba(192, 64, 47, .35));
+  animation: grin-idle 7s ease-in-out 2.2s infinite alternate;
+}
+.grin .line {
+  fill: none; stroke: var(--accent-hi); stroke-width: 5; stroke-linecap: round;
+  stroke-dasharray: 100; stroke-dashoffset: 0;
+  animation: grin-draw 1.4s ease-out .5s both;
+}
+.grin .tick {
+  fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; opacity: 1;
+  animation: tick-in .35s ease-out 1.5s both;
+}
+.grin .tick:nth-of-type(3) { animation-delay: 1.65s; }
+.grin .tick:nth-of-type(4) { animation-delay: 1.8s; }
+
+/* занавес на входе: раздвигается сам, повторно не показывается */
+.curtain { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.curtain i {
+  position: absolute; top: 0; bottom: 0; width: 51%;
+  background: repeating-linear-gradient(90deg, #1c0c0e 0 10px, #34151a 10px 26px, #1a0a0c 26px 36px);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, .9);
+}
+.curtain i:first-child { left: 0; animation: curtain-l 1.5s cubic-bezier(.65, 0, .35, 1) .35s forwards; }
+.curtain i:last-child { right: 0; animation: curtain-r 1.5s cubic-bezier(.65, 0, .35, 1) .35s forwards; }
+.curtain.done,
+html.curtain-seen .curtain { display: none; }
+
+@keyframes folds { from { background-position: 0 0; } to { background-position: 240px 0; } }
+@keyframes breathe { from { opacity: .3; transform: scale(.98); } to { opacity: .7; transform: scale(1.04); } }
+@keyframes sweep-a {
+  from { transform: translateX(-42vw) rotate(-7deg); }
+  to { transform: translateX(-8vw) rotate(5deg); }
+}
+@keyframes sweep-b {
+  from { transform: translateX(40vw) rotate(6deg); }
+  to { transform: translateX(6vw) rotate(-4deg); }
+}
+@keyframes grain {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-14px, 9px, 0); }
+  40% { transform: translate3d(10px, -12px, 0); }
+  60% { transform: translate3d(-8px, -6px, 0); }
+  80% { transform: translate3d(13px, 7px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes flicker {
+  0%, 100% { opacity: .85; }
+  6% { opacity: .35; }
+  8% { opacity: .9; }
+  47% { opacity: .5; }
+  49% { opacity: .88; }
+  73% { opacity: .4; }
+  75% { opacity: .9; }
+}
+@keyframes glitch {
+  0%, 100% { text-shadow: none; transform: none; }
+  8% { text-shadow: -3px 0 var(--accent), 3px 0 rgba(120, 200, 220, .55); transform: translateX(2px); }
+  14% { text-shadow: 3px 0 var(--accent), -3px 0 rgba(120, 200, 220, .55); transform: translateX(-2px); }
+  20%, 60% { text-shadow: none; transform: none; }
+  64% { text-shadow: -2px 0 rgba(192, 64, 47, .8), 2px 0 rgba(120, 200, 220, .4); transform: translateY(1px); }
+}
+@keyframes grin-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes tick-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes grin-idle { from { transform: scaleY(1); } to { transform: scaleY(1.04); } }
+@keyframes curtain-l { to { transform: translateX(-102%); } }
+@keyframes curtain-r { to { transform: translateX(102%); } }
+
+@media (max-width: 720px) {
+  .atmosphere::before, .atmosphere::after, .beam, .torch { display: none; }
+  .grain { opacity: .035; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow, .beam, .grain, .atmosphere::before, .atmosphere::after,
+  nav::after, footer::before, .hero h1, .grin, .grin .line, .grin .tick, .curtain i { animation: none !important; }
+  .grin .line { stroke-dashoffset: 0; }
+  .grin .tick { opacity: 1; }
+  .curtain, .torch, .dust { display: none; }
+}
 .feature .cover { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 4px 0 20px; }
 .buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
 .btn {

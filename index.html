@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>// занавес показываем только раз за сессию
+try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement.classList.add("curtain-seen"); } catch (e) { document.documentElement.classList.add("curtain-seen"); }</script>
 <title>Ceaseless Studio</title>
 <meta name="description" content="Behind the painted grin: Discord bots, automation and visual novel localization.">
 <meta property="og:title" content="Ceaseless Studio">
@@ -22,6 +24,7 @@
     <a class="link" href="ceaseless-bot.html">Ceaseless Bot</a>
     <a class="link" href="maria.html">Maria</a>
   </div>
+  <div class="progress" aria-hidden="true"></div>
 </nav>
 
 <main class="wrap">
@@ -29,6 +32,12 @@
     <img class="banner" src="assets/banner.png" alt="Ceaseless Studio - the show never stops">
     <h1>Behind the painted grin</h1>
     <p class="lead">Discord bots, automation and visual novel localization. The show never stops.</p>
+    <svg class="grin" viewBox="0 0 200 84" aria-hidden="true" focusable="false">
+      <path class="line" pathLength="100" d="M22 20 C 46 74, 154 74, 178 20"></path>
+      <path class="tick" d="M62 46 v16"></path>
+      <path class="tick" d="M100 58 v14"></path>
+      <path class="tick" d="M138 46 v16"></path>
+    </svg>
   </header>
 
   <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
@@ -119,17 +128,16 @@
 
 <footer>&#9670; the grin stays on, the work never stops &#9670;</footer>
 
-<script>
-  // плавное появление блоков при прокрутке
-  const els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    els.forEach((el) => io.observe(el));
-  } else {
-    els.forEach((el) => el.classList.add('in'));
-  }
-</script>
+<div class="atmosphere" aria-hidden="true">
+  <div class="glow"></div>
+  <div class="beam beam-a"></div>
+  <div class="beam beam-b"></div>
+  <canvas class="dust"></canvas>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<div class="torch" aria-hidden="true"></div>
+<div class="curtain" aria-hidden="true"><i></i><i></i></div>
+
+<script src="site.js" defer></script>
 </body>
 </html>
