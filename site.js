@@ -217,4 +217,46 @@
     } catch (e) { /* браузер не дал скопировать */ }
     document.body.removeChild(field);
   }
+
+  /* 8. переключатель языка на странице новеллы: EN по умолчанию, выбор помнится */
+  const langSwitch = document.querySelector(".lang-switch");
+  if (langSwitch) {
+    const buttons = langSwitch.querySelectorAll("button[data-lang]");
+    const nodes = document.querySelectorAll("[data-ru]");
+    nodes.forEach((el) => { el.dataset.en = el.innerHTML; });
+
+    const applyLang = (lang) => {
+      const ru = lang === "ru";
+      document.documentElement.lang = ru ? "ru" : "en";
+      nodes.forEach((el) => {
+        el.innerHTML = ru ? el.dataset.ru : el.dataset.en;
+      });
+      buttons.forEach((b) => {
+        const on = b.dataset.lang === (ru ? "ru" : "en");
+        b.classList.toggle("on", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      try { localStorage.setItem("dbd-lang", ru ? "ru" : "en"); } catch (e) { /* приватный режим */ }
+    };
+
+    let saved = "en";
+    try { saved = localStorage.getItem("dbd-lang") || "en"; } catch (e) { /* приватный режим */ }
+    const fromUrl = new URLSearchParams(window.location.search).get("lang");
+    if (fromUrl === "ru" || fromUrl === "en") saved = fromUrl;
+
+    applyLang(saved);
+    buttons.forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+  }
+
+  /* 9. гейт спойлеров в After hours: кадры скрыты, пока не нажмут кнопку */
+  const gate = document.querySelector(".dbd-gate");
+  if (gate) {
+    const btn = gate.querySelector(".dbd-gate-btn");
+    const panel = gate.querySelector(".dbd-gallery");
+    btn.addEventListener("click", () => {
+      const open = gate.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      panel.hidden = !open;
+    });
+  }
 })();

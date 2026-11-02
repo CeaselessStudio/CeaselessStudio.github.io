@@ -17,9 +17,10 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, other acts, tools and languages |
 | `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
 | `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
+| `driven-by-desire.html` | **Driven By Desire** - the visual novel: story, cast cards, art, an 18+ after-hours gallery, build stats and links |
 | `style.css` | Shared styles and the scene: grain, glow, spotlights, curtain folds, marquee bulbs |
-| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain |
-| `assets/` | Banner, key art, tier icons |
+| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch |
+| `assets/` | Banner, key art, tier icons, Driven By Desire art |
 
 ## Main project: Driven By Desire
 
