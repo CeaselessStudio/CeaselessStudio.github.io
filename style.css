@@ -786,3 +786,7 @@ body.novel .kicker { color: #c9a24a; }
 }
 body.novel .dbd-spoiler { color: #c9a24a; border-color: rgba(201, 162, 39, .5); }
 body.novel .kicker { color: #d8b45c; }
+
+/* home main-stage title links to the novel page */
+.feature h3 a { color: inherit; text-decoration: none; }
+.feature h3 a:hover { color: var(--accent-hi); }
