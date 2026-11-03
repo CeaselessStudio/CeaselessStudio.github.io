@@ -953,3 +953,5 @@ main.wrap { position: relative; isolation: isolate; }
 .dbd-side.s4 { top: 45%; }
 .dbd-side.s5 { top: 63%; }
 .dbd-side.s6 { top: 81%; }
+
+.dbd-gallery video { display: block; width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
