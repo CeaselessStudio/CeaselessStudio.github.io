@@ -28,6 +28,14 @@
 </nav>
 
 <main class="wrap">
+  <div class="dbd-sides" aria-hidden="true">
+    <figure class="dbd-side left s1"><img src="assets/dbd/side-zoe.webp" alt="" loading="lazy" width="330" height="914"></figure>
+    <figure class="dbd-side right s2"><img src="assets/dbd/side-maria.webp" alt="" loading="lazy" width="292" height="908"></figure>
+    <figure class="dbd-side left s3"><img src="assets/dbd/side-elsa.webp" alt="" loading="lazy" width="256" height="869"></figure>
+    <figure class="dbd-side right s4"><img src="assets/dbd/side-delphine.webp" alt="" loading="lazy" width="358" height="900"></figure>
+    <figure class="dbd-side left s5"><img src="assets/dbd/side-lucy.webp" alt="" loading="lazy" width="245" height="884"></figure>
+    <figure class="dbd-side right s6"><img src="assets/dbd/side-carla.webp" alt="" loading="lazy" width="377" height="923"></figure>
+  </div>
   <div class="lang-switch" role="group" aria-label="Language / Язык">
     <button type="button" data-lang="en" class="on" aria-pressed="true">EN</button>
     <button type="button" data-lang="ru" aria-pressed="false">RU</button>
@@ -164,21 +172,21 @@
       <span class="dbd-age">18+</span>
       <span class="dbd-spoiler" data-ru="Спойлеры">Spoilers</span>
     </div>
-    <p data-ru="Кадры из поздних глав, в том числе взрослые сцены. Дальше небольшие спойлеры.">Frames from later chapters, including adult scenes. Mild spoilers ahead.</p>
+    <p data-ru="Короткие зацикленные кадры из поздних глав, в том числе взрослые сцены. Дальше небольшие спойлеры.">Short loops from later chapters, including adult scenes. Mild spoilers ahead.</p>
     <div class="dbd-gate" id="after-gate">
       <button class="dbd-gate-btn" type="button" aria-expanded="false" aria-controls="after-gallery">
         <span class="dbd-gate-mark" aria-hidden="true">&#9670;</span>
-        <span class="dbd-gate-label when-closed" data-ru="Показать кадры">Reveal the frames</span>
-        <span class="dbd-gate-label when-open" data-ru="Скрыть кадры">Hide the frames</span>
+        <span class="dbd-gate-label when-closed" data-ru="Показать сцены">Reveal the scenes</span>
+        <span class="dbd-gate-label when-open" data-ru="Скрыть сцены">Hide the scenes</span>
         <span class="dbd-gate-meta" data-ru="18+ &middot; спойлеры">18+ &middot; spoilers</span>
       </button>
-      <div class="dbd-gallery" id="after-gallery" hidden>
-        <figure><img src="assets/dbd/after-backstage.webp" alt="Backstage at the fashion show" loading="lazy" width="1280" height="720"></figure>
-        <figure><img src="assets/dbd/after-duo.webp" alt="Kimberly and Patricia in lingerie" loading="lazy" width="1280" height="720"></figure>
-        <figure><img src="assets/dbd/after-carla.webp" alt="Carla in the dressing room" loading="lazy" width="1280" height="720"></figure>
-        <figure><img src="assets/dbd/after-kimberly.webp" alt="Kimberly close to the player" loading="lazy" width="1280" height="720"></figure>
-        <figure><img src="assets/dbd/after-car.webp" alt="Kimberly in the car" loading="lazy" width="1280" height="720"></figure>
-        <figure><img src="assets/dbd/after-zoe-night.webp" alt="Zoe asleep in a pink nightdress" loading="lazy" width="1280" height="720"></figure>
+      <div class="dbd-gallery dbd-reel" id="after-gallery" hidden>
+        <figure><video src="assets/dbd/reel-kimberly-kiss.mp4" poster="assets/dbd/reel-kimberly-kiss.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="Kimberly and the player at the door"></video></figure>
+        <figure><video src="assets/dbd/reel-patricia.mp4" poster="assets/dbd/reel-patricia.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="Patricia with the player"></video></figure>
+        <figure><video src="assets/dbd/reel-carla.mp4" poster="assets/dbd/reel-carla.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="Carla backstage"></video></figure>
+        <figure><video src="assets/dbd/reel-kimberly-car.mp4" poster="assets/dbd/reel-kimberly-car.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="Kimberly in the car"></video></figure>
+        <figure><video src="assets/dbd/reel-car.mp4" poster="assets/dbd/reel-car.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="Kimberly behind the wheel"></video></figure>
+        <figure><video src="assets/dbd/reel-zoe.mp4" poster="assets/dbd/reel-zoe.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="Zoe in her room"></video></figure>
       </div>
       <p class="dbd-note" data-ru="Сцены из взрослой версии игры. 18+.">Scenes from the adult version of the game. 18+.</p>
     </div>
@@ -224,5 +232,22 @@
 <div class="torch" aria-hidden="true"></div>
 
 <script src="site.js" defer></script>
+  <script>
+    (() => {
+      const gate = document.getElementById("after-gate");
+      if (!gate) return;
+      const panel = document.getElementById("after-gallery");
+      const vids = panel.querySelectorAll("video");
+      const apply = () => {
+        if (panel.hidden) {
+          vids.forEach((v) => v.pause());
+        } else {
+          vids.forEach((v) => { v.currentTime = 0; v.play().catch(() => {}); });
+        }
+      };
+      new MutationObserver(apply).observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+      apply();
+    })();
+  </script>
 </body>
 </html>
