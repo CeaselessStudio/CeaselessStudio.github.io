@@ -6,7 +6,7 @@
 
 **Behind the painted grin.** Discord bots, automation and visual novel localization. The show never stops.
 
-🌐 **Live site:** https://ceaselessstudio.github.io/
+🌐 **Live site:** https://ceaseless-studio.github.io/
 
 ## What's here
 
