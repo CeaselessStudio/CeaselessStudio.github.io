@@ -50,4 +50,4 @@ Everything moves on `transform`/`opacity` only, without libraries. All of it tur
 
 ## Contact
 
-GitHub: [CeaselessStudio](https://github.com/CeaselessStudio) · Discord: `ceaselessstudio`
+GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
