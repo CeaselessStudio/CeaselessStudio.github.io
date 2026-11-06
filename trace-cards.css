@@ -14,9 +14,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 46px;
-  height: 66px;
-  border-radius: 4px;
+  width: 34px;
+  height: 48px;
+  border-radius: 3px;
   pointer-events: none;
   color: #161214;
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -26,10 +26,10 @@
   will-change: transform, opacity;
   background: linear-gradient(155deg, #f6f1e7 0%, #e6ded0 55%, #d5cbbb 100%);
   box-shadow:
-    0 10px 18px rgba(0, 0, 0, .45),
+    0 6px 12px rgba(0, 0, 0, .42),
     0 0 0 1px rgba(20, 16, 17, .65),
-    inset 0 0 0 3px #efe9dd,
-    inset 0 0 0 4px rgba(20, 16, 17, .25);
+    inset 0 0 0 2px #efe9dd,
+    inset 0 0 0 3px rgba(20, 16, 17, .22);
   animation-name: trace-fade;
   animation-timing-function: cubic-bezier(.2, .6, .3, 1);
   animation-fill-mode: forwards;
@@ -40,9 +40,9 @@
 .trace-card::before {
   content: var(--rank);
   position: absolute;
-  left: 5px;
-  top: 4px;
-  font-size: 15px;
+  left: 3px;
+  top: 2px;
+  font-size: 11px;
   letter-spacing: -.02em;
 }
 
@@ -50,9 +50,9 @@
   content: var(--suit);
   position: absolute;
   left: 50%;
-  top: 56%;
+  top: 54%;
   transform: translate(-50%, -50%);
-  font-size: 26px;
+  font-size: 19px;
   opacity: .9;
 }
 
@@ -71,8 +71,7 @@
     transform:
       translate3d(calc(var(--x0) * 1px - 50% + var(--dx) * 1px), calc(var(--y0) * 1px - 50% + var(--dy) * 1px), 0)
       rotate(calc(var(--r0) + var(--spin)))
-      scale(calc(var(--scale, 1) * .6));
-    filter: blur(1px);
+      scale(calc(var(--scale, 1) * .55));
   }
 }
 
@@ -81,7 +80,7 @@
 }
 
 @media (max-width: 720px) {
-  .trace-card { width: 38px; height: 54px; }
-  .trace-card::before { font-size: 12px; }
-  .trace-card::after { font-size: 21px; }
+  .trace-card { width: 28px; height: 40px; }
+  .trace-card::before { font-size: 9px; left: 3px; top: 2px; }
+  .trace-card::after { font-size: 15px; }
 }

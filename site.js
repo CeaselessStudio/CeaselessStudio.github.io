@@ -262,27 +262,44 @@
 
   /* 10. след из игральных карт за курсором (только мышь, без reduced-motion) */
   if (finePointer && !reduced) {
-    const layer = document.createElement("div");
-    layer.className = "trace-layer";
-    layer.setAttribute("aria-hidden", "true");
-    document.body.appendChild(layer);
-
     const RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     const SUITS = ["\u2660", "\u2665", "\u2666", "\u2663"]; // пики, черви, бубны, трефы
     const RED = ["\u2665", "\u2666"];
-    const MAX = 18;
+    const MAX = 14;
+    const STEP = 34; // столько пикселей пути между картами
+    const PAUSE = 70; // не чаще одной карты в 70 мс
+    const LIFE = 2600; // страховка: карта уходит не позже этого срока
     const live = [];
+    let layer = null;
+    let travel = 0;
     let lastX = null;
     let lastY = null;
     let lastT = 0;
 
     const rand = (min, max) => min + Math.random() * (max - min);
 
-    function drop(x, y) {
-      if (live.length >= MAX) {
-        const old = live.shift();
-        if (old && old.parentNode) old.parentNode.remove();
+    // слой могли случайно снести - поднимаем заново, след не должен умирать навсегда
+    function ensureLayer() {
+      if (!layer || !layer.isConnected) {
+        layer = document.createElement("div");
+        layer.className = "trace-layer";
+        layer.setAttribute("aria-hidden", "true");
+        document.body.appendChild(layer);
       }
+      return layer;
+    }
+
+    function retire(card) {
+      const i = live.indexOf(card);
+      if (i >= 0) live.splice(i, 1);
+      if (card.isConnected) card.remove();
+    }
+
+    function drop(x, y) {
+      const host = ensureLayer();
+      if (live.length >= MAX) retire(live[0]);
+      if (live.length >= MAX) retire(live[0]);
+
       const suit = SUITS[(Math.random() * SUITS.length) | 0];
       const card = document.createElement("span");
       card.className = "trace-card" + (RED.indexOf(suit) >= 0 ? " red" : "");
@@ -295,24 +312,39 @@
       card.style.setProperty("--dx", rand(-16, 16).toFixed(1));
       card.style.setProperty("--dy", rand(14, 40).toFixed(1));
       card.style.setProperty("--scale", rand(.82, 1.12).toFixed(2));
-      card.style.animationDuration = rand(1.1, 1.7).toFixed(2) + "s";
-      layer.appendChild(card);
+      card.style.animationDuration = rand(.9, 1.4).toFixed(2) + "s";
+      host.appendChild(card);
       live.push(card);
-      card.addEventListener("animationend", () => {
-        card.remove();
-        const i = live.indexOf(card);
-        if (i >= 0) live.splice(i, 1);
-      }, { once: true });
+      card.addEventListener("animationend", () => retire(card), { once: true });
+      setTimeout(() => retire(card), LIFE);
     }
 
     window.addEventListener("pointermove", (e) => {
       if (e.pointerType && e.pointerType !== "mouse") return;
       const now = performance.now();
-      const dist = lastX === null ? Infinity : Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      if (dist < 34 || now - lastT < 70) return;
+      if (lastX === null) {
+        lastX = e.clientX;
+        lastY = e.clientY;
+        lastT = now;
+        return;
+      }
+      const d = Math.hypot(e.clientX - lastX, e.clientY - lastY);
       lastX = e.clientX;
       lastY = e.clientY;
+      if (d > 120) { // телепорт курсора: линию не тянем
+        travel = 0;
+        return;
+      }
+      travel += d;
+      if (travel < STEP || now - lastT < PAUSE) return;
+      travel = 0;
       lastT = now;
+      drop(e.clientX, e.clientY);
+    }, { passive: true });
+
+    // клик тоже оставляет карту - так след виден и при медленном движении
+    window.addEventListener("pointerdown", (e) => {
+      if (e.pointerType && e.pointerType !== "mouse") return;
       drop(e.clientX, e.clientY);
     }, { passive: true });
   }
