@@ -348,4 +348,24 @@
       drop(e.clientX, e.clientY);
     }, { passive: true });
   }
+
+  /* 11. обрывок записки на главной: строки проявляются одна за другой */
+  const note = document.querySelector(".note");
+  if (note) {
+    const noteLines = note.querySelectorAll(".note-line");
+    if ("IntersectionObserver" in window && !reduced) {
+      const noteIO = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          noteIO.unobserve(e.target);
+          noteLines.forEach((line, i) => {
+            setTimeout(() => line.classList.add("on"), 260 + i * 420);
+          });
+        });
+      }, { threshold: .35 });
+      noteIO.observe(note);
+    } else {
+      noteLines.forEach((line) => line.classList.add("on"));
+    }
+  }
 })();

@@ -1,0 +1,106 @@
+/* Обрывок записки на главной: рваный лист, скотч, три строки из-за кулис.
+   Разметка - в index.html, появление строк - в site.js (пункт 11).
+   Стили отдельным файлом, потому что style.css в смешанной кодировке. */
+
+.note-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 6px;
+}
+
+.note-shell {
+  position: relative;
+  width: min(620px, 100%);
+  transform: rotate(-1.4deg);
+  transition: transform .5s cubic-bezier(.2, .7, .2, 1);
+}
+
+.note-shell:hover { transform: rotate(-.5deg) translateY(-3px); }
+
+.note {
+  position: relative;
+  padding: 46px 44px 44px;
+  color: #241c19;
+  background: linear-gradient(158deg, #f2ebda 0%, #e7ddc7 56%, #d8ccb2 100%);
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, .55)) drop-shadow(0 1px 0 rgba(255, 255, 255, .05));
+  clip-path: polygon(
+    1% 4%, 5% 2%, 9% 5%, 14% 1%, 19% 4%, 24% 1%, 29% 5%, 34% 2%, 40% 5%, 45% 1%,
+    51% 4%, 56% 1%, 62% 5%, 67% 2%, 73% 5%, 78% 1%, 83% 4%, 88% 2%, 93% 5%, 97% 2%,
+    99.6% 6%, 99% 18%, 99.8% 30%, 98.6% 42%, 99.9% 54%, 98.8% 66%, 99.7% 76%, 98.7% 86%, 99.4% 94%,
+    96% 97%, 91% 94%, 86% 98%, 80% 95%, 74% 98%, 68% 94%, 62% 98%, 56% 95%, 50% 98%,
+    44% 94%, 38% 98%, 32% 95%, 26% 98%, 20% 94%, 14% 98%, 8% 95%, 4% 97%, 1% 93%,
+    2% 82%, .6% 72%, 2.2% 62%, .8% 52%, 2% 42%, .7% 32%, 1.8% 20%
+  );
+}
+
+/* скотч сверху, чуть под углом, выходит за рваный край */
+.note-tape {
+  position: absolute;
+  z-index: 2;
+  top: -16px;
+  left: 50%;
+  width: 148px;
+  height: 32px;
+  margin-left: -74px;
+  transform: rotate(-2.4deg);
+  background:
+    linear-gradient(100deg, rgba(228, 214, 184, .5), rgba(240, 229, 203, .88) 22%, rgba(240, 229, 203, .82) 78%, rgba(228, 214, 184, .45));
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .26), inset 0 0 0 1px rgba(255, 255, 255, .22);
+  clip-path: polygon(2% 0%, 98% 2%, 100% 32%, 97% 64%, 100% 100%, 2% 98%, 0% 68%, 3% 32%);
+  opacity: .92;
+}
+
+.note-kicker {
+  display: block;
+  margin: 0 0 22px;
+  color: #8d2f22;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+
+.note-line {
+  margin: 0 0 12px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.06rem, 2vw, 1.38rem);
+  font-style: italic;
+  line-height: 1.55;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .75s ease, transform .75s cubic-bezier(.2, .7, .2, 1);
+}
+
+.note-line:last-child { margin-bottom: 0; }
+
+.note-line.on { opacity: 1; transform: none; }
+
+/* протянутое "эээ" - тише и глуше остального */
+.note-drag {
+  color: #7b6a57;
+  letter-spacing: .16em;
+  font-style: normal;
+}
+
+/* ударное слово - багровым, с волнистым подчёркиванием от руки */
+.note-hot {
+  color: #8f2419;
+  font-weight: 600;
+  text-decoration: underline wavy rgba(143, 36, 25, .75);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+@media (max-width: 720px) {
+  .note-shell { transform: rotate(-.9deg); }
+  .note { padding: 34px 24px 32px; }
+  .note-kicker { margin-bottom: 16px; font-size: .64rem; letter-spacing: .24em; }
+  .note-line { font-size: 1rem; }
+  .note-tape { width: 116px; margin-left: -58px; height: 26px; top: -13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-shell { transform: none; transition: none; }
+  .note-line { opacity: 1; transform: none; transition: none; }
+}
