@@ -373,4 +373,34 @@
       if (noteSign) noteSign.classList.add("on");
     }
   });
+  /* 12. ночной режим: после 22:00 включается сам, но кнопка важнее расписания */
+  const nightBtn = document.querySelector(".night-toggle");
+  const NIGHT_KEY = "cs-night-mode";
+  const isNightNow = () => {
+    const h = new Date().getHours();
+    return h >= 22 || h < 6;
+  };
+  const readNightChoice = () => {
+    try { return localStorage.getItem(NIGHT_KEY); } catch (e) { return null; }
+  };
+  const paintNight = (on) => {
+    document.documentElement.classList.toggle("night", on);
+    if (!nightBtn) return;
+    nightBtn.setAttribute("aria-pressed", String(on));
+    nightBtn.textContent = on ? "☀" : "☾";
+    nightBtn.setAttribute("aria-label", on ? "Day mode" : "Night mode");
+    nightBtn.title = on ? "Day mode" : "Night mode";
+  };
+  const savedNight = readNightChoice();
+  paintNight(savedNight ? savedNight === "on" : isNightNow());
+  if (nightBtn) {
+    nightBtn.addEventListener("click", () => {
+      const on = !document.documentElement.classList.contains("night");
+      paintNight(on);
+      try { localStorage.setItem(NIGHT_KEY, on ? "on" : "off"); } catch (e) { /* приватный режим */ }
+    });
+  }
+  setInterval(() => {
+    if (!readNightChoice()) paintNight(isNightNow());
+  }, 60000);
 })();
