@@ -1,4 +1,4 @@
-/* След из игральных карт за курсором.
+﻿/* След из игральных карт за курсором.
    Слой создаёт site.js (пункт 10), здесь только внешний вид и анимация.
    Отключается при prefers-reduced-motion и на тач-устройствах (JS не спавнит). */
 
@@ -84,3 +84,15 @@
   .trace-card::before { font-size: 9px; left: 3px; top: 2px; }
   .trace-card::after { font-size: 15px; }
 }
+
+
+/* содержимое страницы всегда выше следа из карт */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.trace-layer {
+  z-index: 0;
+}
+

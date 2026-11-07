@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="night.css">
     <link rel="stylesheet" href="ticket.css">
     <link rel="stylesheet" href="applause.css">
+<link rel="stylesheet" href="contract.css">
 </head>
 <body>
 <nav>
@@ -149,6 +150,39 @@
       [ ] - необязательный параметр. <code>channel</code> по умолчанию - текущий канал. <code>public: True</code> - результат увидят все, иначе только вы.</p>
   </section>
 
+  <section class="reveal contract-section">
+    <h2>Sign the contract / Подпиши контракт</h2>
+    <div class="contract">
+      <div class="contract-paper">
+        <span class="contract-stamp" aria-hidden="true">signed</span>
+        <p class="contract-kicker">ceaseless studio &middot; after hours</p>
+        <h3 class="contract-title">Performers agreement</h3>
+        <ol class="contract-terms">
+          <li>The show never stops.
+            <span class="ru">Шоу не останавливается никогда.</span></li>
+          <li>You do not talk about the cage.
+            <span class="ru">О клетке ты не говоришь.</span></li>
+          <li>Every applause is paid for in advance.
+            <span class="ru">Каждые аплодисменты оплачены заранее.</span></li>
+        </ol>
+        <div class="contract-sign">
+          <canvas class="contract-canvas" width="360" height="150" aria-label="Sign here with the mouse or a finger"></canvas>
+          <span class="contract-hint">sign with blood / подпись кровью</span>
+        </div>
+        <div class="contract-actions">
+          <button class="contract-clear" type="button">Clear / Стереть</button>
+          <span class="contract-status" aria-live="polite"></span>
+        </div>
+      </div>
+      <div class="contract-side">
+        <p>Draw your signature in the box. The ink is free, the exit is not.</p>
+        <p class="ru">Поставь подпись в рамке. Чернила бесплатно, выход - нет.</p>
+        <p>This is only a website: nothing is stored and nothing is signed for real.</p>
+        <p class="ru">Это только сайт: ничего не сохраняется и ничего не подписывается по-настоящему.</p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>&#9670; the grin stays on, the work never stops &#9670; &middot; <a href="index.html">back to the stage</a></footer>
@@ -166,6 +200,7 @@
 <script src="site.js" defer></script>
 </body>
 </html>
+
 
 
 

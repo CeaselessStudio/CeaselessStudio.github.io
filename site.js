@@ -851,5 +851,101 @@
     });
   })();
 
+  /* 17. контракт: подпись кровью мышью или пальцем на полотне */
+  (() => {
+    const canvas = document.querySelector(".contract-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const paper = canvas.closest(".contract-paper");
+    const status = document.querySelector(".contract-status");
+    const clearBtn = document.querySelector(".contract-clear");
+    const paths = [];
+    let active = null;
+    let signed = false;
+    const scale = () => Math.min(2, window.devicePixelRatio || 1);
+    const paint = () => {
+      const d = scale();
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      ctx.clearRect(0, 0, canvas.width / d, canvas.height / d);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      paths.forEach((path) => {
+        ctx.strokeStyle = path.color;
+        ctx.lineWidth = path.width;
+        ctx.beginPath();
+        path.points.forEach((p, i) => {
+          if (i) ctx.lineTo(p.x, p.y);
+          else ctx.moveTo(p.x, p.y);
+        });
+        ctx.stroke();
+      });
+    };
+    const size = () => {
+      const box = canvas.getBoundingClientRect();
+      const d = scale();
+      canvas.width = Math.round(box.width * d);
+      canvas.height = Math.round(box.height * d);
+      paint();
+    };
+    const point = (event) => {
+      const box = canvas.getBoundingClientRect();
+      return { x: event.clientX - box.left, y: event.clientY - box.top };
+    };
+    const newInk = () => ({
+      points: [],
+      color: "rgba(143, 36, 26, .92)",
+      width: 2.3 + Math.random() * 1.3,
+    });
+    canvas.addEventListener("pointerdown", (event) => {
+      if (event.button) return;
+      canvas.setPointerCapture(event.pointerId);
+      active = newInk();
+      active.points.push(point(event));
+      paths.push(active);
+      event.preventDefault();
+    });
+    canvas.addEventListener("pointermove", (event) => {
+      if (!active) return;
+      active.points.push(point(event));
+      const points = active.points;
+      if (points.length > 1) {
+        const a = points[points.length - 2];
+        const b = points[points.length - 1];
+        ctx.strokeStyle = active.color;
+        ctx.lineWidth = active.width;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+      event.preventDefault();
+    });
+    const finish = () => {
+      if (!active) return;
+      const strokes = active.points.length;
+      active = null;
+      if (strokes > 5 && !signed) {
+        signed = true;
+        paper.classList.add("is-signed");
+        if (status) status.textContent = "Signed. No refunds. / Подписано. Возврата нет.";
+      }
+    };
+    canvas.addEventListener("pointerup", finish);
+    canvas.addEventListener("pointercancel", finish);
+    canvas.addEventListener("pointerleave", finish);
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        paths.length = 0;
+        active = null;
+        signed = false;
+        paper.classList.remove("is-signed");
+        if (status) status.textContent = "";
+        paint();
+      });
+    }
+    window.addEventListener("resize", size);
+    size();
+  })();
+
 })();
 
