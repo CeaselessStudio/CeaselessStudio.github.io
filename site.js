@@ -1066,7 +1066,120 @@
     paintCount();
   })();
 
+  /* 19. Konami-код: стрелки-стрелки-вниз-вверх и глитч на пару секунд */
+  (() => {
+    const CODE = [
+      "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+      "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a",
+    ];
+    let at = 0;
+    let busy = false;
+    const flash = document.createElement("div");
+    flash.className = "konami-flash";
+    flash.setAttribute("aria-hidden", "true");
+    document.body.appendChild(flash);
+    const toast = document.createElement("div");
+    toast.className = "konami-toast";
+    toast.setAttribute("role", "status");
+    document.body.appendChild(toast);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fire = () => {
+      if (busy) return;
+      busy = true;
+      document.documentElement.classList.add("konami-glitch");
+      toast.textContent = "cheat code accepted";
+      toast.classList.add("is-on");
+      window.setTimeout(() => {
+        document.documentElement.classList.remove("konami-glitch");
+        toast.classList.remove("is-on");
+        busy = false;
+      }, reduce ? 1600 : 2700);
+    };
+    window.addEventListener("keydown", (event) => {
+      const input = event.target;
+      if (input && (input.tagName === "INPUT" || input.tagName === "TEXTAREA" || input.isContentEditable)) return;
+      const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+      if (key === CODE[at]) {
+        at += 1;
+        if (at === CODE.length) {
+          at = 0;
+          fire();
+        }
+      } else {
+        at = key === CODE[0] ? 1 : 0;
+      }
+    });
+  })();
+
+  /* 20. шёпот: после сорока секунд без движения на краю экрана */
+  (() => {
+    const IDLE = 40000;
+    const SHOW = 6200;
+    const LINES = [
+      "ты ещё здесь?",
+      "the show never stops",
+      "кто-то считает твои вдохи",
+      "не оборачивайся",
+      "the cage is open",
+      "аплодисменты были не тебе",
+      "я вижу тебя в третьем ряду",
+      "ещё немного - и занавес",
+      "they never left the stage",
+      "дыши ровнее",
+    ];
+    const box = document.createElement("p");
+    box.className = "whisper is-right";
+    box.setAttribute("aria-hidden", "true");
+    document.body.appendChild(box);
+    let idleTimer = 0;
+    let hideTimer = 0;
+    let last = 0;
+    let index = Math.floor(Math.random() * LINES.length);
+    const hide = () => {
+      box.classList.remove("is-on");
+    };
+    const show = () => {
+      if (document.hidden) {
+        arm();
+        return;
+      }
+      index = (index + 1 + Math.floor(Math.random() * (LINES.length - 1))) % LINES.length;
+      const line = LINES[index];
+      const left = Math.random() < 0.5;
+      box.textContent = line;
+      box.classList.toggle("is-left", left);
+      box.classList.toggle("is-right", !left);
+      box.classList.add("is-on");
+      hideTimer = window.setTimeout(hide, SHOW);
+      arm();
+    };
+    const arm = () => {
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(show, IDLE);
+    };
+    const poke = () => {
+      const now = Date.now();
+      if (now - last < 400) return;
+      last = now;
+      hide();
+      arm();
+    };
+    ["pointermove", "pointerdown", "keydown", "wheel", "touchstart"].forEach((name) => {
+      window.addEventListener(name, poke, { passive: true });
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        window.clearTimeout(idleTimer);
+        hide();
+      } else {
+        arm();
+      }
+    });
+    arm();
+  })();
+
 })();
+
 
 
 

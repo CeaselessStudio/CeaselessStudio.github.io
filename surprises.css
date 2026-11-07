@@ -1,0 +1,133 @@
+﻿/* сюрпризы: глитч по Konami-коду и шёпот после долгого простоя */
+
+html.konami-glitch main,
+html.konami-glitch nav,
+html.konami-glitch footer {
+  animation: konami-shake .42s steps(2, end) 5;
+  filter: saturate(1.5) contrast(1.06);
+}
+
+.konami-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 66;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(192, 64, 47, .07) 0 2px, transparent 2px 4px),
+    radial-gradient(120% 90% at 50% 0%, rgba(192, 64, 47, .22), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+html.konami-glitch .konami-flash {
+  opacity: 1;
+  animation: konami-flash 2.6s steps(1, end) forwards;
+}
+
+@keyframes konami-shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3px, 2px); }
+  50% { transform: translate(3px, -2px); }
+  75% { transform: translate(-2px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes konami-flash {
+  0% { opacity: 0; }
+  6% { opacity: 1; }
+  18% { opacity: .35; }
+  26% { opacity: 1; }
+  62% { opacity: .5; }
+  100% { opacity: 0; }
+}
+
+.konami-toast {
+  position: fixed;
+  left: 50%;
+  top: 18px;
+  z-index: 68;
+  padding: 8px 16px;
+  border: 1px solid rgba(226, 69, 44, .5);
+  background: rgba(10, 8, 9, .9);
+  color: var(--accent-hi);
+  font-size: .66rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  transform: translate(-50%, -14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.konami-toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.whisper {
+  position: fixed;
+  z-index: 44;
+  max-width: 46vw;
+  color: rgba(232, 92, 66, .62);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: .06em;
+  text-shadow: 0 0 18px rgba(192, 64, 47, .45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.6s ease;
+}
+
+.whisper.is-left {
+  left: 14px;
+  bottom: 22vh;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.whisper.is-right {
+  right: 14px;
+  bottom: 22vh;
+  writing-mode: vertical-rl;
+}
+
+.whisper.is-on {
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .whisper {
+    font-size: .88rem;
+  }
+  .whisper.is-left,
+  .whisper.is-right {
+    writing-mode: horizontal-tb;
+    max-width: 62vw;
+    bottom: 16vh;
+  }
+  .whisper.is-left {
+    left: 10px;
+    transform: none;
+  }
+  .whisper.is-right {
+    right: 10px;
+    text-align: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.konami-glitch main,
+  html.konami-glitch nav,
+  html.konami-glitch footer {
+    animation: none;
+  }
+  html.konami-glitch .konami-flash {
+    animation: konami-flash 1.4s steps(1, end) forwards;
+  }
+  .whisper {
+    transition: none;
+  }
+}
+
+
