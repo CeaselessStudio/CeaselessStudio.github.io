@@ -14,11 +14,12 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&family=Ruslan+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="trace-cards.css">
 <link rel="stylesheet" href="night.css">
 <link rel="stylesheet" href="backstage-note.css">
+<link rel="stylesheet" href="flyer.css">
 </head>
 <body class="home">
 <nav>
@@ -213,6 +214,31 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
       </figure>
     </div>
   </section>
+
+  <section class="reveal flyer-section">
+    <div class="flyer-shell">
+      <span class="flyer-tape" aria-hidden="true"></span>
+      <div class="flyer" role="note" aria-label="A club flyer found on the floor">
+        <span class="flyer-kicker">found on the floor / after hours</span>
+        <span class="flyer-title">ГАББЕР</span>
+        <p class="flyer-line">Мы всё взяли, киска, прыгай как габбер</p>
+        <p class="flyer-line">Сломай свои суставы, до-до коленей локтями</p>
+        <p class="flyer-line flyer-line--dim">Мы всё взяли, киска, прыгай как габбер</p>
+        <p class="flyer-line">Трись об меня джинсами, киска, прыгай как габбер</p>
+        <div class="flyer-chant" aria-hidden="true">
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+        </div>
+        <p class="flyer-encore">ебашь ещё</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>&#9670; the grin stays on, the work never stops &#9670;</footer>
@@ -231,5 +257,7 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <script src="site.js" defer></script>
 </body>
 </html>
+
+
 
 

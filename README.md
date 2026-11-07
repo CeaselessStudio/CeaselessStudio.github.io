@@ -14,7 +14,7 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 
 | Page | What it is |
 |---|---|
-| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, torn backstage notes, other acts, tools and languages |
+| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, torn backstage notes, other acts, tools and languages, the club flyer |
 | `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
 | `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
 | `driven-by-desire.html` | **Driven By Desire** - the visual novel: story, cast cards, art, an 18+ after-hours gallery, build stats and links |
@@ -22,6 +22,7 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `trace-cards.css` | The playing-card trail: card face, rank, suit and the fade-out animation |
 | `backstage-note.css` | The torn notes on the home page: paper, tape, blood stains and the handwritten lines |
 | `night.css` | Night mode: darker palette, deeper shadows, vignette and the toggle in the menu |
+| `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
 | `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode |
 | `assets/` | Banner, key art, tier icons, Driven By Desire art |
 
@@ -51,6 +52,8 @@ The page is a stage, not a screenshot. The home hero is built from live layers i
 
 Everything moves on `transform`/`opacity` only, without libraries. All of it turns off under `prefers-reduced-motion: reduce`, and the heavy layers (folds, beams, haze, cursor light, dust, curtain) are hidden on screens narrower than 720 px.
 
+At the very bottom of the home page there is a club flyer: a torn black poster with a crimson neon title, the first verse of the track and a chorus that scrolls like a stuck print. It flickers softly and sits still under reduced motion.
+
 One more trick: the pointer leaves a trail of playing cards. A card drops under the cursor every few steps, each with a random rank and suit, drifts down, turns and fades. It is mouse-only, capped at fourteen live cards, and hidden under reduced motion.
 
 And a quieter one: two torn pages are taped to the stage, stained, scratched and signed. One carries a fingerprint, the other a `no entry` stamp; their lines reveal one after another when the page scrolls to them. From 1600 px up they slide out of the text column into the empty gutters beside the cast, and fall back under it on narrower screens.
@@ -58,4 +61,5 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
