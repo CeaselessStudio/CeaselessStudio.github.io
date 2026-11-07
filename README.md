@@ -22,8 +22,9 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `trace-cards.css` | The playing-card trail: card face, rank, suit and the fade-out animation |
 | `backstage-note.css` | The torn notes on the home page: paper, tape, blood stains and the handwritten lines, with texts drawn at random from a pool of twenty-six |
 | `night.css` | Night mode: darker palette, deeper shadows, vignette and the toggle in the menu |
+| `ticket.css` | The ADMIT ONE ticket that slides in once per visit and flies away when clicked |
 | `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
-| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode |
+| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode, first-visit ticket |
 | `assets/` | Banner, key art, tier icons, Driven By Desire art |
 
 ## Main project: Driven By Desire
@@ -63,6 +64,7 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
 
 

@@ -662,5 +662,41 @@
   setInterval(() => {
     if (!readNightChoice()) paintNight(isNightNow());
   }, 60000);
+  /* 13. билет ADMIT ONE: показывается один раз за визит и улетает по клику */
+  (() => {
+    const ADMIT_KEY = "cs-admit-ticket";
+    let seen = null;
+    try { seen = localStorage.getItem(ADMIT_KEY); } catch (e) { /* приватный режим */ }
+    if (seen) return;
+    const ticket = document.createElement("div");
+    ticket.className = "admit-ticket";
+    ticket.setAttribute("role", "button");
+    ticket.setAttribute("tabindex", "0");
+    ticket.setAttribute("aria-label", "Admit one ticket. Press Enter to put it away.");
+    ticket.innerHTML =
+      '<span class="admit-kicker">Cease Neverly presents</span>' +
+      '<span class="admit-title">ADMIT ONE</span>' +
+      '<span class="admit-sub">the show never stops</span>' +
+      '<span class="admit-stub"><span class="admit-no">No. 013</span><span class="admit-code" aria-hidden="true"></span></span>';
+    let going = false;
+    const putAway = () => {
+      if (going) return;
+      going = true;
+      try { localStorage.setItem(ADMIT_KEY, "1"); } catch (e) { /* приватный режим */ }
+      ticket.classList.add("is-going");
+      ticket.classList.remove("is-in");
+      setTimeout(() => ticket.remove(), 620);
+    };
+    ticket.addEventListener("click", putAway);
+    ticket.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
+        e.preventDefault();
+        putAway();
+      }
+    });
+    document.body.appendChild(ticket);
+    setTimeout(() => ticket.classList.add("is-in"), reduced ? 400 : 1400);
+  })();
+
 })();
 
