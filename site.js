@@ -1,4 +1,4 @@
-/* Сцена сайта: появление блоков, прогресс, прожектор, наклон карточек, пыль, занавес.
+﻿/* Сцена сайта: появление блоков, прогресс, прожектор, наклон карточек, пыль, занавес.
    Без библиотек. Всё движение отключается при prefers-reduced-motion. */
 (() => {
   "use strict";
@@ -1074,7 +1074,7 @@
   (() => {
     const CODE = [
       "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
-      "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a",
+      "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA",
     ];
     let at = 0;
     let busy = false;
@@ -1110,7 +1110,7 @@
     window.addEventListener("keydown", (event) => {
       const input = event.target;
       if (input && (input.tagName === "INPUT" || input.tagName === "TEXTAREA" || input.isContentEditable)) return;
-      const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+      const key = event.code || event.key;
       if (key === CODE[at]) {
         at += 1;
         if (at === CODE.length) {
@@ -1193,6 +1193,7 @@
   })();
 
 })();
+
 
 
 
