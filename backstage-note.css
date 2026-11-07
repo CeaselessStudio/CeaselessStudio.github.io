@@ -1,25 +1,32 @@
-/* Обрывок записки на главной: рваный лист, скотч, три строки из-за кулис.
+/* Обрывки записок на главной: два рваных листа по краям, скотч, кровь, злые строки из-за кулис.
    Разметка - в index.html, появление строк - в site.js (пункт 11).
    Стили отдельным файлом, потому что style.css в смешанной кодировке. */
 
-.note-wrap {
+.notes-rail {
   display: flex;
-  justify-content: center;
-  padding: 10px 0 6px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 28px;
+  flex-wrap: wrap;
 }
 
 .note-shell {
   position: relative;
-  width: min(620px, 100%);
-  transform: rotate(-1.4deg);
+  flex: 1 1 280px;
+  width: auto;
+  max-width: 426px;
   transition: transform .5s cubic-bezier(.2, .7, .2, 1);
 }
 
-.note-shell:hover { transform: rotate(-.5deg) translateY(-3px); }
+.note-shell--left { transform: rotate(-2deg); }
+.note-shell--right { transform: rotate(1.6deg); }
+
+.note-shell--left:hover { transform: rotate(-1deg) translateY(-3px); }
+.note-shell--right:hover { transform: rotate(.8deg) translateY(-3px); }
 
 .note {
   position: relative;
-  padding: 46px 44px 44px;
+  padding: 44px 40px 40px;
   color: #241c19;
   background: linear-gradient(158deg, #f2ebda 0%, #e7ddc7 56%, #d8ccb2 100%);
   filter: drop-shadow(0 22px 34px rgba(0, 0, 0, .55)) drop-shadow(0 1px 0 rgba(255, 255, 255, .05));
@@ -32,6 +39,39 @@
     2% 82%, .6% 72%, 2.2% 62%, .8% 52%, 2% 42%, .7% 32%, 1.8% 20%
   );
 }
+
+/* кровь и грязь: пятна под текстом, умножаются на бумагу */
+.note::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background:
+    radial-gradient(42% 38% at 88% 8%, rgba(104, 12, 8, .78), rgba(104, 12, 8, .3) 46%, transparent 72%),
+    radial-gradient(26% 22% at 97% 30%, rgba(104, 12, 8, .55), transparent 74%),
+    radial-gradient(8% 7% at 79% 34%, rgba(104, 12, 8, .8), transparent 70%),
+    radial-gradient(4% 4% at 92% 44%, rgba(104, 12, 8, .7), transparent 72%),
+    radial-gradient(38% 32% at 5% 94%, rgba(112, 18, 12, .6), transparent 70%),
+    radial-gradient(20% 17% at 52% 100%, rgba(34, 16, 12, .42), transparent 76%),
+    radial-gradient(16% 14% at 22% 26%, rgba(96, 62, 30, .3), transparent 80%);
+}
+
+/* тонкая царапина через лист */
+.note-scratch {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  opacity: .5;
+  background:
+    linear-gradient(101deg, transparent 46%, rgba(70, 30, 24, .4) 46.6%, transparent 47.4%),
+    linear-gradient(96deg, transparent 70%, rgba(70, 30, 24, .28) 70.7%, transparent 71.6%);
+}
+
+.note-kicker,
+.note-line { position: relative; z-index: 1; }
 
 /* скотч сверху, чуть под углом, выходит за рваный край */
 .note-tape {
@@ -50,9 +90,11 @@
   opacity: .92;
 }
 
+.note-shell--right .note-tape { transform: rotate(2.2deg); left: 38%; }
+
 .note-kicker {
   display: block;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   color: #8d2f22;
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: .72rem;
@@ -62,11 +104,11 @@
 }
 
 .note-line {
-  margin: 0 0 12px;
+  margin: 0 0 11px;
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.06rem, 2vw, 1.38rem);
+  font-size: clamp(1.04rem, 1.8vw, 1.3rem);
   font-style: italic;
-  line-height: 1.55;
+  line-height: 1.5;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity .75s ease, transform .75s cubic-bezier(.2, .7, .2, 1);
@@ -76,11 +118,25 @@
 
 .note-line.on { opacity: 1; transform: none; }
 
-/* протянутое "эээ" - тише и глуше остального */
+/* крик в начале второго листа: готический шрифт, багровый */
+.note-yell {
+  margin-bottom: 16px;
+  color: #8f2419;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-style: normal;
+  letter-spacing: .01em;
+  line-height: 1.15;
+}
+
+/* протянутое "эээ" - зачёркнуто, будто передумали */
 .note-drag {
   color: #7b6a57;
   letter-spacing: .16em;
   font-style: normal;
+  text-decoration: line-through;
+  text-decoration-color: rgba(143, 36, 25, .8);
+  text-decoration-thickness: 2px;
 }
 
 /* ударное слово - багровым, с волнистым подчёркиванием от руки */
@@ -92,15 +148,25 @@
   text-underline-offset: 5px;
 }
 
+@media (max-width: 860px) {
+  .notes-rail { gap: 44px; justify-content: center; }
+  .note-shell { width: min(440px, 100%); }
+  .note-shell--left, .note-shell--right { transform: rotate(-.8deg); }
+  .note-shell--right { transform: rotate(.7deg); }
+}
+
 @media (max-width: 720px) {
-  .note-shell { transform: rotate(-.9deg); }
-  .note { padding: 34px 24px 32px; }
-  .note-kicker { margin-bottom: 16px; font-size: .64rem; letter-spacing: .24em; }
-  .note-line { font-size: 1rem; }
+  .note { padding: 32px 22px 30px; }
+  .note-kicker { margin-bottom: 14px; font-size: .62rem; letter-spacing: .24em; }
+  .note-line { font-size: .98rem; }
+  .note-yell { font-size: 1.3rem; }
   .note-tape { width: 116px; margin-left: -58px; height: 26px; top: -13px; }
+  .note-shell--right .note-tape { left: 42%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .note-shell { transform: none; transition: none; }
+  .note-shell,
+  .note-shell--left,
+  .note-shell--right { transform: none; transition: none; }
   .note-line { opacity: 1; transform: none; transition: none; }
 }

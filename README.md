@@ -14,13 +14,13 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 
 | Page | What it is |
 |---|---|
-| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, a torn backstage note, other acts, tools and languages |
+| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, torn backstage notes, other acts, tools and languages |
 | `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
 | `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
 | `driven-by-desire.html` | **Driven By Desire** - the visual novel: story, cast cards, art, an 18+ after-hours gallery, build stats and links |
 | `style.css` | Shared styles and the scene: grain, glow, spotlights, curtain folds, marquee bulbs |
 | `trace-cards.css` | The playing-card trail: card face, rank, suit and the fade-out animation |
-| `backstage-note.css` | The torn note on the home page: paper, tape and the three handwritten lines |
+| `backstage-note.css` | The torn notes on the home page: paper, tape, blood stains and the handwritten lines |
 | `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines |
 | `assets/` | Banner, key art, tier icons, Driven By Desire art |
 
@@ -52,7 +52,7 @@ Everything moves on `transform`/`opacity` only, without libraries. All of it tur
 
 One more trick: the pointer leaves a trail of playing cards. A card drops under the cursor every few steps, each with a random rank and suit, drifts down, turns and fades. It is mouse-only, capped at fourteen live cards, and hidden under reduced motion.
 
-And a quieter one: between the cast strip and the other acts, a torn page is taped to the stage. It is not part of the copy: it is a note someone left backstage, and its three lines reveal one after another when the page scrolls to it.
+And a quieter one: between the cast strip and the other acts, two torn pages are taped to the left and right edges of the stage. They are not part of the copy: they are notes someone left backstage, stained and scratched, and their lines reveal one after another when the page scrolls to them.
 
 ## Contact
 
