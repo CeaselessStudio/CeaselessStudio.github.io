@@ -962,7 +962,8 @@
       "404.html": { anchor: ".cage", dx: -116, dy: 12, text: "Пятая. Дальше только крик." },
     };
     const name = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-    const key = PAGES[name] ? name : null;
+    const cage = !!document.querySelector(".cage");
+    const key = PAGES[name] ? name : cage ? "404.html" : null;
     const main = document.querySelector("main");
     if (!key || !main) return;
     const read = () => {
@@ -1193,6 +1194,7 @@
   })();
 
 })();
+
 
 
 
