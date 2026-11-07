@@ -20,7 +20,7 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `driven-by-desire.html` | **Driven By Desire** - the visual novel: story, cast cards, art, an 18+ after-hours gallery, build stats and links |
 | `style.css` | Shared styles and the scene: grain, glow, spotlights, curtain folds, marquee bulbs |
 | `trace-cards.css` | The playing-card trail: card face, rank, suit and the fade-out animation |
-| `backstage-note.css` | The torn notes on the home page: paper, tape, blood stains and the handwritten lines |
+| `backstage-note.css` | The torn notes on the home page: paper, tape, blood stains and the handwritten lines, with two texts drawn at random from a pool of fourteen |
 | `night.css` | Night mode: darker palette, deeper shadows, vignette and the toggle in the menu |
 | `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
 | `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode |
@@ -52,6 +52,8 @@ The page is a stage, not a screenshot. The home hero is built from live layers i
 
 Everything moves on `transform`/`opacity` only, without libraries. All of it turns off under `prefers-reduced-motion: reduce`, and the heavy layers (folds, beams, haze, cursor light, dust, curtain) are hidden on screens narrower than 720 px.
 
+The two backstage notes reshuffle on every load: the page picks two different texts out of a pool of fourteen, so the same visit rarely repeats. The paper, tape, stains and signature stay put.
+
 At the very bottom of the home page there is a club flyer: a torn black poster with a crimson neon title, the first verse of the track and a chorus that scrolls like a stuck print. It flickers softly and sits still under reduced motion.
 
 One more trick: the pointer leaves a trail of playing cards. A card drops under the cursor every few steps, each with a random rank and suit, drifts down, turns and fades. It is mouse-only, capped at fourteen live cards, and hidden under reduced motion.
@@ -61,5 +63,6 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
 

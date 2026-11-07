@@ -349,6 +349,94 @@
     }, { passive: true });
   }
 
+  /* 10.5 пул обрывков: каждый заход страницы достаёт два других текста из общей пачки */
+  const NOTE_POOL = [
+    { kicker: "found backstage", lines: [
+      "Я дорожаю как хаты или как в маке соус, а.",
+      "Я дорожая как тачки, и как в принципе всё у нас.",
+      "И только ты всё также <span class=\"note-drag\">эээ</span>, короче, <b class=\"note-hot\">ты лох</b>, ебать",
+    ] },
+    { kicker: "page two, same night", lines: [
+      { text: "Малышка, не пойти бы тебе нахуй?", cls: "note-yell" },
+      "По твоим глазам и так понятно то, что тебе надо.",
+      "Я знаю то, что я неадекватный.",
+      "Я был в аду, вернулся и <b class=\"note-hot\">ушёл туда обратно</b>.",
+    ] },
+    { kicker: "torn from the call sheet", lines: [
+      "Свет - по счёту.",
+      "Кровь - по вкусу.",
+      "Аплодисменты - по настроению.",
+    ] },
+    { kicker: "written on the mirror", lines: [
+      "Если тебе не смешно,",
+      "ты сидишь не в том ряду.",
+    ] },
+    { kicker: "found in the ticket booth", lines: [
+      "Мне не нужна твоя жалость.",
+      "Мне нужен твой <b class=\"note-hot\">билет</b>.",
+    ] },
+    { kicker: "left on the prop table", lines: [
+      "Не трогай кулисы.",
+      "<span class=\"note-drag\">Они</span> трогают в ответ.",
+    ] },
+    { kicker: "half-burned", lines: [
+      "Здесь улыбаются за деньги.",
+      "Остальное - <b class=\"note-hot\">бонус</b>.",
+    ] },
+    { kicker: "stage manager's copy", lines: [
+      "Ты думал, это шутка?",
+      "Шутка - <b class=\"note-hot\">ты</b>.",
+    ] },
+    { kicker: "costume note", lines: [
+      "Кровь на костюме - часть реквизита.",
+      "Пятна не отстирываются. Я пробовал.",
+    ] },
+    { kicker: "after the lights", lines: [
+      "Если стало тихо,",
+      "значит кто-то на сцене устал.",
+    ] },
+    { kicker: "no entry", lines: [
+      "Некоторые гости остаются после шоу.",
+      "Навсегда.",
+    ] },
+    { kicker: "found backstage", lines: [
+      "Оставь телефон. Возьми маску.",
+      "И не оборачивайся.",
+    ] },
+    { kicker: "page three", lines: [
+      "Аплодисменты - единственная валюта,",
+      "которую я не беру.",
+    ] },
+    { kicker: "torn in half", lines: [
+      "Малышка, сцена не резиновая.",
+      "И ты, к сожалению, тоже.",
+    ] },
+  ];
+  const noteShells = document.querySelectorAll(".notes-rail .note");
+  if (noteShells.length) {
+    const pool = NOTE_POOL.slice();
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    noteShells.forEach((note, i) => {
+      const data = pool[i];
+      if (!data) return;
+      const kicker = note.querySelector(".note-kicker");
+      if (kicker) kicker.textContent = data.kicker;
+      const sign = note.querySelector(".note-sign");
+      note.querySelectorAll(".note-line").forEach((line) => line.remove());
+      data.lines.forEach((line) => {
+        const text = typeof line === "string" ? line : line.text;
+        const cls = typeof line === "string" ? "" : (line.cls || "");
+        const p = document.createElement("p");
+        p.className = cls ? "note-line " + cls : "note-line";
+        p.innerHTML = text;
+        note.insertBefore(p, sign);
+      });
+    });
+  }
+
   /* 11. обрывки записок на главной: строки и подпись проявляются одна за другой */
   document.querySelectorAll(".note").forEach((note) => {
     const noteLines = note.querySelectorAll(".note-line");
