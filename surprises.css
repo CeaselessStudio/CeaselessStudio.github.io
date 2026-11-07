@@ -131,3 +131,18 @@ html.konami-glitch .konami-flash {
 }
 
 
+
+/* подсказка про Konami: тихая последовательность в подвале */
+.konami-hint {
+  margin-left: 10px;
+  font-size: .58rem;
+  letter-spacing: .22em;
+  color: rgba(226, 69, 44, .22);
+  white-space: nowrap;
+  transition: color .3s ease;
+}
+
+footer:hover .konami-hint,
+.konami-hint:hover {
+  color: rgba(226, 69, 44, .55);
+}

@@ -1,4 +1,4 @@
-﻿/* Сцена сайта: появление блоков, прогресс, прожектор, наклон карточек, пыль, занавес.
+/* Сцена сайта: появление блоков, прогресс, прожектор, наклон карточек, пыль, занавес.
    Без библиотек. Всё движение отключается при prefers-reduced-motion. */
 (() => {
   "use strict";
@@ -351,6 +351,10 @@
 
   /* 10.5 пул обрывков: тексты перемешиваются, два ложатся в секцию, остальные разлетаются по полям */
   const NOTE_POOL = [
+    { kicker: "the old code", lines: [
+      "↑↑↓↓←→←→BA. Старый код всё ещё работает.",
+      "Проверь на клавиатуре, если не веришь.",
+    ] },
     { kicker: "found backstage", lines: [
       "Я дорожаю как хаты или как в маке соус, а.",
       "Я дорожая как тачки, и как в принципе всё у нас.",
@@ -1082,6 +1086,14 @@
     toast.className = "konami-toast";
     toast.setAttribute("role", "status");
     document.body.appendChild(toast);
+    const footer = document.querySelector("footer");
+    if (footer && !footer.querySelector(".konami-hint")) {
+      const hint = document.createElement("span");
+      hint.className = "konami-hint";
+      hint.textContent = "↑↑↓↓←→←→BA";
+      hint.setAttribute("aria-hidden", "true");
+      footer.appendChild(hint);
+    }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const fire = () => {
       if (busy) return;
@@ -1113,7 +1125,8 @@
 
   /* 20. шёпот: после сорока секунд без движения на краю экрана */
   (() => {
-    const IDLE = 40000;
+    const IDLE = 10000;
+    const REPEAT = 30000;
     const SHOW = 6200;
     const LINES = [
       "ты ещё здесь?",
@@ -1151,11 +1164,12 @@
       box.classList.toggle("is-right", !left);
       box.classList.add("is-on");
       hideTimer = window.setTimeout(hide, SHOW);
-      arm();
-    };
-    const arm = () => {
       window.clearTimeout(idleTimer);
-      idleTimer = window.setTimeout(show, IDLE);
+      idleTimer = window.setTimeout(show, REPEAT);
+    };
+    const arm = (delay) => {
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(show, delay || IDLE);
     };
     const poke = () => {
       const now = Date.now();
@@ -1179,6 +1193,11 @@
   })();
 
 })();
+
+
+
+
+
 
 
 
