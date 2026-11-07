@@ -52,7 +52,7 @@ The page is a stage, not a screenshot. The home hero is built from live layers i
 
 Everything moves on `transform`/`opacity` only, without libraries. All of it turns off under `prefers-reduced-motion: reduce`, and the heavy layers (folds, beams, haze, cursor light, dust, curtain) are hidden on screens narrower than 720 px.
 
-The backstage notes reshuffle on every load: fourteen texts come out of a pool of twenty-six and land in the side gutters, two under the mask section and twelve scattered down the page. On wide screens (1600 px and up) one of the scattered notes swaps its text every few seconds, so the paper keeps moving; narrower screens keep only the two notes under the mask.
+The backstage notes reshuffle on every load: fourteen texts come out of a pool of twenty-six and land in the side gutters, two under the mask section and twelve scattered down the page. The scattered notes are laid out by their measured height, so two sheets on the same side never overlap, and the layout is recalculated when images load, on resize and after every text swap. On wide screens (1600 px and up) one of the scattered notes swaps its text every few seconds, so the paper keeps moving; narrower screens keep only the two notes under the mask.
 
 At the very bottom of the home page there is a club flyer: a torn black poster with a crimson neon title, the first verse of the track and a chorus that scrolls like a stuck print. It flickers softly and sits still under reduced motion.
 
@@ -63,6 +63,7 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
 
 

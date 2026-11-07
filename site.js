@@ -498,6 +498,7 @@
   /* облако: двенадцать листов, разбросанных по полям страницы */
   const pageMain = document.querySelector("main");
   const floats = [];
+  let relayout = () => {};
   if (pageMain) {
     const cloud = document.createElement("div");
     cloud.className = "notes-cloud";
@@ -507,8 +508,8 @@
     for (let i = 0; i < 12 && usedCount < pool.length; i += 1) {
       const float = document.createElement("div");
       float.className = "note-float";
-      float.style.top = (3 + (i * 94) / 12 + (Math.random() * 2.4 - 1.2)).toFixed(2) + "%";
-      if (i % 2 === 0) float.style.left = "1.8vw";
+      const side = i % 2 === 0 ? "left" : "right";
+      if (side === "left") float.style.left = "1.8vw";
       else float.style.right = "1.8vw";
       const shell = document.createElement("div");
       shell.className = "note-shell";
@@ -537,9 +538,43 @@
       shell.appendChild(note);
       float.appendChild(shell);
       cloud.appendChild(float);
-      floats.push({ note, index: usedCount });
+      floats.push({ note, float, side, index: usedCount });
       usedCount += 1;
     }
+
+    /* раскладываем листы по высоте так, чтобы на одной стороне они не наезжали друг на друга */
+    const layoutFloats = () => {
+      const total = pageMain.offsetHeight;
+      ["left", "right"].forEach((sideName) => {
+        const sideFloats = floats.filter((f) => f.side === sideName);
+        if (!sideFloats.length) return;
+        const gap = 54;
+        const margin = 48;
+        const heights = sideFloats.map((f) => f.float.offsetHeight);
+        const used = heights.reduce((sum, h) => sum + h, 0) + gap * (sideFloats.length - 1);
+        const slack = Math.max(0, (total - margin * 2 - used) / sideFloats.length);
+        let y = margin;
+        sideFloats.forEach((f, idx) => {
+          f.float.style.top = Math.round(y) + "px";
+          y += heights[idx] + gap + slack;
+        });
+      });
+    };
+    let layoutRaf = 0;
+    relayout = () => {
+      if (layoutRaf) return;
+      layoutRaf = requestAnimationFrame(() => {
+        layoutRaf = 0;
+        layoutFloats();
+      });
+    };
+    cloud.style.visibility = "hidden";
+    requestAnimationFrame(() => {
+      layoutFloats();
+      cloud.style.visibility = "";
+    });
+    window.addEventListener("resize", relayout);
+    if ("ResizeObserver" in window) new ResizeObserver(relayout).observe(pageMain);
   }
 
   /* на широких экранах один обрывок раз в несколько секунд меняет текст */
@@ -555,6 +590,7 @@
         fillNote(slot.note, next);
         pool[slot.index] = next;
         slot.note.classList.remove("is-fading");
+        relayout();
       }, 380);
     }, 9000);
   }
