@@ -1,4 +1,4 @@
-/* Обрывки записок на главной: два рваных листа по краям, скотч, кровь, злые строки из-за кулис.
+﻿/* Обрывки записок на главной: два рваных листа по краям, скотч, кровь, злые строки из-за кулис.
    Разметка - в index.html, появление строк - в site.js (пункт 11).
    Стили отдельным файлом, потому что style.css в смешанной кодировке. */
 
@@ -255,7 +255,46 @@
 
   .note { padding: 40px 34px 36px; }
   .note-line { font-size: 1.08rem; }
+
+  /* разбросанные по полям записки: видны только на широких экранах */
+  .notes-cloud { display: block; }
 }
+
+main { position: relative; }
+
+/* записки в полях шире колонки, поэтому гасим горизонтальный вылет без создания скролла */
+html.notes-visible { overflow-x: clip; }
+
+.notes-cloud {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  z-index: 1;
+  display: none;
+  pointer-events: none;
+}
+
+.note-float {
+  position: absolute;
+  width: 300px;
+}
+
+.note-float .note-shell {
+  flex: none;
+  width: 300px;
+  max-width: 300px;
+}
+
+.notes-cloud .note { padding: 34px 26px 30px; transition: opacity .35s ease; }
+.notes-cloud .note.is-fading { opacity: 0; }
+.notes-cloud .note-kicker { font-size: .58rem; letter-spacing: .22em; margin-bottom: 12px; }
+.notes-cloud .note-line { font-size: .94rem; line-height: 1.38; margin-bottom: 7px; }
+.notes-cloud .note-sign { font-size: .92rem; }
+.notes-cloud .note-line,
+.notes-cloud .note-sign { opacity: 1; transform: none; }
+.notes-cloud .note:hover { opacity: .96; }
 
 @media (max-width: 860px) {
   .notes-rail { gap: 44px; justify-content: center; }
@@ -279,4 +318,12 @@
   .note-shell--right { transform: none; transition: none; }
   .note-line { opacity: 1; transform: none; transition: none; }
 }
+
+
+
+/* порядок правил: облако показываем только на широких экранах, базовое display: none выше */
+@media (min-width: 1600px) {
+  .notes-cloud { display: block; }
+}
+
 

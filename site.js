@@ -349,7 +349,7 @@
     }, { passive: true });
   }
 
-  /* 10.5 пул обрывков: каждый заход страницы достаёт два других текста из общей пачки */
+  /* 10.5 пул обрывков: тексты перемешиваются, два ложатся в секцию, остальные разлетаются по полям */
   const NOTE_POOL = [
     { kicker: "found backstage", lines: [
       "Я дорожаю как хаты или как в маке соус, а.",
@@ -411,30 +411,152 @@
       "Малышка, сцена не резиновая.",
       "И ты, к сожалению, тоже.",
     ] },
+    { kicker: "written in the dark", lines: [
+      "Ты пришёл за шоу.",
+      "Шоу пришло за тобой.",
+    ] },
+    { kicker: "left on the mirror", lines: [
+      "Сними маску.",
+      "Нет, не эту.",
+    ] },
+    { kicker: "unsigned", lines: [
+      "Я не злой.",
+      "Я просто честный за твои деньги.",
+    ] },
+    { kicker: "box office", lines: [
+      "Ты аплодируешь.",
+      "Я считаю.",
+    ] },
+    { kicker: "second thought", lines: [
+      "Тут добрые только к тем, кто платит.",
+      "Ты, кажется, ошибся дверью.",
+    ] },
+    { kicker: "no refunds", lines: [
+      "Останься после шоу.",
+      "Обещаю, это будет недолго.",
+    ] },
+    { kicker: "torn ticket", lines: [
+      "Мне не жаль тебя.",
+      "Мне жаль потраченного света.",
+    ] },
+    { kicker: "the price", lines: [
+      "Смейся.",
+      "Это бесплатно. Пока.",
+    ] },
+    { kicker: "from the ring", lines: [
+      "Кто-то должен быть клоуном.",
+      "Ты так хорошо подходишь.",
+    ] },
+    { kicker: "after hours", lines: [
+      "Я не помню твоего имени.",
+      "И не буду.",
+    ] },
+    { kicker: "ink", lines: [
+      "Твои деньги пахнут лучше,",
+      "чем твои комплименты.",
+    ] },
+    { kicker: "curtain call", lines: [
+      "Не надо меня спасать.",
+      "Просто купи билет.",
+    ] },
   ];
-  const noteShells = document.querySelectorAll(".notes-rail .note");
-  if (noteShells.length) {
-    const pool = NOTE_POOL.slice();
-    for (let i = pool.length - 1; i > 0; i -= 1) {
+
+  const shuffle = (list) => {
+    for (let i = list.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
+      [list[i], list[j]] = [list[j], list[i]];
     }
-    noteShells.forEach((note, i) => {
-      const data = pool[i];
-      if (!data) return;
-      const kicker = note.querySelector(".note-kicker");
-      if (kicker) kicker.textContent = data.kicker;
-      const sign = note.querySelector(".note-sign");
-      note.querySelectorAll(".note-line").forEach((line) => line.remove());
-      data.lines.forEach((line) => {
-        const text = typeof line === "string" ? line : line.text;
-        const cls = typeof line === "string" ? "" : (line.cls || "");
-        const p = document.createElement("p");
-        p.className = cls ? "note-line " + cls : "note-line";
-        p.innerHTML = text;
-        note.insertBefore(p, sign);
-      });
+    return list;
+  };
+
+  const fillNote = (note, data) => {
+    const kicker = note.querySelector(".note-kicker");
+    if (kicker) kicker.textContent = data.kicker;
+    const sign = note.querySelector(".note-sign");
+    note.querySelectorAll(".note-line").forEach((line) => line.remove());
+    data.lines.forEach((line) => {
+      const text = typeof line === "string" ? line : line.text;
+      const cls = typeof line === "string" ? "" : (line.cls || "");
+      const p = document.createElement("p");
+      p.className = cls ? "note-line " + cls : "note-line";
+      p.innerHTML = text;
+      note.insertBefore(p, sign);
     });
+  };
+
+  const pool = shuffle(NOTE_POOL.slice());
+  const railPicked = [];
+  let usedCount = 0;
+
+  document.querySelectorAll(".notes-rail .note").forEach((note) => {
+    if (usedCount >= pool.length) return;
+    fillNote(note, pool[usedCount]);
+    railPicked.push(pool[usedCount]);
+    usedCount += 1;
+  });
+
+  /* облако: двенадцать листов, разбросанных по полям страницы */
+  const pageMain = document.querySelector("main");
+  const floats = [];
+  if (pageMain) {
+    const cloud = document.createElement("div");
+    cloud.className = "notes-cloud";
+    cloud.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.add("notes-visible");
+    pageMain.appendChild(cloud);
+    for (let i = 0; i < 12 && usedCount < pool.length; i += 1) {
+      const float = document.createElement("div");
+      float.className = "note-float";
+      float.style.top = (3 + (i * 94) / 12 + (Math.random() * 2.4 - 1.2)).toFixed(2) + "%";
+      if (i % 2 === 0) float.style.left = "1.8vw";
+      else float.style.right = "1.8vw";
+      const shell = document.createElement("div");
+      shell.className = "note-shell";
+      shell.style.transform = "rotate(" + (Math.random() * 5 - 2.5).toFixed(2) + "deg)";
+      const tape = document.createElement("span");
+      tape.className = "note-tape";
+      tape.setAttribute("aria-hidden", "true");
+      const note = document.createElement("div");
+      note.className = "note";
+      note.setAttribute("role", "note");
+      if (i % 3 === 0) {
+        const scratch = document.createElement("span");
+        scratch.className = "note-scratch";
+        scratch.setAttribute("aria-hidden", "true");
+        note.appendChild(scratch);
+      }
+      const kicker = document.createElement("span");
+      kicker.className = "note-kicker";
+      note.appendChild(kicker);
+      const sign = document.createElement("p");
+      sign.className = "note-sign";
+      sign.textContent = "Cease Neverly";
+      note.appendChild(sign);
+      fillNote(note, pool[usedCount]);
+      shell.appendChild(tape);
+      shell.appendChild(note);
+      float.appendChild(shell);
+      cloud.appendChild(float);
+      floats.push({ note, index: usedCount });
+      usedCount += 1;
+    }
+  }
+
+  /* на широких экранах один обрывок раз в несколько секунд меняет текст */
+  if (floats.length && !reduced) {
+    setInterval(() => {
+      const slot = floats[Math.floor(Math.random() * floats.length)];
+      const roll = Math.floor(Math.random() * NOTE_POOL.length);
+      const next = NOTE_POOL[roll];
+      const usedNow = new Set(railPicked.concat(floats.map((f) => pool[f.index])));
+      if (usedNow.has(next) || next === pool[slot.index]) return;
+      slot.note.classList.add("is-fading");
+      setTimeout(() => {
+        fillNote(slot.note, next);
+        pool[slot.index] = next;
+        slot.note.classList.remove("is-fading");
+      }, 380);
+    }, 9000);
   }
 
   /* 11. обрывки записок на главной: строки и подпись проявляются одна за другой */
@@ -492,3 +614,4 @@
     if (!readNightChoice()) paintNight(isNightNow());
   }, 60000);
 })();
+
