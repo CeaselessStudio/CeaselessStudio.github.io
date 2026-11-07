@@ -947,7 +947,127 @@
     size();
   })();
 
+  /* 18. охота за записками: пять бумажек по страницам и счётчик находок */
+  (() => {
+    const KEY = "cs-hunt-found";
+    const PAGES = {
+      "index.html": { anchor: ".flyer-section", dx: -128, dy: 30, text: "Билет без номера. Ты уже в списке." },
+      "ceaseless-bot.html": { anchor: ".contract-paper", dx: -128, dy: 34, text: "О клетке не говорят. Но ты нашёл." },
+      "maria.html": { anchor: ".chat-demo", dx: -120, dy: 20, text: "Мария всё видит. Даже это." },
+      "driven-by-desire.html": { anchor: ".dbd-poster", dx: -128, dy: 20, text: "Занавес падал. Ты стоял." },
+      "404.html": { anchor: ".cage", dx: -116, dy: 12, text: "Пятая. Дальше только крик." },
+    };
+    const name = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    const key = PAGES[name] ? name : null;
+    const main = document.querySelector("main");
+    if (!key || !main) return;
+    const read = () => {
+      try {
+        const raw = localStorage.getItem(KEY);
+        const list = raw ? JSON.parse(raw) : [];
+        return Array.isArray(list) ? list.filter((id) => typeof id === "string") : [];
+      } catch (e) {
+        return [];
+      }
+    };
+    const store = (list) => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(list));
+      } catch (e) {
+        /* приватный режим */
+      }
+    };
+    const config = PAGES[key];
+    const total = Object.keys(PAGES).length;
+    const countEl = document.createElement("div");
+    countEl.className = "hunt-count";
+    countEl.setAttribute("role", "status");
+    countEl.setAttribute("aria-live", "polite");
+    document.body.appendChild(countEl);
+    const toast = document.createElement("div");
+    toast.className = "hunt-toast";
+    toast.setAttribute("role", "status");
+    document.body.appendChild(toast);
+    let toastTimer = 0;
+    const say = (text) => {
+      toast.textContent = text;
+      toast.classList.add("is-on");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("is-on"), 3600);
+    };
+    const paintCount = () => {
+      const done = read().length;
+      countEl.textContent = "записки " + done + " / " + total;
+      countEl.classList.toggle("is-complete", done >= total);
+      countEl.setAttribute("title", done >= total ? "Открыть пятую записку" : "Ищи записки на страницах сайта");
+    };
+    const final = document.createElement("div");
+    final.className = "hunt-final";
+    final.innerHTML = '<div class="hunt-final-paper" role="dialog" aria-modal="true" aria-label="Secret note">' +
+      '<p class="hunt-final-kicker">five of five &middot; after hours</p>' +
+      "<h2>Все пять</h2>" +
+      "<p>You found every note. The show never stops, so neither do you.</p>" +
+      '<p class="ru">Ты нашёл все записки. Шоу не останавливается - и ты тоже. Добро пожаловать в труппу, киска.</p>' +
+      '<button class="hunt-final-close" type="button">Закрыть</button></div>';
+    document.body.appendChild(final);
+    const closeFinal = () => final.classList.remove("is-on");
+    final.querySelector(".hunt-final-close").addEventListener("click", closeFinal);
+    final.addEventListener("click", (event) => {
+      if (event.target === final) closeFinal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeFinal();
+    });
+    countEl.addEventListener("click", () => {
+      if (read().length >= total) final.classList.add("is-on");
+    });
+    const place = () => {
+      const anchor = document.querySelector(config.anchor);
+      if (!anchor) return null;
+      const box = anchor.getBoundingClientRect();
+      const base = main.getBoundingClientRect();
+      return {
+        left: Math.max(6 - base.left, Math.min(window.innerWidth - base.left - 112, box.left - base.left + config.dx)),
+        top: box.top - base.top + config.dy,
+      };
+    };
+    const note = document.createElement("button");
+    note.type = "button";
+    note.className = "hunt-note";
+    note.textContent = "записка";
+    note.setAttribute("aria-label", "Спрятанная записка");
+    if (read().indexOf(key) >= 0) note.classList.add("is-found");
+    const spot = place();
+    if (spot) {
+      note.style.left = spot.left + "px";
+      note.style.top = spot.top + "px";
+      main.appendChild(note);
+    }
+    const reposition = () => {
+      const next = place();
+      if (!next) return;
+      note.style.left = next.left + "px";
+      note.style.top = next.top + "px";
+    };
+    window.addEventListener("resize", reposition);
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(() => requestAnimationFrame(reposition)).observe(main);
+    }
+    note.addEventListener("click", () => {
+      const list = read();
+      if (list.indexOf(key) >= 0) return;
+      list.push(key);
+      store(list);
+      note.classList.add("is-found");
+      paintCount();
+      say(config.text);
+      if (list.length >= total) setTimeout(() => final.classList.add("is-on"), 900);
+    });
+    paintCount();
+  })();
 
 })();
+
+
 
 

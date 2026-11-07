@@ -1,0 +1,203 @@
+/* охота за записками: пять спрятанных бумажек и счётчик находок */
+
+.hunt-note {
+  position: absolute;
+  z-index: 6;
+  width: 94px;
+  height: 66px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(160deg, #f2e8d2, #ddcdaa 78%, #cdbb95);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .48), inset 0 0 16px rgba(140, 100, 60, .22);
+  clip-path: polygon(2% 5%, 96% 0%, 100% 28%, 98% 95%, 5% 100%, 0% 58%);
+  transform: rotate(-7deg);
+  cursor: pointer;
+  color: #8f241a;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  transition: transform .18s ease, opacity .35s ease, box-shadow .18s ease;
+  animation: hunt-breathe 6s ease-in-out infinite;
+}
+
+.hunt-note::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 34px;
+  height: 10px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: linear-gradient(100deg, rgba(230, 220, 196, .55), rgba(244, 236, 216, .9), rgba(230, 220, 196, .5));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+}
+
+.hunt-note:hover,
+.hunt-note:focus-visible {
+  transform: rotate(-2deg) scale(1.08);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .55), 0 0 22px rgba(192, 64, 47, .35), inset 0 0 16px rgba(140, 100, 60, .25);
+  outline: none;
+}
+
+.hunt-note.is-found {
+  opacity: 0;
+  transform: rotate(14deg) scale(.7);
+  pointer-events: none;
+}
+
+@keyframes hunt-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.14); }
+}
+
+.hunt-count {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 42;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid rgba(226, 69, 44, .35);
+  border-radius: 999px;
+  background: rgba(13, 11, 12, .82);
+  color: var(--muted);
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: default;
+  backdrop-filter: blur(6px);
+}
+
+.hunt-count.is-complete {
+  color: var(--accent-hi);
+  border-color: rgba(226, 69, 44, .7);
+  cursor: pointer;
+  animation: hunt-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes hunt-pulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(192, 64, 47, 0); }
+  50% { box-shadow: 0 0 18px rgba(192, 64, 47, .4); }
+}
+
+.hunt-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  z-index: 45;
+  max-width: min(420px, calc(100vw - 40px));
+  padding: 12px 18px;
+  border-left: 3px solid var(--accent-hi);
+  background: rgba(13, 11, 12, .93);
+  color: var(--fg);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: .95rem;
+  line-height: 1.35;
+  transform: translate(-50%, 14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.hunt-toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.hunt-final {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(6, 5, 6, .78);
+  backdrop-filter: blur(4px);
+}
+
+.hunt-final.is-on {
+  display: flex;
+}
+
+.hunt-final-paper {
+  position: relative;
+  max-width: 430px;
+  padding: 32px 30px 26px;
+  color: #2a1712;
+  background:
+    repeating-linear-gradient(94deg, rgba(120, 60, 40, .05) 0 2px, transparent 2px 10px),
+    linear-gradient(165deg, #f5eddb, #e6dabc 62%, #d6c8a8);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .6);
+  transform: rotate(-1.2deg);
+}
+
+.hunt-final-kicker {
+  margin: 0 0 8px;
+  font-size: .58rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(120, 60, 40, .7);
+}
+
+.hunt-final h2 {
+  margin: 0 0 12px;
+  font-family: 'Pirata One', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #8f241a;
+}
+
+.hunt-final p {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.hunt-final p.ru {
+  font-style: italic;
+  color: rgba(70, 40, 30, .8);
+}
+
+.hunt-final-close {
+  margin-top: 10px;
+  padding: 7px 18px;
+  border: 1px solid rgba(120, 60, 40, .55);
+  border-radius: 999px;
+  background: transparent;
+  color: #6d2a1e;
+  font-family: inherit;
+  font-size: .74rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .hunt-note {
+    width: 78px;
+    height: 56px;
+    font-size: .54rem;
+  }
+  .hunt-count {
+    right: 12px;
+    bottom: 12px;
+    font-size: .6rem;
+    padding: 6px 11px;
+  }
+  .hunt-toast {
+    bottom: 84px;
+    font-size: .88rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hunt-note {
+    animation: none;
+  }
+}

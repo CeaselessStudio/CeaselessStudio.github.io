@@ -28,6 +28,7 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `cage.css` | The 404 cage: arched bars, a torn note inside and a missing-door gap |\n| `gothic.css` | The blackletter wordmark used for the studio name in the menu and the hero |
 | `curtain-transition.css` | Page transition: the curtain closes before a new page and opens on arrival |
 | `brand-mark.css` | The small crimson smile next to the wordmark |
+| `hunt.css` | Five notes hidden across the pages and a counter for the ones you found |
 | `contract.css` | The performers agreement on the bot page: paper, terms and a canvas to sign in blood |
 | `maria-chat.css` | The demo chat with Maria on her page: purple panel, bubbles, quick asks and a typing indicator |
 | `fortune.css` | The fortune card: a face-down deck that flips on click and answers in English and Russian |
@@ -72,6 +73,7 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
 
 
