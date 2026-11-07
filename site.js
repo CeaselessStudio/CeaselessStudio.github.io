@@ -543,8 +543,17 @@
     }
 
     /* раскладываем листы по высоте так, чтобы на одной стороне они не наезжали друг на друга */
+    const railShells = Array.from(document.querySelectorAll(".notes-rail .note-shell"));
     const layoutFloats = () => {
       const total = pageMain.offsetHeight;
+      const mainTop = pageMain.getBoundingClientRect().top;
+      const blocked = { left: [], right: [] };
+      railShells.forEach((shell) => {
+        const r = shell.getBoundingClientRect();
+        if (!r.height) return;
+        const sideName = r.left + r.width / 2 < innerWidth / 2 ? "left" : "right";
+        blocked[sideName].push({ top: r.top - mainTop - 20, bottom: r.bottom - mainTop + 20 });
+      });
       ["left", "right"].forEach((sideName) => {
         const sideFloats = floats.filter((f) => f.side === sideName);
         if (!sideFloats.length) return;
@@ -555,8 +564,12 @@
         const slack = Math.max(0, (total - margin * 2 - used) / sideFloats.length);
         let y = margin;
         sideFloats.forEach((f, idx) => {
-          f.float.style.top = Math.round(y) + "px";
-          y += heights[idx] + gap + slack;
+          let top = y;
+          blocked[sideName].forEach((zone) => {
+            if (top < zone.bottom && top + heights[idx] > zone.top) top = zone.bottom;
+          });
+          f.float.style.top = Math.round(top) + "px";
+          y = top + heights[idx] + gap + slack;
         });
       });
     };
