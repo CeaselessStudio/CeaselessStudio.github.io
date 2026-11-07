@@ -765,20 +765,89 @@
         countEl.innerHTML = "card <strong>" + (drawn > FORTUNES.length ? "∞" : drawn) + "</strong> of " + FORTUNES.length;
       }
     };
+    let turning = false;
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reveal = () => {
+      fill();
+      card.classList.add("is-face");
+      card.setAttribute("aria-pressed", "true");
+    };
     card.addEventListener("click", () => {
-      if (card.classList.contains("is-flipped")) {
-        card.classList.remove("is-flipped");
-        card.setAttribute("aria-pressed", "false");
-        setTimeout(() => {
-          fill();
-          card.classList.add("is-flipped");
-          card.setAttribute("aria-pressed", "true");
-        }, 340);
-      } else {
-        fill();
-        card.classList.add("is-flipped");
-        card.setAttribute("aria-pressed", "true");
+      if (turning) return;
+      if (reduceMotion) {
+        reveal();
+        return;
       }
+      turning = true;
+      card.classList.remove("is-opening");
+      card.classList.add("is-shut");
+      setTimeout(() => {
+        reveal();
+        card.classList.add("is-opening");
+        card.classList.remove("is-shut");
+        setTimeout(() => {
+          card.classList.remove("is-opening");
+          turning = false;
+        }, 300);
+      }, 190);
+    });
+  })();
+
+  /* 16. демо-чат с Марией: заготовленные ответы, подсказки и «печатает…» */
+  (() => {
+    const root = document.querySelector(".chat-demo");
+    if (!root) return;
+    const log = root.querySelector(".chat-log");
+    const form = root.querySelector(".chat-form");
+    const input = root.querySelector(".chat-input");
+    const REPLIES = [
+      { test: /^!gm\b|good morning/i, text: "Good morning, kitten. The lights are warm, the coffee is questionable." },
+      { test: /^!gn\b|good night/i, text: "Good night. Leave the mask on the prop table, not on my desk." },
+      { test: /proof|rating|itch/i, text: "Send a screenshot of your itch.io rating with /proof. Only you and the admins see it, and Approve hands out the Game Rater role." },
+      { test: /who|about you|maria/i, text: "Maria. Cease's assistant on Driven By Desire: greetings, cards, the proof queue and a little chaos." },
+      { test: /hello|^hi\b|hey/i, text: "You are not on the guest list. Come in anyway." },
+      { test: /cease|owner/i, text: "He is backstage. He is always backstage." },
+      { test: /role|booster|supporter|subscriber|tier/i, text: "Roles come from the role log and the supporter tiers. I only greet people, I do not hand them out." },
+      { test: /thanks|thank you/i, text: "Do not thank me. Thank the show." },
+    ];
+    const FALLBACK = "The real Maria answers on the server. This demo only has a handful of lines.";
+    const scrollDown = () => { log.scrollTop = log.scrollHeight; };
+    const add = (text, kind) => {
+      const el = document.createElement("div");
+      el.className = "msg msg--" + kind;
+      el.textContent = text;
+      log.appendChild(el);
+      scrollDown();
+      return el;
+    };
+    add("Evening. This is a demo of Maria: the real one only lives on Discord.", "maria");
+    add("canned replies, no commands", "note");
+    const reply = (text) => {
+      const typing = document.createElement("div");
+      typing.className = "msg msg--maria typing";
+      typing.innerHTML = "<span></span><span></span><span></span>";
+      log.appendChild(typing);
+      scrollDown();
+      setTimeout(() => {
+        typing.remove();
+        add(text, "maria");
+      }, 640 + Math.min(900, text.length * 7));
+    };
+    const respond = (raw) => {
+      const q = String(raw || "").trim().slice(0, 200);
+      if (!q) return;
+      add(q, "user");
+      const hit = REPLIES.find((r) => r.test.test(q));
+      reply(hit ? hit.text : FALLBACK);
+    };
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = input.value;
+      input.value = "";
+      respond(value);
+    });
+    root.querySelectorAll(".chat-chip").forEach((chip) => {
+      chip.addEventListener("click", () => respond(chip.dataset.ask || chip.textContent));
     });
   })();
 
