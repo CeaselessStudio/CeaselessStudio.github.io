@@ -349,9 +349,13 @@
     }, { passive: true });
   }
 
-  /* 11. обрывки записок на главной: строки проявляются одна за другой */
+  /* 11. обрывки записок на главной: строки и подпись проявляются одна за другой */
   document.querySelectorAll(".note").forEach((note) => {
     const noteLines = note.querySelectorAll(".note-line");
+    const noteSign = note.querySelector(".note-sign");
+    const revealSign = () => {
+      if (noteSign) setTimeout(() => noteSign.classList.add("on"), 260 + noteLines.length * 380);
+    };
     if ("IntersectionObserver" in window && !reduced) {
       const noteIO = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
@@ -360,11 +364,13 @@
           noteLines.forEach((line, i) => {
             setTimeout(() => line.classList.add("on"), 260 + i * 380);
           });
+          revealSign();
         });
       }, { threshold: .3 });
       noteIO.observe(note);
     } else {
       noteLines.forEach((line) => line.classList.add("on"));
+      if (noteSign) noteSign.classList.add("on");
     }
   });
 })();

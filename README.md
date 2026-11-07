@@ -52,7 +52,7 @@ Everything moves on `transform`/`opacity` only, without libraries. All of it tur
 
 One more trick: the pointer leaves a trail of playing cards. A card drops under the cursor every few steps, each with a random rank and suit, drifts down, turns and fades. It is mouse-only, capped at fourteen live cards, and hidden under reduced motion.
 
-And a quieter one: between the cast strip and the other acts, two torn pages are taped to the left and right edges of the stage. They are not part of the copy: they are notes someone left backstage, stained and scratched, and their lines reveal one after another when the page scrolls to them.
+And a quieter one: two torn pages are taped to the stage, stained, scratched and signed. One carries a fingerprint, the other a `no entry` stamp; their lines reveal one after another when the page scrolls to them. From 1600 px up they slide out of the text column into the empty gutters beside the cast, and fall back under it on narrower screens.
 
 ## Contact
 
