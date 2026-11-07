@@ -14,7 +14,7 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 
 | Page | What it is |
 |---|---|
-| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, torn backstage notes, other acts, tools and languages, the club flyer |
+| `index.html` | Home: live hero (medallion, stage light, name), who's behind the mask, the main project, torn backstage notes, other acts, tools and languages, the club flyer, the fortune deck |
 | `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
 | `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
 | `driven-by-desire.html` | **Driven By Desire** - the visual novel: story, cast cards, art, an 18+ after-hours gallery, build stats and links |
@@ -25,8 +25,9 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `night.css` | Night mode: darker palette, deeper shadows, vignette and the toggle in the menu |
 | `ticket.css` | The ADMIT ONE ticket that slides in once per visit and flies away when clicked |
 | `applause.css` | The APPLAUSE sign in the footer: bulbs chase and a "bravo" shows up when you click it |
-| `cage.css` | The 404 cage: arched bars, a torn note inside and a missing-door gap |\n| `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
-| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode, first-visit ticket, footer applause sign |
+| `cage.css` | The 404 cage: arched bars, a torn note inside and a missing-door gap |\n| `fortune.css` | The fortune card: a face-down deck that flips on click and answers in English and Russian |
+| `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
+| `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode, first-visit ticket, footer applause sign, the bilingual fortune card |
 | `assets/` | Banner, key art, tier icons, Driven By Desire art |
 
 ## Main project: Driven By Desire
@@ -66,6 +67,7 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
 
 

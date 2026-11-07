@@ -1,0 +1,235 @@
+﻿/* 16. карта судьбы: колода за кулисами, по клику переворачивается и отвечает на двух языках */
+
+.fortune-section {
+  padding-top: 8px;
+}
+
+.fortune-hint {
+  margin: 4px 0 26px;
+  color: var(--muted);
+}
+
+.fortune-wrap {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fortune-card {
+  position: relative;
+  width: 232px;
+  height: 342px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 1100px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fortune-card:focus-visible {
+  outline: 2px solid var(--accent-hi, #c0402f);
+  outline-offset: 8px;
+  border-radius: 12px;
+}
+
+.fortune-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .75s cubic-bezier(.2, .8, .25, 1);
+}
+
+.fortune-card.is-flipped .fortune-inner {
+  transform: rotateY(180deg);
+}
+
+.fortune-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 20px;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 22px 40px rgba(0, 0, 0, .55);
+  overflow: hidden;
+}
+
+/* рубашка */
+
+.fortune-back {
+  border: 2px solid rgba(168, 80, 56, .7);
+  background:
+    repeating-linear-gradient(45deg, rgba(150, 44, 28, .32) 0 2px, transparent 2px 14px),
+    repeating-linear-gradient(-45deg, rgba(150, 44, 28, .32) 0 2px, transparent 2px 14px),
+    radial-gradient(120% 100% at 50% 0%, rgba(120, 30, 20, .5), transparent 62%),
+    linear-gradient(168deg, #191011, #0d0909 62%, #1a0d0a);
+  box-shadow:
+    inset 0 0 0 6px rgba(8, 6, 6, .9),
+    inset 0 0 0 7px rgba(168, 80, 56, .45),
+    0 22px 40px rgba(0, 0, 0, .55);
+}
+
+.fortune-back::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(168, 80, 56, .38);
+  border-radius: 6px;
+}
+
+.fortune-back-sigil {
+  position: relative;
+  z-index: 1;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: 4.6rem;
+  line-height: 1;
+  color: rgba(196, 84, 58, .78);
+  text-shadow: 0 0 22px rgba(190, 52, 28, .45);
+}
+
+.fortune-back-word {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  font-size: .6rem;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: rgba(214, 170, 148, .6);
+}
+
+.fortune-back-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fortune-back-corners::before,
+.fortune-back-corners::after {
+  content: "◆";
+  position: absolute;
+  font-size: .8rem;
+  color: rgba(196, 84, 58, .6);
+}
+
+.fortune-back-corners::before { top: 26px; left: 26px; }
+.fortune-back-corners::after { bottom: 26px; right: 26px; }
+
+/* лицо */
+
+.fortune-front {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  border: 2px solid rgba(120, 60, 40, .5);
+  background:
+    repeating-linear-gradient(96deg, rgba(120, 60, 40, .04) 0 2px, transparent 2px 11px),
+    linear-gradient(168deg, #f3ebd8, #e8dec4 58%, #dccfaf);
+  color: #2a1712;
+  text-align: center;
+}
+
+.fortune-rank,
+.fortune-suit {
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  color: #8f241a;
+}
+
+.fortune-rank {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.fortune-suit {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.fortune-card.is-red .fortune-rank,
+.fortune-card.is-red .fortune-suit {
+  color: #a8261c;
+}
+
+.fortune-divider {
+  width: 46px;
+  height: 1px;
+  margin: 16px auto 14px;
+  background: rgba(120, 60, 40, .42);
+}
+
+.fortune-line {
+  display: block;
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.06rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.fortune-line-ru {
+  display: block;
+  margin: 10px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: .98rem;
+  font-style: italic;
+  line-height: 1.35;
+  color: rgba(70, 40, 30, .82);
+}
+
+.fortune-sign {
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: .68rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(120, 60, 40, .55);
+}
+
+.fortune-text {
+  max-width: 32ch;
+}
+
+.fortune-text p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+.fortune-count {
+  margin: 14px 0 0;
+  font-size: .8rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fortune-count strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .fortune-wrap {
+    gap: 24px;
+    justify-content: center;
+  }
+  .fortune-card {
+    width: 200px;
+    height: 296px;
+  }
+  .fortune-rank { font-size: 2rem; }
+  .fortune-line { font-size: .98rem; }
+  .fortune-line-ru { font-size: .9rem; }
+  .fortune-back-sigil { font-size: 3.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fortune-inner { transition: none; }
+}
+

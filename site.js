@@ -724,5 +724,63 @@
     sign.addEventListener("click", clap);
   })();
 
+  /* 15. карта судьбы: колода переворачивается по клику и отвечает на двух языках */
+  (() => {
+    const card = document.querySelector(".fortune-card");
+    if (!card) return;
+    const FORTUNES = [
+      { rank: "A", suit: "♠", en: "You will get exactly what you paid for. Nothing more.", ru: "Ты получишь ровно то, за что заплатил. Ни больше." },
+      { rank: "K", suit: "♥", en: "Applause is coming. Not for you.", ru: "Аплодисменты будут. Не тебе." },
+      { rank: "Q", suit: "♦", en: "The cage was open all along.", ru: "Клетка была открыта всё это время." },
+      { rank: "J", suit: "♣", en: "Someone is watching the show from your seat.", ru: "Кто-то смотрит шоу с твоего места." },
+      { rank: "10", suit: "♠", en: "You will be remembered. Briefly.", ru: "Тебя запомнят. Ненадолго." },
+      { rank: "9", suit: "♥", en: "The person beside you is already bored.", ru: "Тот, кто рядом, уже скучает." },
+      { rank: "8", suit: "♦", en: "Your luck is backstage. It is not coming out.", ru: "Твоя удача за кулисами. Она не выйдет." },
+      { rank: "7", suit: "♣", en: "Do not turn around during the finale.", ru: "Не оборачивайся во время финала." },
+      { rank: "6", suit: "♥", en: "You will laugh tonight. Later you will not.", ru: "Сегодня ты посмеёшься. Потом - нет." },
+      { rank: "5", suit: "♠", en: "A refund is not in this deck.", ru: "Возврата в этой колоде нет." },
+      { rank: "4", suit: "♦", en: "The next curtain is yours to open.", ru: "Следующий занавес открывать тебе." },
+      { rank: "3", suit: "♣", en: "The cards like you. That is the bad news.", ru: "Карты к тебе расположены. Это плохая новость." },
+    ];
+    const rankEl = card.querySelector(".fortune-rank");
+    const suitEl = card.querySelector(".fortune-suit");
+    const enEl = card.querySelector(".fortune-line");
+    const ruEl = card.querySelector(".fortune-line-ru");
+    const countEl = document.querySelector(".fortune-count");
+    const redSuits = ["♥", "♦"];
+    let current = -1;
+    let drawn = 0;
+    const fill = () => {
+      let next = Math.floor(Math.random() * FORTUNES.length);
+      if (next === current) next = (next + 1) % FORTUNES.length;
+      current = next;
+      const f = FORTUNES[next];
+      rankEl.textContent = f.rank;
+      suitEl.textContent = f.suit;
+      enEl.textContent = f.en;
+      ruEl.textContent = f.ru;
+      card.classList.toggle("is-red", redSuits.indexOf(f.suit) !== -1);
+      drawn += 1;
+      if (countEl) {
+        countEl.innerHTML = "card <strong>" + (drawn > FORTUNES.length ? "∞" : drawn) + "</strong> of " + FORTUNES.length;
+      }
+    };
+    card.addEventListener("click", () => {
+      if (card.classList.contains("is-flipped")) {
+        card.classList.remove("is-flipped");
+        card.setAttribute("aria-pressed", "false");
+        setTimeout(() => {
+          fill();
+          card.classList.add("is-flipped");
+          card.setAttribute("aria-pressed", "true");
+        }, 340);
+      } else {
+        fill();
+        card.classList.add("is-flipped");
+        card.setAttribute("aria-pressed", "true");
+      }
+    });
+  })();
+
 })();
 

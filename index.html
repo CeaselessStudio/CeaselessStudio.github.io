@@ -22,6 +22,7 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
     <link rel="stylesheet" href="applause.css">
 <link rel="stylesheet" href="backstage-note.css">
 <link rel="stylesheet" href="flyer.css">
+    <link rel="stylesheet" href="fortune.css">
 </head>
 <body class="home">
 <nav>
@@ -241,6 +242,35 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
       </div>
     </div>
   </section>
+
+  <section class="reveal fortune-section">
+    <h2>Ask the cards</h2>
+    <p class="fortune-hint">Tap the deck. It answers in both languages.</p>
+    <div class="fortune-wrap">
+      <button class="fortune-card" type="button" aria-label="Draw a card" aria-pressed="false">
+        <span class="fortune-inner">
+          <span class="fortune-face fortune-back" aria-hidden="true">
+            <span class="fortune-back-sigil">CS</span>
+            <span class="fortune-back-word">ceaseless studio</span>
+            <span class="fortune-back-corners"></span>
+          </span>
+          <span class="fortune-face fortune-front">
+            <span class="fortune-rank">A</span>
+            <span class="fortune-suit">&#9824;</span>
+            <span class="fortune-divider" aria-hidden="true"></span>
+            <span class="fortune-line">Draw a card.</span>
+            <span class="fortune-line-ru">Вытяни карту.</span>
+            <span class="fortune-sign">Cease Neverly</span>
+          </span>
+        </span>
+      </button>
+      <div class="fortune-text">
+        <p>The deck saw you coming. It has opinions.</p>
+        <p class="ru">Колода тебя заметила. У нее есть мнение.</p>
+        <p class="fortune-count" aria-live="polite">card <strong>1</strong> of 12</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>&#9670; the grin stays on, the work never stops &#9670;</footer>
@@ -259,6 +289,7 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <script src="site.js" defer></script>
 </body>
 </html>
+
 
 
 
