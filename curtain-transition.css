@@ -1,0 +1,76 @@
+﻿/* переход между страницами: занавес закрывается, потом открывается новая страница */
+
+.curtain.is-closing {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: none;
+  z-index: 60;
+}
+
+.curtain.is-closing i {
+  animation: none !important;
+  will-change: transform;
+}
+
+.curtain.is-closing i:first-child {
+  animation: cs-curtain-close-left .44s cubic-bezier(.25, .8, .35, 1) forwards !important;
+}
+
+.curtain.is-closing i:last-child {
+  animation: cs-curtain-close-right .44s cubic-bezier(.25, .8, .35, 1) forwards !important;
+}
+
+/* новая страница: занавес уже закрыт и раскрывается */
+.curtain.is-arriving {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 60;
+}
+
+.curtain.is-arriving i {
+  animation: none !important;
+  will-change: transform;
+}
+
+.curtain.is-arriving i:first-child {
+  animation: cs-curtain-open-left .5s cubic-bezier(.4, .1, .5, .95) forwards !important;
+}
+
+.curtain.is-arriving i:last-child {
+  animation: cs-curtain-open-right .5s cubic-bezier(.4, .1, .5, .95) forwards !important;
+}
+
+@keyframes cs-curtain-open-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-104%); }
+}
+
+@keyframes cs-curtain-open-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(104%); }
+}
+
+@keyframes cs-curtain-close-left {
+  from { transform: translateX(-104%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes cs-curtain-close-right {
+  from { transform: translateX(104%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain.is-closing i:first-child,
+  .curtain.is-closing i:last-child {
+    animation: none !important;
+    transform: translateX(0) !important;
+  }
+
+  .curtain.is-arriving {
+    display: none !important;
+  }
+}
+

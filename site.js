@@ -947,5 +947,73 @@
     size();
   })();
 
+  /* 18. переходы: занавес закрывается перед переходом на другую страницу сайта */
+  (() => {
+    const curtain = document.querySelector(".curtain");
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!curtain || reduced) return;
+    const panels = curtain.querySelectorAll("i");
+    const lastPanel = panels[panels.length - 1];
+    let arriving = false;
+    try {
+      arriving = sessionStorage.getItem("cs-curtain-arrive") === "1";
+      sessionStorage.removeItem("cs-curtain-arrive");
+    } catch (e) {
+      arriving = false;
+    }
+    if (arriving) {
+      curtain.classList.remove("done");
+      curtain.classList.add("is-arriving");
+      let opened = false;
+      const open = () => {
+        if (opened) return;
+        opened = true;
+        curtain.classList.remove("is-arriving");
+        curtain.classList.add("done");
+      };
+      if (lastPanel) lastPanel.addEventListener("animationend", open, { once: true });
+      setTimeout(open, 760);
+    }
+    let leaving = false;
+    const leaveTo = (href) => {
+      if (leaving) return;
+      leaving = true;
+      try {
+        sessionStorage.setItem("cs-curtain-arrive", "1");
+      } catch (e) {
+        /* приватный режим */
+      }
+      curtain.classList.remove("done");
+      curtain.classList.add("is-closing");
+      let gone = false;
+      const go = () => {
+        if (gone) return;
+        gone = true;
+        window.location.href = href;
+      };
+      if (lastPanel) lastPanel.addEventListener("animationend", go, { once: true });
+      setTimeout(go, 640);
+    };
+    document.querySelectorAll("a[href]").forEach((link) => {
+      const raw = link.getAttribute("href");
+      if (!raw || raw.indexOf("#") === 0 || raw.indexOf("mailto:") === 0) return;
+      if (link.target === "_blank" || link.hasAttribute("download")) return;
+      let url;
+      try {
+        url = new URL(raw, window.location.href);
+      } catch (e) {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      if (!/\.html?$/.test(url.pathname) && !/\/$/.test(url.pathname)) return;
+      link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (event.button !== 0) return;
+        event.preventDefault();
+        leaveTo(url.href);
+      });
+    });
+  })();
+
 })();
 
