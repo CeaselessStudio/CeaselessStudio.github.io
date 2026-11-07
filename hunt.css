@@ -1,4 +1,4 @@
-/* охота за записками: пять спрятанных бумажек и счётчик находок */
+﻿/* охота за записками: пять спрятанных бумажек и счётчик находок */
 
 .hunt-note {
   position: absolute;
@@ -200,4 +200,18 @@
   .hunt-note {
     animation: none;
   }
+}
+
+/* тихий вход в 404: слово в подвале */
+.footer-cage {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(226, 69, 44, .3);
+}
+
+.footer-cage:hover,
+.footer-cage:focus-visible {
+  color: var(--accent-hi);
+  border-bottom-color: var(--accent-hi);
+  outline: none;
 }
