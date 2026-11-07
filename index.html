@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -14,17 +14,28 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&family=Ruslan+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="brand-mark.css">
+<link rel="stylesheet" href="hunt.css">
+<link rel="stylesheet" href="surprises.css">
+<link rel="stylesheet" href="trace-cards.css">
+<link rel="stylesheet" href="night.css">
+    <link rel="stylesheet" href="ticket.css">
+    <link rel="stylesheet" href="applause.css">
+<link rel="stylesheet" href="backstage-note.css">
+<link rel="stylesheet" href="flyer.css">
+    <link rel="stylesheet" href="fortune.css">
 </head>
 <body class="home">
 <nav>
   <div class="wrap">
-    <a class="brand" href="index.html">Ceaseless Studio</a>
+    <a class="brand" href="index.html"><span class="brand-smile" aria-hidden="true"><svg viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M4 5 Q32 34 60 5"/><path d="M17.5 10.4 L16 19"/><path d="M32 15.8 L32 27.4"/><path d="M46.5 10.4 L48 19"/></svg></span>Ceaseless Studio</a>
     <a class="link on" href="index.html">Home</a>
     <a class="link" href="driven-by-desire.html">Driven By Desire</a>
     <a class="link" href="ceaseless-bot.html">Ceaseless Bot</a>
     <a class="link" href="maria.html">Maria</a>
+    <button class="night-toggle" type="button" aria-pressed="false" aria-label="Night mode" title="Night mode">☾</button>
   </div>
   <div class="progress" aria-hidden="true"></div>
 </nav>
@@ -60,7 +71,7 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 
   <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
 
-  <section class="reveal">
+  <section class="reveal mask-section">
     <h2>Who's behind the mask</h2>
     <div class="mask-grid">
       <div class="mask-copy">
@@ -71,6 +82,34 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
       <div class="mask-art" aria-hidden="true">
         <figure class="clown-card tilt-a"><img src="assets/clown/stargirl.webp?v=3" alt="" loading="lazy"></figure>
         <figure class="clown-card tilt-b"><img src="assets/clown/cross.webp?v=3" alt="" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <div class="notes-rail">
+      <div class="note-shell note-shell--left">
+        <span class="note-tape" aria-hidden="true"></span>
+        <div class="note" role="note" aria-label="A note found backstage">
+          <span class="note-scratch" aria-hidden="true"></span>
+          <span class="note-print" aria-hidden="true"></span>
+          <span class="note-kicker">found backstage</span>
+          <p class="note-line">Я дорожаю как хаты или как в маке соус, а.</p>
+          <p class="note-line">Я дорожая как тачки, и как в принципе всё у нас.</p>
+          <p class="note-line">И только ты всё также <span class="note-drag">эээ</span>, короче, <b class="note-hot">ты лох</b>, ебать</p>
+          <p class="note-sign">Cease Neverly</p>
+        </div>
+      </div>
+      <div class="note-shell note-shell--right">
+        <span class="note-tape" aria-hidden="true"></span>
+        <div class="note" role="note" aria-label="Another note, the same night">
+          <span class="note-scratch" aria-hidden="true"></span>
+          <span class="note-stamp" aria-hidden="true">no entry</span>
+          <span class="note-kicker">page two, same night</span>
+          <p class="note-line note-yell">Малышка, не пойти бы тебе нахуй?</p>
+          <p class="note-line">По твоим глазам и так понятно то, что тебе надо.</p>
+          <p class="note-line">Я знаю то, что я неадекватный.</p>
+          <p class="note-line">Я был в аду, вернулся и <b class="note-hot">ушёл туда обратно</b>.</p>
+          <p class="note-sign">Cease Neverly</p>
+        </div>
       </div>
     </div>
   </section>
@@ -181,9 +220,63 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
       </figure>
     </div>
   </section>
+
+  <section class="reveal flyer-section">
+    <div class="flyer-shell">
+      <span class="flyer-tape" aria-hidden="true"></span>
+      <div class="flyer" role="note" aria-label="A club flyer found on the floor">
+        <span class="flyer-kicker">found on the floor / after hours</span>
+        <span class="flyer-title">ГАББЕР</span>
+        <p class="flyer-line">Мы всё взяли, киска, прыгай как габбер</p>
+        <p class="flyer-line">Сломай свои суставы, до-до коленей локтями</p>
+        <p class="flyer-line flyer-line--dim">Мы всё взяли, киска, прыгай как габбер</p>
+        <p class="flyer-line">Трись об меня джинсами, киска, прыгай как габбер</p>
+        <div class="flyer-chant" aria-hidden="true">
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+          <span>Прыгай, киска</span>
+          <span>Пры-пры-прыгай, прыгай, киска</span>
+        </div>
+        <p class="flyer-encore">ебашь ещё</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal fortune-section">
+    <h2>Ask the cards</h2>
+    <p class="fortune-hint">Tap the deck. It answers in both languages.</p>
+    <div class="fortune-wrap">
+      <button class="fortune-card" type="button" aria-label="Draw a card" aria-pressed="false">
+        <span class="fortune-inner">
+          <span class="fortune-face fortune-back" aria-hidden="true">
+            <span class="fortune-back-sigil">CS</span>
+            <span class="fortune-back-word">ceaseless studio</span>
+            <span class="fortune-back-corners"></span>
+          </span>
+          <span class="fortune-face fortune-front">
+            <span class="fortune-rank">A</span>
+            <span class="fortune-suit">&#9824;</span>
+            <span class="fortune-divider" aria-hidden="true"></span>
+            <span class="fortune-line">Draw a card.</span>
+            <span class="fortune-line-ru">Вытяни карту.</span>
+            <span class="fortune-sign">Cease Neverly</span>
+          </span>
+        </span>
+      </button>
+      <div class="fortune-text">
+        <p>The deck saw you coming. It has opinions.</p>
+        <p class="ru">Колода тебя заметила. У нее есть мнение.</p>
+        <p class="fortune-count" aria-live="polite">card <strong>1</strong> of 12</p>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer>&#9670; the grin stays on, the work never stops &#9670;</footer>
+<footer>&#9670; the grin stays on, the <a class="footer-cage" href="404.html">cage</a> never opens &#9670;</footer>
 
 <div class="atmosphere" aria-hidden="true">
   <div class="glow"></div>
@@ -199,3 +292,21 @@ try { if (sessionStorage.getItem("cs-curtain") === "1") document.documentElement
 <script src="site.js" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

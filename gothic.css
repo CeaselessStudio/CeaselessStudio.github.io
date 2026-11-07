@@ -1,0 +1,23 @@
+﻿/* готический шрифт для надписи Ceaseless Studio: отдельный файл, чтобы не трогать style.css */
+
+nav .brand,
+.hero h1 {
+  font-family: 'UnifrakturMaguntia', 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+}
+
+.hero h1 {
+  letter-spacing: .01em;
+  text-shadow: 0 0 26px rgba(153, 45, 34, .28), 0 2px 0 rgba(0, 0, 0, .45);
+}
+
+nav .brand {
+  letter-spacing: .02em;
+}
+
+@media (max-width: 720px) {
+  nav .brand {
+    font-family: 'UnifrakturMaguntia', 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  }
+}
+

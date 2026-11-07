@@ -1,0 +1,203 @@
+﻿/* контракт с кровавой подписью: бумага, пункты и полотно для подписи */
+
+.contract-section {
+  position: relative;
+  z-index: 5;
+  padding-top: 6px;
+}
+
+.contract {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.contract-paper {
+  position: relative;
+  flex: 1 1 380px;
+  max-width: 470px;
+  padding: 30px 28px 24px;
+  border-radius: 3px;
+  color: #2a1712;
+  background:
+    repeating-linear-gradient(94deg, rgba(120, 60, 40, .045) 0 2px, transparent 2px 10px),
+    linear-gradient(165deg, #f4ecdb, #e9dfc6 62%, #ded2b4);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, .55), inset 0 0 40px rgba(140, 100, 60, .18);
+  transform: rotate(-.5deg);
+}
+
+.contract-paper::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(120, 60, 40, .28);
+  pointer-events: none;
+}
+
+.contract-kicker {
+  margin: 0;
+  font-size: .58rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(120, 60, 40, .68);
+}
+
+.contract-title {
+  margin: 8px 0 14px;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #8f241a;
+}
+
+.contract-terms {
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  counter-reset: term;
+  font-size: .96rem;
+  line-height: 1.45;
+}
+
+.contract-terms li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 10px;
+  counter-increment: term;
+}
+
+.contract-terms li::before {
+  content: counter(term) ".";
+  position: absolute;
+  left: 0;
+  font-family: 'Pirata One', Georgia, serif;
+  color: rgba(143, 36, 26, .8);
+}
+
+.contract-terms .ru {
+  display: block;
+  font-size: .86rem;
+  font-style: italic;
+  color: rgba(70, 40, 30, .72);
+}
+
+.contract-sign {
+  position: relative;
+  padding-top: 8px;
+}
+
+.contract-canvas {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border-radius: 4px;
+  background:
+    linear-gradient(transparent calc(100% - 1px), rgba(120, 60, 40, .35) 0) 0 100% / 100% 1px no-repeat;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.contract-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: .66rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(120, 60, 40, .55);
+}
+
+.contract-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.contract-clear {
+  padding: 6px 14px;
+  border: 1px solid rgba(120, 60, 40, .45);
+  border-radius: 99px;
+  background: transparent;
+  color: #6d2a1e;
+  font-family: inherit;
+  font-size: .74rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.contract-clear:hover {
+  border-color: rgba(120, 60, 40, .8);
+  background: rgba(120, 60, 40, .08);
+}
+
+.contract-status {
+  font-size: .82rem;
+  font-style: italic;
+  color: #8f241a;
+}
+
+.contract-stamp {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  padding: 4px 10px;
+  border: 2px solid rgba(150, 30, 20, .0);
+  border-radius: 3px;
+  font-family: 'Pirata One', Georgia, serif;
+  font-size: .86rem;
+  letter-spacing: .12em;
+  color: rgba(150, 30, 20, 0);
+  transform: rotate(-8deg);
+  transition: color .25s, border-color .25s;
+}
+
+.contract-paper.is-signed .contract-stamp {
+  border-color: rgba(150, 30, 20, .55);
+  color: rgba(150, 30, 20, .8);
+}
+
+.contract-side {
+  flex: 0 1 300px;
+  max-width: 320px;
+}
+
+.contract-side p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+.contract-side .ru {
+  color: var(--muted);
+}
+
+html.night .contract-paper {
+  background:
+    repeating-linear-gradient(94deg, rgba(120, 60, 40, .05) 0 2px, transparent 2px 10px),
+    linear-gradient(165deg, #ded4bd, #cfc3a6 62%, #bfb192);
+}
+
+@media (max-width: 720px) {
+  .contract {
+    gap: 22px;
+  }
+  .contract-paper {
+    flex: 1 1 100%;
+    padding: 24px 20px 20px;
+    transform: none;
+  }
+  .contract-title {
+    font-size: 1.6rem;
+  }
+  .contract-canvas {
+    height: 130px;
+  }
+  .contract-side {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+}
+

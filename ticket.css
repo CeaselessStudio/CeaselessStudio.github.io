@@ -1,0 +1,151 @@
+/* 13. билет ADMIT ONE: один раз за визит, сидит в левом нижнем углу */
+
+.admit-ticket {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 40;
+  width: 268px;
+  padding: 18px 20px 16px;
+  color: #2a1712;
+  background:
+    repeating-linear-gradient(96deg, rgba(120, 60, 40, .05) 0 2px, transparent 2px 9px),
+    linear-gradient(168deg, #f4ecd9 0%, #e9dfc6 55%, #dccfb0 100%);
+  border-radius: 3px;
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, .55),
+    inset 0 0 0 1px rgba(120, 60, 40, .35);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px) rotate(-2.4deg);
+  transition: opacity .5s ease, transform .6s cubic-bezier(.2, .8, .2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admit-ticket.is-in {
+  opacity: 1;
+  transform: translateY(0) rotate(-2.4deg);
+}
+
+.admit-ticket:focus-visible {
+  outline: 2px solid var(--accent-hi, #c0402f);
+  outline-offset: 4px;
+}
+
+.admit-ticket::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  right: 58px;
+  border-left: 2px dashed rgba(120, 60, 40, .3);
+}
+
+.admit-ticket::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  right: 57px;
+  width: 3px;
+  background:
+    radial-gradient(circle at 50% 0, transparent 0 3px, #0d0b0c 3px 4px, transparent 4px) top / 100% 9px repeat-y;
+  opacity: .9;
+  pointer-events: none;
+}
+
+.admit-kicker,
+.admit-title,
+.admit-sub,
+.admit-stub {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.admit-kicker {
+  padding-right: 58px;
+  font-size: .52rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(110, 40, 28, .78);
+}
+
+.admit-title {
+  margin: 8px 0 4px;
+  padding-right: 58px;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: .04em;
+  color: #8f241a;
+  text-shadow: 0 1px 0 rgba(255, 245, 225, .6);
+}
+
+.admit-sub {
+  padding-right: 58px;
+  font-size: .86rem;
+  font-style: italic;
+  color: rgba(60, 35, 26, .8);
+}
+
+.admit-stub {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 42px;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: .56rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(110, 40, 28, .7);
+  white-space: nowrap;
+}
+
+.admit-code {
+  display: block;
+  margin: 6px auto 0;
+  width: 34px;
+  height: 18px;
+  background: repeating-linear-gradient(90deg, rgba(42, 23, 18, .82) 0 1px, transparent 1px 3px, rgba(42, 23, 18, .82) 3px 5px, transparent 5px 7px);
+  opacity: .7;
+}
+
+.admit-ticket.is-going {
+  opacity: 0;
+  transform: translateY(-26px) rotate(9deg) scale(.9);
+  transition: opacity .45s ease, transform .55s cubic-bezier(.4, 0, .7, .3);
+}
+
+html.night .admit-ticket {
+  filter: brightness(.92) saturate(1.05);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, .7),
+    inset 0 0 0 1px rgba(150, 70, 45, .4);
+}
+
+@media (max-width: 640px) {
+  .admit-ticket {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    padding: 15px 16px 13px;
+  }
+  .admit-title { font-size: 1.7rem; }
+  .admit-ticket::before,
+  .admit-ticket::after { display: none; }
+  .admit-title,
+  .admit-sub { padding-right: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admit-ticket,
+  .admit-ticket.is-in,
+  .admit-ticket.is-going {
+    transform: rotate(-2.4deg);
+    transition: opacity .35s ease;
+  }
+}

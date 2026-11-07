@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -11,15 +11,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="brand-mark.css">
+<link rel="stylesheet" href="hunt.css">
+<link rel="stylesheet" href="surprises.css">
+<link rel="stylesheet" href="trace-cards.css">
+<link rel="stylesheet" href="night.css">
+    <link rel="stylesheet" href="ticket.css">
+    <link rel="stylesheet" href="applause.css">
+<link rel="stylesheet" href="contract.css">
 </head>
 <body>
 <nav>
   <div class="wrap">
-    <a class="brand" href="index.html">Ceaseless Studio</a>
+    <a class="brand" href="index.html"><span class="brand-smile" aria-hidden="true"><svg viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M4 5 Q32 34 60 5"/><path d="M17.5 10.4 L16 19"/><path d="M32 15.8 L32 27.4"/><path d="M46.5 10.4 L48 19"/></svg></span>Ceaseless Studio</a>
     <a class="link" href="index.html">Home</a>
     <a class="link" href="driven-by-desire.html">Driven By Desire</a>
     <a class="link on" href="ceaseless-bot.html">Ceaseless Bot</a>
     <a class="link" href="maria.html">Maria</a>
+    <button class="night-toggle" type="button" aria-pressed="false" aria-label="Night mode" title="Night mode">☾</button>
   </div>
   <div class="progress" aria-hidden="true"></div>
 </nav>
@@ -29,6 +38,12 @@
     <h1>Ceaseless Bot</h1>
     <p class="lead">The backstage of a modeling agency. Contracts, roles and reports, so the runway show never stops.<br>
       Закулисье агентства: контракты, роли и отчёты.</p>
+    <svg class="grin" viewBox="0 0 200 84" aria-hidden="true" focusable="false">
+      <path class="line" pathLength="100" d="M22 20 C 46 74, 154 74, 178 20"></path>
+      <path class="tick" d="M62 46 v16"></path>
+      <path class="tick" d="M100 58 v14"></path>
+      <path class="tick" d="M138 46 v16"></path>
+    </svg>
   </header>
 
   <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
@@ -144,9 +159,42 @@
       [ ] - необязательный параметр. <code>channel</code> по умолчанию - текущий канал. <code>public: True</code> - результат увидят все, иначе только вы.</p>
   </section>
 
+  <section class="reveal contract-section">
+    <h2>Sign the contract / Подпиши контракт</h2>
+    <div class="contract">
+      <div class="contract-paper">
+        <span class="contract-stamp" aria-hidden="true">signed</span>
+        <p class="contract-kicker">ceaseless studio &middot; after hours</p>
+        <h3 class="contract-title">Performers agreement</h3>
+        <ol class="contract-terms">
+          <li>The show never stops.
+            <span class="ru">Шоу не останавливается никогда.</span></li>
+          <li>You do not talk about the cage.
+            <span class="ru">О клетке ты не говоришь.</span></li>
+          <li>Every applause is paid for in advance.
+            <span class="ru">Каждые аплодисменты оплачены заранее.</span></li>
+        </ol>
+        <div class="contract-sign">
+          <canvas class="contract-canvas" width="360" height="150" aria-label="Sign here with the mouse or a finger"></canvas>
+          <span class="contract-hint">sign with blood / подпись кровью</span>
+        </div>
+        <div class="contract-actions">
+          <button class="contract-clear" type="button">Clear / Стереть</button>
+          <span class="contract-status" aria-live="polite"></span>
+        </div>
+      </div>
+      <div class="contract-side">
+        <p>Draw your signature in the box. The ink is free, the exit is not.</p>
+        <p class="ru">Поставь подпись в рамке. Чернила бесплатно, выход - нет.</p>
+        <p>This is only a website: nothing is stored and nothing is signed for real.</p>
+        <p class="ru">Это только сайт: ничего не сохраняется и ничего не подписывается по-настоящему.</p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer>&#9670; the grin stays on, the work never stops &#9670; &middot; <a href="index.html">back to the stage</a></footer>
+<footer>&#9670; the grin stays on, the <a class="footer-cage" href="404.html">cage</a> never opens &#9670; &middot; <a href="index.html">back to the stage</a></footer>
 
 <div class="atmosphere" aria-hidden="true">
   <div class="glow"></div>
@@ -157,7 +205,24 @@
 </div>
 <div class="grain" aria-hidden="true"></div>
 <div class="torch" aria-hidden="true"></div>
-
 <script src="site.js" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+﻿/* Клубная листовка на главной: обрывок афиши подпольного рейва, чёрная бумага и багровый неон.
+   Разметка - в index.html перед закрытием main, отдельный файл, потому что style.css в смешанной кодировке. */
+
+.flyer-section {
+  display: flex;
+  justify-content: center;
+}
+
+.flyer-shell {
+  position: relative;
+  width: min(540px, 100%);
+  transform: rotate(-1.6deg);
+}
+
+.flyer {
+  position: relative;
+  padding: 42px 40px 36px;
+  color: #efe3d2;
+  background:
+    radial-gradient(120% 90% at 80% 0%, rgba(140, 30, 20, .45), transparent 58%),
+    linear-gradient(160deg, #1d1412 0%, #100c0b 58%, #20100c 100%);
+  box-shadow: inset 0 0 0 1px rgba(226, 69, 44, .22), inset 0 0 90px rgba(120, 20, 12, .26);
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, .62));
+  clip-path: polygon(
+    2% 3%, 7% 1%, 12% 4%, 18% 0%, 24% 3%, 30% 0%, 36% 4%, 42% 1%, 48% 4%, 54% 0%,
+    60% 3%, 66% 0%, 72% 4%, 78% 1%, 84% 4%, 90% 0%, 95% 3%, 98% 1%,
+    99.5% 10%, 98.4% 22%, 99.6% 34%, 98.2% 46%, 99.4% 58%, 98.3% 70%, 99.5% 82%, 98.4% 92%,
+    95% 96%, 89% 93%, 83% 97%, 76% 94%, 69% 97%, 62% 93%, 55% 97%, 48% 94%, 41% 97%,
+    34% 93%, 27% 97%, 20% 94%, 13% 97%, 7% 94%, 2% 97%,
+    1% 88%, 2.4% 76%, .8% 64%, 2.2% 52%, .9% 40%, 2% 28%, .7% 16%
+  );
+}
+
+/* скотч по центру сверху */
+.flyer-tape {
+  position: absolute;
+  z-index: 2;
+  top: -15px;
+  left: 50%;
+  width: 160px;
+  height: 30px;
+  margin-left: -80px;
+  transform: rotate(1.8deg);
+  background:
+    linear-gradient(100deg, rgba(226, 213, 192, .42), rgba(240, 230, 209, .8) 24%, rgba(240, 230, 209, .72) 76%, rgba(226, 213, 192, .38));
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .3), inset 0 0 0 1px rgba(255, 255, 255, .18);
+  clip-path: polygon(1% 0%, 99% 3%, 100% 40%, 98% 100%, 2% 97%, 0% 54%);
+  opacity: .9;
+}
+
+.flyer-kicker {
+  display: block;
+  margin: 0 0 6px;
+  color: #b8543f;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+
+.flyer-title {
+  display: block;
+  margin: 0 0 18px;
+  color: #e2452c;
+  font-family: 'Ruslan Display', 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.3rem, 7vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: .02em;
+  text-shadow: 0 0 18px rgba(226, 69, 44, .5), 0 0 46px rgba(226, 69, 44, .22);
+}
+
+.flyer-line {
+  margin: 0 0 9px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.42;
+}
+
+.flyer-line--dim { opacity: .68; }
+
+/* припев: повторяющиеся строки, будто принт заело */
+.flyer-chant {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 18px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(226, 69, 44, .38);
+  color: rgba(232, 176, 158, .5);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: .72rem;
+  letter-spacing: .03em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  animation: flyer-flicker 5.2s infinite;
+}
+
+.flyer-chant span:nth-child(4n + 1) { color: rgba(226, 69, 44, .82); }
+.flyer-chant span:nth-child(4n + 3) { opacity: .62; }
+
+@keyframes flyer-flicker {
+  0%, 100% { opacity: 1; }
+  46% { opacity: 1; }
+  47% { opacity: .82; }
+  48% { opacity: 1; }
+  85% { opacity: .93; }
+  86% { opacity: 1; }
+}
+
+.flyer-encore {
+  margin: 20px 0 0;
+  color: #e2452c;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  letter-spacing: .06em;
+  text-align: right;
+  transform: rotate(-2.5deg);
+  text-shadow: 0 0 14px rgba(226, 69, 44, .5);
+}
+
+.night .flyer-title,
+.night .flyer-encore {
+  text-shadow: 0 0 22px rgba(226, 69, 44, .7), 0 0 54px rgba(226, 69, 44, .3);
+}
+
+@media (max-width: 720px) {
+  .flyer { padding: 34px 24px 30px; }
+  .flyer-kicker { font-size: .66rem; letter-spacing: .2em; }
+  .flyer-chant { grid-template-columns: 1fr; gap: 2px; font-size: .72rem; }
+  .flyer-tape { width: 124px; margin-left: -62px; height: 26px; top: -12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flyer-chant { animation: none; }
+  .flyer-shell { transform: none; }
+}
+

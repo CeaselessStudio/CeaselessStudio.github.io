@@ -1,0 +1,146 @@
+/* 14. свеча в футере: горит и дрожит, по клику гаснет и дымит */
+
+.candle {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 62px;
+  margin: 0 auto 22px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.candle:focus-visible {
+  outline: 2px solid var(--accent-hi, #c0402f);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.candle-wax {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 15px;
+  height: 34px;
+  transform: translateX(-50%);
+  border-radius: 3px 3px 2px 2px;
+  background:
+    linear-gradient(90deg, rgba(210, 190, 160, .55), rgba(250, 240, 220, .95) 42%, rgba(232, 214, 186, .9) 74%, rgba(198, 176, 146, .7));
+  box-shadow: inset 0 -8px 10px rgba(120, 90, 60, .35), 0 6px 14px rgba(0, 0, 0, .45);
+}
+
+.candle-wax::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 2px;
+  width: 4px;
+  height: 9px;
+  border-radius: 0 0 3px 3px;
+  background: rgba(245, 234, 214, .95);
+  box-shadow: 7px 2px 0 -1px rgba(236, 224, 202, .9);
+}
+
+.candle-wick {
+  position: absolute;
+  left: 50%;
+  bottom: 33px;
+  width: 2px;
+  height: 6px;
+  transform: translateX(-50%);
+  background: #241a15;
+  border-radius: 1px;
+}
+
+.candle-flame {
+  position: absolute;
+  left: 50%;
+  bottom: 38px;
+  width: 9px;
+  height: 17px;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 68%, #fff6d8 0 22%, #ffcf6b 42%, #ff8a2e 72%, rgba(200, 60, 20, .2));
+  box-shadow: 0 0 12px rgba(255, 170, 70, .75), 0 0 26px rgba(200, 60, 20, .45);
+  transform-origin: 50% 92%;
+  animation: candle-flicker 1.9s ease-in-out infinite alternate;
+  transition: opacity .35s ease;
+}
+
+.candle-glow {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: 78px;
+  height: 78px;
+  transform: translate(-50%, 0);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 176, 84, .26), rgba(200, 60, 20, .1) 46%, transparent 68%);
+  animation: candle-breathe 3.4s ease-in-out infinite;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+.candle-smoke {
+  position: absolute;
+  left: 50%;
+  bottom: 38px;
+  width: 8px;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(to top, rgba(220, 214, 206, .34), transparent);
+  filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.candle.is-out .candle-flame,
+.candle.is-out .candle-glow {
+  opacity: 0;
+  animation: none;
+}
+
+.candle.is-out .candle-wick {
+  background: #3b2f28;
+}
+
+.candle.is-out .candle-smoke {
+  animation: candle-smoke 2.6s ease-out forwards;
+}
+
+html.night .candle-flame {
+  box-shadow: 0 0 16px rgba(255, 180, 80, .9), 0 0 38px rgba(220, 70, 25, .55);
+}
+
+html.night .candle-glow {
+  background: radial-gradient(circle, rgba(255, 170, 80, .34), rgba(190, 50, 20, .14) 48%, transparent 70%);
+}
+
+@keyframes candle-flicker {
+  0% { transform: translateX(-50%) scale(1, 1) rotate(-1deg); }
+  35% { transform: translateX(-52%) scale(.94, 1.06) rotate(1.5deg); }
+  70% { transform: translateX(-48%) scale(1.03, .96) rotate(-1.5deg); }
+  100% { transform: translateX(-50%) scale(.97, 1.04) rotate(1deg); }
+}
+
+@keyframes candle-breathe {
+  0%, 100% { opacity: .85; transform: translate(-50%, 0) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -2px) scale(1.06); }
+}
+
+@keyframes candle-smoke {
+  0% { opacity: .7; transform: translate(-50%, 0) scale(.7); }
+  45% { opacity: .45; transform: translate(-56%, -18px) scale(1); }
+  100% { opacity: 0; transform: translate(-44%, -40px) scale(1.4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .candle-flame,
+  .candle-glow {
+    animation: none;
+  }
+  .candle.is-out .candle-smoke {
+    animation: none;
+  }
+}

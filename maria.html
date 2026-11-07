@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -11,15 +11,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pirata+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="brand-mark.css">
+<link rel="stylesheet" href="hunt.css">
+<link rel="stylesheet" href="surprises.css">
+<link rel="stylesheet" href="trace-cards.css">
+<link rel="stylesheet" href="night.css">
+    <link rel="stylesheet" href="ticket.css">
+    <link rel="stylesheet" href="applause.css">
+    <link rel="stylesheet" href="maria-chat.css">
 </head>
 <body>
 <nav>
   <div class="wrap">
-    <a class="brand" href="index.html">Ceaseless Studio</a>
+    <a class="brand" href="index.html"><span class="brand-smile" aria-hidden="true"><svg viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M4 5 Q32 34 60 5"/><path d="M17.5 10.4 L16 19"/><path d="M32 15.8 L32 27.4"/><path d="M46.5 10.4 L48 19"/></svg></span>Ceaseless Studio</a>
     <a class="link" href="index.html">Home</a>
     <a class="link" href="driven-by-desire.html">Driven By Desire</a>
     <a class="link" href="ceaseless-bot.html">Ceaseless Bot</a>
     <a class="link on" href="maria.html">Maria</a>
+    <button class="night-toggle" type="button" aria-pressed="false" aria-label="Night mode" title="Night mode">☾</button>
   </div>
   <div class="progress" aria-hidden="true"></div>
 </nav>
@@ -30,9 +39,38 @@
     <h1>Maria</h1>
     <p class="lead">Cease's personal assistant on the Driven By Desire server.<br>
       Личный помощник Cease на сервере Driven By Desire.</p>
+    <svg class="grin" viewBox="0 0 200 84" aria-hidden="true" focusable="false">
+      <path class="line" pathLength="100" d="M22 20 C 46 74, 154 74, 178 20"></path>
+      <path class="tick" d="M62 46 v16"></path>
+      <path class="tick" d="M100 58 v14"></path>
+      <path class="tick" d="M138 46 v16"></path>
+    </svg>
   </header>
 
   <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
+
+  <section class="reveal chat-section">
+    <h2>Try her / Попробуй</h2>
+    <div class="chat-demo">
+      <div class="chat-head">
+        <span class="chat-avatar" aria-hidden="true">M</span>
+        <span class="chat-who"><strong>Maria</strong><span class="chat-tag">demo</span></span>
+        <span class="chat-state">not the real one</span>
+      </div>
+      <div class="chat-log" aria-live="polite"></div>
+      <div class="chat-chips">
+        <button class="chat-chip" type="button" data-ask="!gm">!gm</button>
+        <button class="chat-chip" type="button" data-ask="!gn">!gn</button>
+        <button class="chat-chip" type="button" data-ask="How do proofs work?">How do proofs work?</button>
+        <button class="chat-chip" type="button" data-ask="Who are you?">Who are you?</button>
+      </div>
+      <form class="chat-form">
+        <input class="chat-input" type="text" placeholder="Write to Maria..." aria-label="Message to Maria" autocomplete="off" maxlength="200">
+        <button class="chat-send" type="submit">Send</button>
+      </form>
+    </div>
+    <p class="chat-hint">Canned replies for the demo. The real Maria only answers on Discord.</p>
+  </section>
 
   <section class="reveal">
     <h2>For everyone / Для всех</h2>
@@ -109,7 +147,7 @@
   </section>
 </main>
 
-<footer>&#9670; the grin stays on, the work never stops &#9670; &middot; <a href="index.html">back to the stage</a></footer>
+<footer>&#9670; the grin stays on, the <a class="footer-cage" href="404.html">cage</a> never opens &#9670; &middot; <a href="index.html">back to the stage</a></footer>
 
 <div class="atmosphere" aria-hidden="true">
   <div class="glow"></div>
@@ -120,7 +158,25 @@
 </div>
 <div class="grain" aria-hidden="true"></div>
 <div class="torch" aria-hidden="true"></div>
-
 <script src="site.js" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

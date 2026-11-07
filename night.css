@@ -1,0 +1,82 @@
+/* Ночной режим: после 22:00 включается сам, но кнопка в меню важнее расписания.
+   Разметка кнопки - в nav на всех страницах, логика - site.js, пункт 12.
+   Отдельный файл, потому что style.css в смешанной кодировке. */
+
+/* кнопка в меню */
+.night-toggle {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  margin-left: 2px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease, transform .25s ease, background-color .25s ease;
+}
+
+.night-toggle:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+  transform: rotate(-14deg);
+}
+
+.night-toggle[aria-pressed="true"] {
+  color: var(--accent-hi);
+  border-color: var(--accent);
+  background: rgba(153, 45, 34, .12);
+}
+
+/* сам режим: тише свет, глубже тени */
+html.night {
+  --bg: #060506;
+  --panel: #0f0c0e;
+  --fg: #d9d3cb;
+  --muted: #757076;
+  --line: #2b2629;
+  --accent: #a33224;
+  --accent-hi: #d24a36;
+}
+
+html.night body {
+  background: var(--bg);
+  transition: background-color .5s ease;
+}
+
+html.night img {
+  filter: brightness(.84) saturate(.9);
+  transition: filter .5s ease;
+}
+
+/* виньетка по краям - сцена в темноте */
+html.night::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(125% 95% at 50% 38%, transparent 42%, rgba(0, 0, 0, .46) 100%);
+}
+
+/* записки ночью темнее, кровь злее */
+html.night .note {
+  background: linear-gradient(158deg, #e6dcc6 0%, #d7cbb2 56%, #c6b99f 100%) !important;
+}
+
+html.night .note::after {
+  filter: saturate(1.25) brightness(.92);
+}
+
+html.night .note-line,
+html.night .note-sign { color: #1d1512; }
+
+@media (max-width: 720px) {
+  .night-toggle { width: 28px; height: 28px; font-size: .9rem; }
+}

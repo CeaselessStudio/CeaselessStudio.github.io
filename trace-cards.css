@@ -1,0 +1,98 @@
+﻿/* След из игральных карт за курсором.
+   Слой создаёт site.js (пункт 10), здесь только внешний вид и анимация.
+   Отключается при prefers-reduced-motion и на тач-устройствах (JS не спавнит). */
+
+.trace-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 4; /* над пылью и зерном, под занавесом */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.trace-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 48px;
+  border-radius: 3px;
+  pointer-events: none;
+  color: #161214;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0;
+  will-change: transform, opacity;
+  background: linear-gradient(155deg, #f6f1e7 0%, #e6ded0 55%, #d5cbbb 100%);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, .42),
+    0 0 0 1px rgba(20, 16, 17, .65),
+    inset 0 0 0 2px #efe9dd,
+    inset 0 0 0 3px rgba(20, 16, 17, .22);
+  animation-name: trace-fade;
+  animation-timing-function: cubic-bezier(.2, .6, .3, 1);
+  animation-fill-mode: forwards;
+}
+
+.trace-card.red { color: var(--accent-hi); }
+
+.trace-card::before {
+  content: var(--rank);
+  position: absolute;
+  left: 3px;
+  top: 2px;
+  font-size: 11px;
+  letter-spacing: -.02em;
+}
+
+.trace-card::after {
+  content: var(--suit);
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  font-size: 19px;
+  opacity: .9;
+}
+
+@keyframes trace-fade {
+  0% {
+    opacity: 0;
+    transform:
+      translate3d(calc(var(--x0) * 1px - 50%), calc(var(--y0) * 1px - 50%), 0)
+      rotate(var(--r0))
+      scale(calc(var(--scale, 1) * .82));
+  }
+  16% { opacity: .92; }
+  55% { opacity: .62; }
+  100% {
+    opacity: 0;
+    transform:
+      translate3d(calc(var(--x0) * 1px - 50% + var(--dx) * 1px), calc(var(--y0) * 1px - 50% + var(--dy) * 1px), 0)
+      rotate(calc(var(--r0) + var(--spin)))
+      scale(calc(var(--scale, 1) * .55));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trace-layer { display: none; }
+}
+
+@media (max-width: 720px) {
+  .trace-card { width: 28px; height: 40px; }
+  .trace-card::before { font-size: 9px; left: 3px; top: 2px; }
+  .trace-card::after { font-size: 15px; }
+}
+
+
+/* содержимое страницы всегда выше следа из карт */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.trace-layer {
+  z-index: 0;
+}
+

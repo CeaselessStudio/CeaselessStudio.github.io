@@ -1,0 +1,34 @@
+/* мини-лого: багровая улыбка в меню на каждой странице */
+
+nav .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.brand-smile {
+  display: inline-block;
+  width: 1.55em;
+  height: .8em;
+  flex: none;
+  color: var(--accent-hi, #c0402f);
+  filter: drop-shadow(0 0 6px rgba(192, 64, 47, .45));
+}
+
+.brand-smile svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+html.night .brand-smile {
+  filter: drop-shadow(0 0 8px rgba(210, 74, 54, .6));
+}
+
+@media (max-width: 560px) {
+  .brand-smile {
+    width: 1.35em;
+    height: .7em;
+  }
+}
