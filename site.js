@@ -499,7 +499,7 @@
   const pageMain = document.querySelector("main");
   const floats = [];
   let relayout = () => {};
-  if (pageMain) {
+  if (pageMain && railPicked.length) {
     const cloud = document.createElement("div");
     cloud.className = "notes-cloud";
     cloud.setAttribute("aria-hidden", "true");

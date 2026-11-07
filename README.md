@@ -18,13 +18,14 @@ The source of the Ceaseless Studio website: a static page set served by GitHub P
 | `ceaseless-bot.html` | **Ceaseless Bot** - the backstage of a modeling agency: contracts, reaction roles, early builds, reports and publishing |
 | `maria.html` | **Maria** - Cease's personal assistant: cards, greetings, proof approvals and publishing |
 | `driven-by-desire.html` | **Driven By Desire** - the visual novel: story, cast cards, art, an 18+ after-hours gallery, build stats and links |
+| `404.html` | The empty cage: a missing page, a note left between the bars and the way back to the stage |
 | `style.css` | Shared styles and the scene: grain, glow, spotlights, curtain folds, marquee bulbs |
 | `trace-cards.css` | The playing-card trail: card face, rank, suit and the fade-out animation |
 | `backstage-note.css` | The torn notes on the home page: paper, tape, blood stains and the handwritten lines, with texts drawn at random from a pool of twenty-six |
 | `night.css` | Night mode: darker palette, deeper shadows, vignette and the toggle in the menu |
 | `ticket.css` | The ADMIT ONE ticket that slides in once per visit and flies away when clicked |
 | `applause.css` | The APPLAUSE sign in the footer: bulbs chase and a "bravo" shows up when you click it |
-| `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
+| `cage.css` | The 404 cage: arched bars, a torn note inside and a missing-door gap |\n| `flyer.css` | The club flyer at the bottom of the home page: dark torn paper, neon crimson title, the track lyric and the stuck chorus |
 | `site.js` | Scene effects: reveal, read progress, medallion parallax and tilt, cursor light, card tilt, dust, opening curtain, EN/RU switch, playing-card cursor trail, backstage note lines, night mode, first-visit ticket, footer applause sign |
 | `assets/` | Banner, key art, tier icons, Driven By Desire art |
 
@@ -65,6 +66,7 @@ And a quieter one: two torn pages are taped to the stage, stained, scratched and
 ## Contact
 
 GitHub: [Ceaseless-Studio](https://github.com/Ceaseless-Studio) · Discord: `ceaselessstudio`
+
 
 
 
