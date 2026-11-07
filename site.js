@@ -698,35 +698,30 @@
     setTimeout(() => ticket.classList.add("is-in"), reduced ? 400 : 1400);
   })();
 
-  /* 14. свеча в футере: горит сама, по клику гаснет и дымит */
+  /* 14. вывеска APPLAUSE в футере: клик запускает овацию */
   (() => {
     const footer = document.querySelector("footer");
     if (!footer) return;
-    const candle = document.createElement("div");
-    candle.className = "candle";
-    candle.setAttribute("role", "button");
-    candle.setAttribute("tabindex", "0");
-    candle.setAttribute("aria-pressed", "true");
-    candle.setAttribute("aria-label", "Blow out the candle");
-    candle.innerHTML =
-      '<span class="candle-glow" aria-hidden="true"></span>' +
-      '<span class="candle-flame" aria-hidden="true"></span>' +
-      '<span class="candle-smoke" aria-hidden="true"></span>' +
-      '<span class="candle-wax" aria-hidden="true"></span>' +
-      '<span class="candle-wick" aria-hidden="true"></span>';
-    footer.insertBefore(candle, footer.firstChild);
-    const toggle = () => {
-      const out = candle.classList.toggle("is-out");
-      candle.setAttribute("aria-pressed", String(!out));
-      candle.setAttribute("aria-label", out ? "Light the candle" : "Blow out the candle");
+    const sign = document.createElement("button");
+    sign.className = "applause";
+    sign.type = "button";
+    sign.setAttribute("aria-pressed", "false");
+    sign.setAttribute("aria-label", "Start the applause");
+    sign.innerHTML =
+      '<span class="applause-board"><span class="applause-word">APPLAUSE</span></span>' +
+      '<span class="applause-cheer" aria-hidden="true">bravo</span>';
+    footer.insertBefore(sign, footer.firstChild);
+    let timer = 0;
+    const clap = () => {
+      sign.classList.add("is-clapping");
+      sign.setAttribute("aria-pressed", "true");
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        sign.classList.remove("is-clapping");
+        sign.setAttribute("aria-pressed", "false");
+      }, 2600);
     };
-    candle.addEventListener("click", toggle);
-    candle.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle();
-      }
-    });
+    sign.addEventListener("click", clap);
   })();
 
 })();

@@ -1,0 +1,125 @@
+﻿/* 14. вывеска APPLAUSE в футере: по клику начинается овация */
+
+.applause {
+  position: relative;
+  display: block;
+  margin: 0 auto 36px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.applause:focus-visible {
+  outline: 2px solid var(--accent-hi, #c0402f);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.applause-board {
+  position: relative;
+  display: block;
+  padding: 15px 26px 13px;
+  border: 1px solid rgba(150, 92, 62, .5);
+  border-radius: 7px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(120, 30, 20, .28), transparent 62%),
+    linear-gradient(168deg, #171112, #100c0c 62%, #170e0c);
+  box-shadow:
+    inset 0 0 0 3px rgba(10, 8, 8, .85),
+    inset 0 0 22px rgba(0, 0, 0, .65),
+    0 10px 24px rgba(0, 0, 0, .5);
+  transition: box-shadow .4s ease, border-color .4s ease;
+}
+
+.applause-board::before,
+.applause-board::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 8px;
+  background-image: radial-gradient(circle, rgba(255, 224, 176, .55) 0 1.9px, rgba(255, 190, 120, .18) 2.6px, transparent 3.6px);
+  background-size: 19px 8px;
+  background-repeat: repeat-x;
+  opacity: .55;
+  transition: opacity .3s ease, filter .3s ease;
+}
+
+.applause-board::before { top: -4px; }
+.applause-board::after { bottom: -4px; }
+
+.applause-word {
+  display: block;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.12rem;
+  letter-spacing: .34em;
+  padding-left: .34em;
+  color: rgba(233, 216, 190, .72);
+  text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: color .35s ease, text-shadow .45s ease;
+}
+
+.applause-cheer {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translate(-50%, -4px);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: .9rem;
+  letter-spacing: .04em;
+  color: rgba(196, 74, 52, .9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease, transform .5s ease;
+}
+
+/* овация */
+
+.applause.is-clapping .applause-board {
+  border-color: rgba(214, 96, 64, .8);
+  box-shadow:
+    inset 0 0 0 3px rgba(10, 8, 8, .85),
+    inset 0 0 26px rgba(120, 24, 14, .45),
+    0 0 26px rgba(190, 52, 28, .35),
+    0 10px 24px rgba(0, 0, 0, .55);
+}
+
+.applause.is-clapping .applause-board::before,
+.applause.is-clapping .applause-board::after {
+  opacity: 1;
+  filter: drop-shadow(0 0 3px rgba(255, 190, 110, .8));
+  animation: applause-chase .95s linear infinite;
+}
+
+.applause.is-clapping .applause-word {
+  color: #f6dfb6;
+  text-shadow: 0 0 10px rgba(255, 176, 92, .55), 0 0 26px rgba(190, 52, 28, .5);
+}
+
+.applause.is-clapping .applause-cheer {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@keyframes applause-chase {
+  0% { background-position: 0 0; }
+  100% { background-position: 19px 0; }
+}
+
+@media (max-width: 480px) {
+  .applause-word { font-size: .98rem; letter-spacing: .26em; padding-left: .26em; }
+  .applause-board { padding: 12px 18px 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .applause.is-clapping .applause-board::before,
+  .applause.is-clapping .applause-board::after {
+    animation: none;
+  }
+}
+
