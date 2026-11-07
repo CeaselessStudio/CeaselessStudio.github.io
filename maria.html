@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="night.css">
     <link rel="stylesheet" href="ticket.css">
     <link rel="stylesheet" href="applause.css">
+    <link rel="stylesheet" href="maria-chat.css">
+<link rel="stylesheet" href="gothic.css">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav>
@@ -38,6 +41,29 @@
   </header>
 
   <div class="divider">&#9670; &#9671; &#9670; &#9671; &#9670;</div>
+
+  <section class="reveal chat-section">
+    <h2>Try her / Попробуй</h2>
+    <div class="chat-demo">
+      <div class="chat-head">
+        <span class="chat-avatar" aria-hidden="true">M</span>
+        <span class="chat-who"><strong>Maria</strong><span class="chat-tag">demo</span></span>
+        <span class="chat-state">not the real one</span>
+      </div>
+      <div class="chat-log" aria-live="polite"></div>
+      <div class="chat-chips">
+        <button class="chat-chip" type="button" data-ask="!gm">!gm</button>
+        <button class="chat-chip" type="button" data-ask="!gn">!gn</button>
+        <button class="chat-chip" type="button" data-ask="How do proofs work?">How do proofs work?</button>
+        <button class="chat-chip" type="button" data-ask="Who are you?">Who are you?</button>
+      </div>
+      <form class="chat-form">
+        <input class="chat-input" type="text" placeholder="Write to Maria..." aria-label="Message to Maria" autocomplete="off" maxlength="200">
+        <button class="chat-send" type="submit">Send</button>
+      </form>
+    </div>
+    <p class="chat-hint">Canned replies for the demo. The real Maria only answers on Discord.</p>
+  </section>
 
   <section class="reveal">
     <h2>For everyone / Для всех</h2>
@@ -129,6 +155,9 @@
 <script src="site.js" defer></script>
 </body>
 </html>
+
+
+
 
 
 
