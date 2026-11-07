@@ -101,8 +101,9 @@
   position: relative;
   z-index: 1;
   margin-top: 12px;
-  font-size: .6rem;
-  letter-spacing: .34em;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: .78rem;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: rgba(214, 170, 148, .6);
 }
@@ -189,7 +190,8 @@
 .fortune-sign {
   margin-top: auto;
   padding-top: 14px;
-  font-size: .68rem;
+  font-family: 'Pirata One', 'Cormorant Garamond', Georgia, serif;
+  font-size: .76rem;
   letter-spacing: .28em;
   text-transform: uppercase;
   color: rgba(120, 60, 40, .55);
@@ -238,6 +240,7 @@
 @media (prefers-reduced-motion: reduce) {
   .fortune-inner { transition: none; }
 }
+
 
 
 
